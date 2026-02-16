@@ -15,7 +15,7 @@ from app.models.notification import Notification, NotificationType
 from app.models.calendar_event import CalendarEvent
 from app.models.document import Document, DocumentType
 from app.models.activity_log import ActivityLog
-from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType
+from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType
 from app.models.google_oauth import GoogleOAuthToken
 
 __all__ = [
@@ -41,4 +41,5 @@ __all__ = [
     "DocumentType",
     "ActivityLog",
     "GoogleOAuthToken",
+    "InterventionStatusType",
 ]

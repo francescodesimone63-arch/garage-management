@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Table, Button, Modal, Form, Input, Select, Space, Tag, Popconfirm, message, InputNumber } from 'antd'
+import { Table, Button, Modal, Form, Input, Select, Space, Tag, Popconfirm, message, InputNumber, Row, Col, Divider, Spin, AutoComplete } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined, CarOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import PageHeader from '@/components/PageHeader'
 import { useVehicles, useCreateVehicle, useUpdateVehicle, useDeleteVehicle } from '@/hooks/useVehicles'
 import { useCustomers } from '@/hooks/useCustomers'
+import { useMarche, useModelli, useCarburanti } from '@/hooks/useAuto'
 import type { Vehicle } from '@/types'
 
 const VehiclesPage = () => {
@@ -12,6 +13,7 @@ const VehiclesPage = () => {
   const [searchText, setSearchText] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
+  const [selectedMarca, setSelectedMarca] = useState<string>('')
   const [form] = Form.useForm()
 
   const { data, isLoading } = useVehicles(page, 10, searchText)
@@ -19,17 +21,31 @@ const VehiclesPage = () => {
   const createMutation = useCreateVehicle()
   const updateMutation = useUpdateVehicle()
   const deleteMutation = useDeleteVehicle()
+  
+  // Hooks per auto (marche, modelli, carburanti)
+  const { data: marcheData, isLoading: loadingMarche } = useMarche()
+  const { data: modelliData, isLoading: loadingModelli } = useModelli(selectedMarca)
+  const { data: carburanti } = useCarburanti()
 
   const handleCreate = () => {
     setEditingVehicle(null)
+    setSelectedMarca('')
     form.resetFields()
     setIsModalOpen(true)
   }
 
   const handleEdit = (record: Vehicle) => {
     setEditingVehicle(record)
+    setSelectedMarca(record.marca || '')
     form.setFieldsValue(record)
     setIsModalOpen(true)
+  }
+
+  // Gestione cambio marca (reset modello)
+  const handleMarcaChange = (value: string) => {
+    setSelectedMarca(value)
+    form.setFieldValue('modello', undefined)
+    form.setFieldValue('marca', value)
   }
 
   const handleDelete = async (id: number) => {
@@ -171,10 +187,11 @@ const VehiclesPage = () => {
         onCancel={() => {
           setIsModalOpen(false)
           form.resetFields()
+          setSelectedMarca('')
         }}
         onOk={() => form.submit()}
         confirmLoading={createMutation.isPending || updateMutation.isPending}
-        width={800}
+        width={900}
       >
         <Form
           form={form}
@@ -200,66 +217,181 @@ const VehiclesPage = () => {
             />
           </Form.Item>
 
-          <Form.Item
-            name="targa"
-            label="Targa"
-            rules={[{ required: true, message: 'Inserisci la targa' }]}
-          >
-            <Input placeholder="XX000XX" />
-          </Form.Item>
+          <Divider orientation="left">
+            <CarOutlined /> Targa e Identificazione
+          </Divider>
 
-          <Space style={{ width: '100%' }} size="large">
-            <Form.Item
-              name="marca"
-              label="Marca"
-              rules={[{ required: true, message: 'Inserisci la marca' }]}
-              style={{ flex: 1 }}
-            >
-              <Input />
-            </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="targa"
+                label="Targa"
+                rules={[{ required: true, message: 'Inserisci la targa' }]}
+              >
+                <Input 
+                  placeholder="XX000XX" 
+                  onChange={(e) => form.setFieldValue('targa', e.target.value.toUpperCase())}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="telaio"
+                label="Numero Telaio (VIN)"
+              >
+                <Input maxLength={17} placeholder="17 caratteri" />
+              </Form.Item>
+            </Col>
+          </Row>
 
-            <Form.Item
-              name="modello"
-              label="Modello"
-              rules={[{ required: true, message: 'Inserisci il modello' }]}
-              style={{ flex: 1 }}
-            >
-              <Input />
-            </Form.Item>
-          </Space>
+          <Divider orientation="left">
+            <CarOutlined /> Marca e Modello
+          </Divider>
 
-          <Space style={{ width: '100%' }} size="large">
-            <Form.Item
-              name="anno"
-              label="Anno"
-              rules={[{ required: true, message: 'Inserisci l\'anno' }]}
-              style={{ width: 120 }}
-            >
-              <InputNumber min={1900} max={new Date().getFullYear() + 1} style={{ width: '100%' }} />
-            </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="marca"
+                label="Marca"
+                rules={[{ required: true, message: 'Inserisci o seleziona la marca' }]}
+              >
+                <AutoComplete
+                  placeholder="Seleziona o digita la marca"
+                  value={selectedMarca || form.getFieldValue('marca')}
+                  onChange={handleMarcaChange}
+                  filterOption={(input, option) =>
+                    (option?.value ?? '').toLowerCase().includes(input.toLowerCase())
+                  }
+                  notFoundContent={loadingMarche ? <Spin size="small" /> : null}
+                  options={marcheData?.marche.map((marca) => ({
+                    value: marca,
+                    label: marca,
+                  }))}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="modello"
+                label="Modello"
+                rules={[{ required: true, message: 'Inserisci o seleziona il modello' }]}
+              >
+                <AutoComplete
+                  placeholder={selectedMarca ? 'Seleziona o digita il modello' : 'Prima seleziona la marca'}
+                  disabled={!selectedMarca}
+                  filterOption={(input, option) =>
+                    (option?.value ?? '').toLowerCase().includes(input.toLowerCase())
+                  }
+                  notFoundContent={
+                    loadingModelli ? (
+                      <Spin size="small" />
+                    ) : null
+                  }
+                  options={modelliData?.modelli.map((modello) => ({
+                    value: modello,
+                    label: modello,
+                  }))}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
 
-            <Form.Item
-              name="colore"
-              label="Colore"
-              style={{ flex: 1 }}
-            >
-              <Input placeholder="es. Nero, Bianco, Grigio" />
-            </Form.Item>
-          </Space>
+          <Divider orientation="left">Dati Tecnici</Divider>
 
-          <Form.Item
-            name="telaio"
-            label="Numero Telaio (VIN)"
-          >
-            <Input maxLength={17} placeholder="17 caratteri" />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col span={6}>
+              <Form.Item
+                name="anno"
+                label="Anno"
+                rules={[{ required: true, message: 'Inserisci l\'anno' }]}
+              >
+                <InputNumber min={1900} max={new Date().getFullYear() + 1} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="carburante"
+                label="Carburante"
+              >
+                <Select
+                  placeholder="Tipo"
+                  allowClear
+                  options={carburanti?.map((c) => ({ value: c, label: c }))}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="cilindrata"
+                label="Cilindrata"
+              >
+                <Input placeholder="es. 1598 cc" />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="colore"
+                label="Colore"
+              >
+                <Input placeholder="es. Nero, Bianco" />
+              </Form.Item>
+            </Col>
+          </Row>
 
-          <Form.Item
-            name="km_attuali"
-            label="Chilometri Attuali"
-          >
-            <InputNumber min={0} style={{ width: '100%' }} />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col span={6}>
+              <Form.Item
+                name="kw"
+                label="KW"
+              >
+                <InputNumber min={0} style={{ width: '100%' }} placeholder="es. 90" />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="cv"
+                label="CV"
+              >
+                <InputNumber min={0} style={{ width: '100%' }} placeholder="es. 122" />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="porte"
+                label="N° Porte"
+              >
+                <Select
+                  placeholder="Porte"
+                  allowClear
+                  options={[
+                    { value: 2, label: '2' },
+                    { value: 3, label: '3' },
+                    { value: 4, label: '4' },
+                    { value: 5, label: '5' },
+                  ]}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item
+                name="prima_immatricolazione"
+                label="Prima Immatric."
+              >
+                <Input type="date" />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="km_attuali"
+                label="Chilometri Attuali"
+              >
+                <InputNumber min={0} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
 
           <Form.Item
             name="note"

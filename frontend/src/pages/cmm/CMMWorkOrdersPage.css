@@ -1,0 +1,26 @@
+.cmm-work-orders-page { padding: 12px 16px; }
+.interventions-list { background: #fafafa; padding: 8px 12px; border-radius: 6px; }
+.interventions-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #e8e8e8; margin-bottom: 8px; }
+.interventions-header .interventions-title { font-weight: 600; font-size: 13px; color: #262626; }
+.interventions-table { display: flex; flex-direction: column; gap: 6px; }
+.intervention-row { background: #fff; border-radius: 4px; border-left: 3px solid #d9d9d9; padding: 8px 12px; }
+.intervention-row:hover { background: #fafafa; }
+.intervention-row.tipo-meccanico { border-left-color: #1890ff; }
+.intervention-row.tipo-carrozziere { border-left-color: #722ed1; }
+.intervention-row.editing { background: #fffbe6; border: 1px solid #ffe58f; }
+.intervention-row-main { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.intervention-row-main .descrizione { flex: 1; font-size: 13px; color: #262626; min-width: 150px; }
+.intervention-row-main .durata { font-size: 12px; color: #8c8c8c; }
+.intervention-note { margin-top: 6px; padding: 4px 8px; background: #e6f7ff; border-radius: 3px; font-size: 12px; color: #0050b3; }
+.intervention-sospensione { margin-top: 4px; padding: 4px 8px; background: #fff1f0; border-radius: 3px; font-size: 12px; color: #a8071a; }
+.intervention-edit-form { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #d9d9d9; }
+.expanded-interventions { padding: 6px; background: #f5f5f5; border-radius: 4px; }
+.readonly-section .ant-card-head { background: #e6f7ff; padding: 8px 12px; }
+.editable-section .ant-card-head { background: #f6ffed; padding: 8px 12px; }
+.work-order-detail { max-height: 75vh; overflow-y: auto; }
+
+/* Tabella schede lavoro compatta */
+.cmm-work-orders-page .ant-table-thead > tr > th { padding: 8px 10px; font-size: 12px; }
+.cmm-work-orders-page .ant-table-tbody > tr > td { padding: 6px 10px; font-size: 12px; }
+.cmm-work-orders-page .ant-table-expanded-row > td { padding: 4px 8px; }
+.cmm-work-orders-page .ant-card-body { padding: 12px; }

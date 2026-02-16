@@ -22,7 +22,9 @@ from app.api.v1.endpoints import (
     dashboard,
     system_tables,
     google_oauth,
-    lavori_calendar
+    lavori_calendar,
+    cmm,
+    auto
 )
 
 api_router = APIRouter()
@@ -155,6 +157,20 @@ api_router.include_router(
 api_router.include_router(
     lavori_calendar.router,
     tags=["work-order-calendar"]
+)
+
+# CMM (Capo Meccanica) specific endpoints
+api_router.include_router(
+    cmm.router,
+    prefix="/cmm",
+    tags=["cmm"]
+)
+
+# Auto (marche, modelli, verifica targa) endpoints
+api_router.include_router(
+    auto.router,
+    prefix="/auto",
+    tags=["auto"]
 )
 
 # TODO: Future endpoints

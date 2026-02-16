@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import axiosInstance from '@/lib/axios'
 import { API_ENDPOINTS } from '@/config/api'
+import type { InterventionStatusType } from '@/types'
 
 export interface SystemTableItem {
   id: number
@@ -59,6 +60,20 @@ export const usePriorityTypes = () => {
     queryFn: async () => {
       const response = await axiosInstance.get<SystemTableItem[]>(
         API_ENDPOINTS.SYSTEM_PRIORITY_TYPES
+      )
+      return response.data || []
+    },
+    staleTime: 1000 * 60 * 5, // 5 minuti
+    gcTime: 1000 * 60 * 10, // 10 minuti (ex: cacheTime)
+  })
+}
+
+export const useInterventionStatusTypes = () => {
+  return useQuery({
+    queryKey: ['intervention-status-types'],
+    queryFn: async () => {
+      const response = await axiosInstance.get<InterventionStatusType[]>(
+        API_ENDPOINTS.SYSTEM_INTERVENTION_STATUS_TYPES
       )
       return response.data || []
     },

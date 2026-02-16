@@ -24,6 +24,14 @@ class VehicleBase(BaseModel):
     km_attuali: Optional[int] = Field(None, ge=0)
     note: Optional[str] = None
     
+    # Dati tecnici (da verifica targa)
+    cilindrata: Optional[str] = Field(None, max_length=20)
+    kw: Optional[int] = Field(None, ge=0)
+    cv: Optional[int] = Field(None, ge=0)
+    porte: Optional[int] = Field(None, ge=2, le=7)
+    carburante: Optional[str] = Field(None, max_length=30)
+    prima_immatricolazione: Optional[str] = Field(None, max_length=10)
+    
     @validator('targa')
     def validate_targa(cls, v):
         # Italian license plate format validation (simplified)
@@ -53,6 +61,14 @@ class VehicleUpdate(BaseModel):
     colore: Optional[str] = Field(None, max_length=30)
     km_attuali: Optional[int] = Field(None, ge=0)
     note: Optional[str] = None
+    
+    # Dati tecnici (da verifica targa)
+    cilindrata: Optional[str] = Field(None, max_length=20)
+    kw: Optional[int] = Field(None, ge=0)
+    cv: Optional[int] = Field(None, ge=0)
+    porte: Optional[int] = Field(None, ge=2, le=7)
+    carburante: Optional[str] = Field(None, max_length=30)
+    prima_immatricolazione: Optional[str] = Field(None, max_length=10)
 
 
 class VehicleInDBBase(VehicleBase):

@@ -10,6 +10,7 @@ import DashboardPage from './pages/dashboard/DashboardPage'
 import CustomersPage from './pages/customers/CustomersPage'
 import VehiclesPage from './pages/vehicles/VehiclesPage'
 import WorkOrdersPage from './pages/work-orders/WorkOrdersPage'
+import CMMWorkOrdersPage from './pages/cmm/CMMWorkOrdersPage'
 import PartsPage from './pages/parts/PartsPage'
 import TiresPage from './pages/tires/TiresPage'
 import CourtesyCarsPage from './pages/courtesy-cars/CourtesyCarsPage'
@@ -46,6 +47,7 @@ function App() {
             <Route path="/customers" element={<CustomersPage />} />
             <Route path="/vehicles" element={<VehiclesPage />} />
             <Route path="/work-orders" element={<WorkOrdersPage />} />
+            <Route path="/cmm/work-orders" element={<CMMWorkOrdersPage />} />
             <Route path="/parts" element={<PartsPage />} />
             <Route path="/tires" element={<TiresPage />} />
             <Route path="/courtesy-cars" element={<CourtesyCarsPage />} />

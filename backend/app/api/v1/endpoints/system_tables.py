@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from typing import Any, List
 
 from app.core.deps import get_db, get_current_user, get_current_active_superuser
-from app.models import DamageType, CustomerType, WorkOrderStatusType, PriorityType, User
+from app.models import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType, User
 from app.schemas.system_tables import (
     DamageTypeCreate,
     DamageTypeUpdate,
@@ -20,6 +20,9 @@ from app.schemas.system_tables import (
     PriorityTypeCreate,
     PriorityTypeUpdate,
     PriorityTypeResponse,
+    InterventionStatusTypeCreate,
+    InterventionStatusTypeUpdate,
+    InterventionStatusTypeResponse,
 )
 
 router = APIRouter(tags=["system-tables"])
@@ -398,4 +401,117 @@ def delete_priority_type(
         )
     
     db.delete(priority_type)
+    db.commit()
+
+
+# ============================================================================
+# INTERVENTION STATUS TYPES ENDPOINTS
+# ============================================================================
+
+@router.get("/intervention-status-types", response_model=List[InterventionStatusTypeResponse])
+def get_intervention_status_types(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Get all intervention status types (accessibile a tutti gli utenti autenticati).
+    
+    Stati predefiniti:
+    - preso_in_carico: L'intervento è in lavorazione
+    - attesa_componente: È stato richiesto l'acquisto di un componente
+    - sospeso: Intervento sospeso (richiede nota descrittiva)
+    - concluso: L'intervento è stato completato
+    """
+    return db.query(InterventionStatusType).filter(
+        InterventionStatusType.attivo == True
+    ).order_by(InterventionStatusType.ordine).all()
+
+
+@router.get("/intervention-status-types/all", response_model=List[InterventionStatusTypeResponse])
+def get_all_intervention_status_types(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+):
+    """Get all intervention status types including inactive (admin only)"""
+    return db.query(InterventionStatusType).order_by(InterventionStatusType.ordine).all()
+
+
+@router.post("/intervention-status-types", response_model=InterventionStatusTypeResponse, status_code=status.HTTP_201_CREATED)
+def create_intervention_status_type(
+    status_type_in: InterventionStatusTypeCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> Any:
+    """Create intervention status type (admin only)"""
+    # Check if codice already exists
+    existing = db.query(InterventionStatusType).filter(
+        InterventionStatusType.codice.ilike(status_type_in.codice)
+    ).first()
+    if existing:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Questo codice stato intervento esiste già"
+        )
+    
+    status_type = InterventionStatusType(**status_type_in.model_dump())
+    db.add(status_type)
+    db.commit()
+    db.refresh(status_type)
+    return status_type
+
+
+@router.put("/intervention-status-types/{status_type_id}", response_model=InterventionStatusTypeResponse)
+def update_intervention_status_type(
+    status_type_id: int,
+    status_type_in: InterventionStatusTypeUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> Any:
+    """Update intervention status type (admin only)"""
+    status_type = db.query(InterventionStatusType).filter(InterventionStatusType.id == status_type_id).first()
+    
+    if not status_type:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Stato intervento non trovato"
+        )
+    
+    # Check codice uniqueness if changed
+    if status_type_in.codice and status_type_in.codice != status_type.codice:
+        existing = db.query(InterventionStatusType).filter(
+            InterventionStatusType.codice.ilike(status_type_in.codice),
+            InterventionStatusType.id != status_type_id
+        ).first()
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Questo codice è già in uso"
+            )
+    
+    update_data = status_type_in.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(status_type, field, value)
+    
+    db.add(status_type)
+    db.commit()
+    db.refresh(status_type)
+    return status_type
+
+
+@router.delete("/intervention-status-types/{status_type_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_intervention_status_type(
+    status_type_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> None:
+    """Delete intervention status type (admin only)"""
+    status_type = db.query(InterventionStatusType).filter(InterventionStatusType.id == status_type_id).first()
+    
+    if not status_type:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Stato intervento non trovato"
+        )
+    
+    db.delete(status_type)
     db.commit()

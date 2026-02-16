@@ -321,6 +321,56 @@ const SettingsPage = () => {
                           ]}
                         />
                       )
+                    },
+                    {
+                      key: 'intervention-status-types',
+                      label: '🔩 Stati Intervento',
+                      children: (
+                        <SystemTableManager
+                          title="Stato Intervento"
+                          endpoint={API_ENDPOINTS.SYSTEM_INTERVENTION_STATUS_TYPES}
+                          columns={[
+                            {
+                              title: 'Codice',
+                              dataIndex: 'codice',
+                              key: 'codice',
+                              width: 120,
+                            },
+                            {
+                              title: 'Nome',
+                              dataIndex: 'nome',
+                              key: 'nome',
+                              width: 150,
+                            },
+                            {
+                              title: 'Descrizione',
+                              dataIndex: 'descrizione',
+                              key: 'descrizione',
+                              ellipsis: true,
+                            },
+                            {
+                              title: 'Richiede Nota',
+                              dataIndex: 'richiede_nota',
+                              key: 'richiede_nota',
+                              width: 100,
+                              render: (richiede: boolean) => richiede ? '✅' : '❌'
+                            },
+                            {
+                              title: 'Ordine',
+                              dataIndex: 'ordine',
+                              key: 'ordine',
+                              width: 80,
+                            },
+                            {
+                              title: 'Attivo',
+                              dataIndex: 'attivo',
+                              key: 'attivo',
+                              width: 80,
+                              render: (attivo: boolean) => attivo ? '✅' : '❌'
+                            }
+                          ]}
+                        />
+                      )
                     }
                   ]}
                 />

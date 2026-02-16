@@ -14,6 +14,13 @@ interface VehicleCreate {
   colore?: string
   km_attuali?: number
   note?: string
+  // Campi tecnici aggiuntivi
+  cilindrata?: string
+  kw?: number
+  cv?: number
+  porte?: number
+  carburante?: string
+  prima_immatricolazione?: string
 }
 
 export const useVehicles = (page: number = 1, size: number = 10, search?: string) => {

@@ -1,9 +1,11 @@
 // User types
 export enum UserRole {
   ADMIN = 'ADMIN',
-  GENERAL_MANAGER = 'GENERAL_MANAGER',
-  WORKSHOP = 'WORKSHOP',
-  BODYSHOP = 'BODYSHOP',
+  GENERAL_MANAGER = 'GM',      // Garage Manager
+  CMM = 'CMM',                  // Capo Meccanica
+  CBM = 'CBM',                  // Capo Carrozzeria
+  WORKSHOP = 'WORKSHOP',        // Legacy - deprecato
+  BODYSHOP = 'BODYSHOP',        // Legacy - deprecato
 }
 
 export interface User {
@@ -86,9 +88,33 @@ export interface Vehicle {
   km_attuali?: number
   note?: string
   attivo?: boolean
+  // Campi tecnici aggiuntivi
+  cilindrata?: string
+  kw?: number
+  cv?: number
+  porte?: number
+  carburante?: string
+  prima_immatricolazione?: string
   created_at: string
   updated_at?: string
   customer?: Customer
+}
+
+// Auto lookup types
+export interface DatiTargaResponse {
+  targa: string
+  marca: string
+  modello: string
+  anno: number
+  cilindrata: string
+  kw: number
+  cv: number
+  porte: number
+  carburante: string
+  telaio: string
+  colore: string
+  prima_immatricolazione: string
+  fonte: string
 }
 
 // Work Order types - ALLINEATO AL BACKEND
@@ -143,6 +169,19 @@ export interface WorkOrder {
   interventions?: Intervention[]
 }
 
+// Intervention Status Type
+export interface InterventionStatusType {
+  id: number
+  codice: string
+  nome: string
+  descrizione?: string
+  richiede_nota: boolean
+  attivo: boolean
+  ordine: number
+  created_at: string
+  updated_at: string
+}
+
 // Intervention types
 export interface Intervention {
   id?: number
@@ -151,6 +190,14 @@ export interface Intervention {
   descrizione_intervento: string
   durata_stimata: number
   tipo_intervento: 'Meccanico' | 'Carrozziere'
+  // Nuovi campi per gestione stato CMM/CBM
+  stato_intervento_id?: number
+  stato_intervento?: InterventionStatusType
+  note_intervento?: string
+  note_sospensione?: string
+  ore_effettive?: number
+  data_inizio?: string
+  data_fine?: string
   created_at?: string
   updated_at?: string
   _isNew?: boolean // Mark new interventions not yet saved
@@ -161,10 +208,80 @@ export interface InterventionCreate {
   descrizione_intervento: string
   durata_stimata: number
   tipo_intervento: 'Meccanico' | 'Carrozziere'
+  stato_intervento_id?: number
+  note_intervento?: string
 }
 
 export interface InterventionUpdate extends InterventionCreate {
   work_order_id: number
+  note_sospensione?: string
+  ore_effettive?: number
+}
+
+export interface InterventionStatusUpdate {
+  stato_intervento_id: number
+  note_intervento?: string
+  note_sospensione?: string
+}
+
+export interface InterventionCreate {
+  descrizione_intervento: string
+  durata_stimata: number
+  tipo_intervento: 'Meccanico' | 'Carrozziere'
+  stato_intervento_id?: number
+  note_intervento?: string
+}
+
+// CMM Work Order Summary (for CMM role)
+export interface CMMInterventionSummary {
+  id: number
+  progressivo: number
+  descrizione_intervento: string
+  durata_stimata: number
+  tipo_intervento: 'Meccanico' | 'Carrozziere'
+  stato_intervento_id?: number
+  stato_intervento_codice?: string
+  stato_intervento_nome?: string
+  note_intervento?: string
+  note_sospensione?: string
+  ore_effettive?: number
+  data_inizio?: string
+  data_fine?: string
+}
+
+export interface CMMWorkOrderSummary {
+  id: number
+  numero_scheda: string
+  stato: string
+  data_appuntamento?: string
+  data_fine_prevista?: string
+  priorita?: string
+  note?: string
+  cliente_nome?: string
+  cliente_cognome?: string
+  cliente_telefono?: string
+  veicolo_targa?: string
+  veicolo_marca?: string
+  veicolo_modello?: string
+  interventi: CMMInterventionSummary[]
+  ha_interventi_meccanica: boolean
+}
+
+// CMM Dashboard Stats
+export interface InterventionStatusStats {
+  codice: string
+  nome: string
+  totale: number
+}
+
+export interface CMMDashboardStats {
+  work_orders_approvate: number
+  work_orders_in_lavorazione: number
+  customers_total: number
+  vehicles_total: number
+  interventi_totali: number
+  interventi_senza_stato: number
+  interventi_per_stato: InterventionStatusStats[]
 }
 
 // Part types - ALLINEATO AL BACKEND MODEL

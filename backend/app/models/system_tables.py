@@ -65,3 +65,29 @@ class PriorityType(Base):
     
     def __repr__(self):
         return f"<PriorityType(id={self.id}, nome='{self.nome}')>"
+
+
+class InterventionStatusType(Base):
+    """
+    Intervention status type - dynamic lookup table
+    
+    Stati predefiniti:
+    - preso_in_carico: L'intervento è in lavorazione
+    - attesa_componente: È stato richiesto l'acquisto di un componente
+    - sospeso: Intervento sospeso (richiede nota descrittiva)
+    - concluso: L'intervento è stato completato
+    """
+    __tablename__ = "intervention_status_types"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    codice = Column(String(30), unique=True, nullable=False, index=True)
+    nome = Column(String(50), nullable=False)
+    descrizione = Column(Text)
+    richiede_nota = Column(Boolean, default=False)  # True per stato "sospeso"
+    attivo = Column(Boolean, default=True)
+    ordine = Column(Integer, default=0)  # Per ordinamento visualizzazione
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    
+    def __repr__(self):
+        return f"<InterventionStatusType(id={self.id}, codice='{self.codice}', nome='{self.nome}')>"

@@ -13,13 +13,13 @@ class UserRole(str, enum.Enum):
     """User roles enumeration"""
     ADMIN = "ADMIN"                    # Administrator
     GENERAL_MANAGER = "GENERAL_MANAGER"  # General Manager (GM)
-    WORKSHOP = "WORKSHOP"                # Car Mechanic Manager (CMM)
-    BODYSHOP = "BODYSHOP"                # Car Body Manager (CBM)
+    WORKSHOP = "WORKSHOP"                # Legacy - Meccanica
+    BODYSHOP = "BODYSHOP"                # Legacy - Carrozzeria
+    CMM = "CMM"                          # Capo Meccanica
+    CBM = "CBM"                          # Capo Carrozzeria
     
-    # Legacy aliases for compatibility
+    # Legacy alias for compatibility
     GM = "GENERAL_MANAGER"
-    CMM = "WORKSHOP"
-    CBM = "BODYSHOP"
 
 
 class User(Base):

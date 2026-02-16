@@ -51,7 +51,7 @@ const MainLayout = () => {
       },
     ]
 
-    // Items per tutti i ruoli autenticati
+    // Items per tutti i ruoli autenticati (eccetto CMM e CBM base)
     const commonItems: MenuProps['items'] = [
       {
         key: '/customers',
@@ -72,6 +72,15 @@ const MainLayout = () => {
         key: '/calendar',
         icon: <CalendarOutlined />,
         label: 'Calendario',
+      },
+    ]
+    
+    // Items specifici per CMM (Capo Meccanica)
+    const cmmItems: MenuProps['items'] = [
+      {
+        key: '/cmm/work-orders',
+        icon: <ToolOutlined />,
+        label: 'Ordini di Lavoro',
       },
     ]
 
@@ -108,13 +117,26 @@ const MainLayout = () => {
       },
     ]
 
+    // Logica basata sul ruolo
+    const ruolo = user?.ruolo
+    
+    // CMM vede solo dashboard + ordini di lavoro CMM
+    if (ruolo === UserRole.CMM) {
+      return [...baseItems, ...cmmItems]
+    }
+    
+    // CBM (Carrozzeria) - TODO: creare pagina simile a CMM
+    if (ruolo === UserRole.CBM) {
+      return [...baseItems, ...cmmItems] // Per ora usa la stessa vista
+    }
+
     let items = [...baseItems, ...commonItems]
 
-    if (user?.ruolo === UserRole.ADMIN || user?.ruolo === UserRole.GENERAL_MANAGER) {
+    if (ruolo === UserRole.ADMIN || ruolo === UserRole.GENERAL_MANAGER) {
       items = [...items, ...workshopItems, ...adminItems]
     } else if (
-      user?.ruolo === UserRole.WORKSHOP ||
-      user?.ruolo === UserRole.BODYSHOP
+      ruolo === UserRole.WORKSHOP ||
+      ruolo === UserRole.BODYSHOP
     ) {
       items = [...items, ...workshopItems]
     }

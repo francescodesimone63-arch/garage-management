@@ -107,4 +107,20 @@ export const API_ENDPOINTS = {
   SYSTEM_CUSTOMER_TYPES: '/system-tables/customer-types',
   SYSTEM_WORKORDER_STATUS_TYPES: '/system-tables/work-order-status-types',
   SYSTEM_PRIORITY_TYPES: '/system-tables/priority-types',
+  SYSTEM_INTERVENTION_STATUS_TYPES: '/system-tables/intervention-status-types',
+  
+  // CMM (Capo Meccanica) specific endpoints
+  CMM_WORK_ORDERS: '/cmm/work-orders',
+  CMM_WORK_ORDER_DETAIL: (id: number) => `/cmm/work-orders/${id}`,
+  CMM_STATS: '/cmm/stats',
+  
+  // Intervention endpoints
+  CREATE_INTERVENTION: (workOrderId: number) => `/work-orders/${workOrderId}/interventions`,
+  INTERVENTION_STATUS: (workOrderId: number, interventionId: number) => 
+    `/work-orders/${workOrderId}/interventions/${interventionId}/status`,
+  
+  // Auto (marche, modelli, carburanti)
+  AUTO_MARCHE: '/auto/marche',
+  AUTO_MODELLI: (marca: string) => `/auto/modelli/${encodeURIComponent(marca)}`,
+  AUTO_CARBURANTI: '/auto/carburanti',
 }

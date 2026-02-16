@@ -26,6 +26,15 @@ class Vehicle(Base):
     modello = Column(String(50))
     anno = Column(Integer)
     colore = Column(String(30))
+    
+    # Dati tecnici (da verifica targa)
+    cilindrata = Column(String(20))  # es. "1598 cc"
+    kw = Column(Integer)  # potenza in kW
+    cv = Column(Integer)  # potenza in CV
+    porte = Column(Integer)  # numero porte (3 o 5)
+    carburante = Column(String(30))  # Benzina, Diesel, GPL, etc.
+    prima_immatricolazione = Column(String(10))  # YYYY-MM-DD
+    
     km_attuali = Column(Integer)
     customer_id = Column(Integer, ForeignKey("customers.id", ondelete="SET NULL"))
     tipo = Column(Enum(VehicleType), default=VehicleType.CLIENTE, index=True)
