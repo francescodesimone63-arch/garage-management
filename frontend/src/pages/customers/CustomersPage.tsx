@@ -8,14 +8,14 @@ import { useCustomerTypes } from '@/hooks/useSystemTables'
 import type { Customer } from '@/types'
 
 const CustomersPage = () => {
-  const [page, setPage] = useState(1)
   const [searchText, setSearchText] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
   const [customerType, setCustomerType] = useState<string>('privato')
   const [form] = Form.useForm()
 
-  const { data, isLoading } = useCustomers(page, 10, searchText)
+  // Carica tutti i clienti per permettere ordinamento completo
+  const { data, isLoading } = useCustomers(1, 1000, searchText)
   const createMutation = useCreateCustomer()
   const updateMutation = useUpdateCustomer()
   const deleteMutation = useDeleteCustomer()
@@ -73,7 +73,11 @@ const CustomersPage = () => {
           </Space>
         )
       },
-      sorter: true,
+      sorter: (a, b) => {
+        const nameA = a.tipo === 'azienda' ? (a.ragione_sociale || '') : `${a.nome || ''} ${a.cognome || ''}`.trim().toLowerCase()
+        const nameB = b.tipo === 'azienda' ? (b.ragione_sociale || '') : `${b.nome || ''} ${b.cognome || ''}`.trim().toLowerCase()
+        return nameA.localeCompare(nameB, 'it')
+      },
     },
     {
       title: 'Email',
@@ -100,16 +104,6 @@ const CustomersPage = () => {
       dataIndex: 'partita_iva',
       key: 'partita_iva',
       render: (vat) => vat || '-',
-    },
-    {
-      title: 'Stato',
-      dataIndex: 'attivo',
-      key: 'attivo',
-      render: (attivo) => (
-        <Tag color={attivo ? 'green' : 'red'}>
-          {attivo ? 'Attivo' : 'Inattivo'}
-        </Tag>
-      ),
     },
     {
       title: 'Azioni',
@@ -167,11 +161,10 @@ const CustomersPage = () => {
         rowKey="id"
         loading={isLoading}
         pagination={{
-          current: page,
           pageSize: 10,
-          total: data?.total,
-          onChange: setPage,
           showTotal: (total) => `Totale ${total} clienti`,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '50', '100'],
         }}
       />
 

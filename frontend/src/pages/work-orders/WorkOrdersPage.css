@@ -150,46 +150,107 @@
   justify-content: center;
 }
 
-/* Tabella interventi compatta */
+/* Tabella interventi */
 .interventions-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+.interventions-table thead {
+  background: #f5f5f5;
 }
 
 .interventions-table th {
-  background: #f5f5f5;
-  padding: 6px 8px;
+  padding: 10px 6px;
   text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  color: #666;
-  border-bottom: 1px solid #e8e8e8;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  white-space: nowrap;
+}
+
+.interventions-table th:nth-child(1) {
+  text-align: center;
+  width: 3%;
+}
+
+.interventions-table th:nth-child(2) {
+  text-align: left;
+  width: auto;
+  min-width: 440px;
+}
+
+.interventions-table th:nth-child(3) {
+  text-align: center;
+  width: 10%;
+}
+
+.interventions-table th:nth-child(4) {
+  text-align: center;
+  width: 14%;
+}
+
+.interventions-table th:nth-child(5) {
+  text-align: center;
+  width: 4%;
 }
 
 .interventions-table td {
-  padding: 6px 8px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 4px 4px;
+  border-bottom: 1px solid #e8e8e8;
   vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.interventions-table td:nth-child(1) {
+  text-align: center;
+  width: 3%;
+}
+
+.interventions-table td:nth-child(2) {
+  padding: 0px !important;
+  overflow: visible !important;
+  width: 69%;
+}
+
+.interventions-table td:nth-child(3) {
+  text-align: center;
+  width: 10%;
+}
+
+.interventions-table td:nth-child(4) {
+  text-align: center;
+  width: 14%;
+}
+
+.interventions-table td:nth-child(5) {
+  text-align: center;
+  width: 4%;
 }
 
 .interventions-table tr:hover {
-  background: #fafafa;
+  background: #f9f9f9;
 }
 
 .interventions-table .ant-input,
-.interventions-table .ant-select-selector,
 .interventions-table .ant-input-number {
   font-size: 12px !important;
   height: 28px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-.interventions-table .ant-input-number-input {
-  height: 26px !important;
+.interventions-table .ant-select {
+  font-size: 12px !important;
+  width: 100% !important;
 }
 
-.interventions-table .ant-select-selection-item {
-  line-height: 26px !important;
+.interventions-table .ant-select-selector {
+  height: 28px !important;
+  box-sizing: border-box !important;
 }
 
 /* Bottone aggiungi intervento */

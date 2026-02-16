@@ -934,20 +934,27 @@ const WorkOrdersPage = () => {
             ) : (
               <div style={{ overflowX: 'auto' }}>
                 <table className="interventions-table">
+                  <colgroup>
+                    <col style={{ width: '5%' }} />
+                    <col style={{ width: '60%' }} />
+                    <col style={{ width: '10%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '10%' }} />
+                  </colgroup>
                   <thead>
                     <tr>
-                      <th style={{ width: 40 }}>#</th>
+                      <th>#</th>
                       <th>Descrizione</th>
-                      <th style={{ width: 70 }}>Ore</th>
-                      <th style={{ width: 100 }}>Tipo</th>
-                      <th style={{ width: 40 }}></th>
+                      <th>Ore</th>
+                      <th>Tipo</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     {formInterventions.map((intervention, idx) => (
-                      <tr key={idx}>
-                        <td>{intervention.progressivo}</td>
-                        <td>
+                      <tr key={`intervention-${idx}-${intervention.id || 'new'}`}>
+                        <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>{intervention.progressivo}</td>
+                        <td style={{ paddingTop: 4, paddingBottom: 4 }}>
                           <Input
                             value={intervention.descrizione_intervento}
                             onChange={(e) => {
@@ -960,7 +967,7 @@ const WorkOrdersPage = () => {
                             size="small"
                           />
                         </td>
-                        <td>
+                        <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
                           <InputNumber
                             value={intervention.durata_stimata}
                             onChange={(value) => {
@@ -976,7 +983,7 @@ const WorkOrdersPage = () => {
                             size="small"
                           />
                         </td>
-                        <td>
+                        <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
                           <Select
                             value={intervention.tipo_intervento}
                             onChange={(value) => {
@@ -992,7 +999,7 @@ const WorkOrdersPage = () => {
                             <Select.Option value="Carrozziere">Carr.</Select.Option>
                           </Select>
                         </td>
-                        <td>
+                        <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>
                           <Button
                             type="text"
                             danger

@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd \"/Users/francescodesimone/Sviluppo Python/garage-management/backend\" && sqlite3 garage\\.db \"SELECT id, nome, attivo FROM customer_types;\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

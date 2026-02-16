@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 class CustomerBase(BaseModel):
     """Base customer schema - VALIDAZIONI SEMPLIFICATE"""
-    tipo: str = Field(..., pattern="^(privato|azienda)$")
+    tipo: str = Field(..., min_length=1, max_length=50)  # Tipo dinamico da tabella di sistema
     nome: Optional[str] = Field(None, max_length=100)
     cognome: Optional[str] = Field(None, max_length=100)
     ragione_sociale: Optional[str] = Field(None, max_length=200)
@@ -32,7 +32,7 @@ class CustomerBase(BaseModel):
     @root_validator(skip_on_failure=True)
     def validate_tipo_fields(cls, values):
         """Valida campi in base al tipo cliente - MENO RIGIDA"""
-        tipo = values.get('tipo')
+        tipo = values.get('tipo', '').lower()
         if tipo == 'privato':
             # Per privati: almeno nome o cognome
             if not values.get('nome') and not values.get('cognome'):
@@ -41,6 +41,9 @@ class CustomerBase(BaseModel):
             # Per aziende: almeno ragione sociale
             if not values.get('ragione_sociale'):
                 raise ValueError('Ragione sociale è obbligatoria per aziende')
+        # Altri tipi (es. interno): almeno nome o cognome o ragione_sociale
+        elif not values.get('nome') and not values.get('cognome') and not values.get('ragione_sociale'):
+            raise ValueError('Almeno nome, cognome o ragione sociale sono richiesti')
         return values
     
     @validator('partita_iva')
@@ -73,7 +76,7 @@ class CustomerCreate(CustomerBase):
 
 class CustomerUpdate(BaseModel):
     """Schema for updating a customer - TUTTI CAMPI OPZIONALI"""
-    tipo: Optional[str] = Field(None, pattern="^(privato|azienda)$")
+    tipo: Optional[str] = Field(None, min_length=1, max_length=50)
     nome: Optional[str] = Field(None, max_length=100)
     cognome: Optional[str] = Field(None, max_length=100)
     ragione_sociale: Optional[str] = Field(None, max_length=200)
