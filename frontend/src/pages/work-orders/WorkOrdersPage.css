@@ -1,0 +1,268 @@
+/* ===========================================
+   WORK ORDER FORM - COMPACT MODERN LAYOUT
+   Responsive: Desktop 4col, Tablet 2col, Mobile 1col
+   =========================================== */
+
+/* Modal Override - riduci padding */
+.compact-modal .ant-modal-body {
+  padding: 12px 16px !important;
+}
+
+.compact-modal .ant-modal-header {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.compact-modal .ant-modal-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Form compatto */
+.compact-form .ant-form-item {
+  margin-bottom: 8px !important;
+}
+
+.compact-form .ant-form-item-label {
+  padding-bottom: 2px !important;
+}
+
+.compact-form .ant-form-item-label > label {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: #666 !important;
+  height: auto !important;
+}
+
+/* Input più piccoli */
+.compact-form .ant-input,
+.compact-form .ant-select-selector,
+.compact-form .ant-picker,
+.compact-form .ant-input-number {
+  font-size: 13px !important;
+  height: 32px !important;
+  border-radius: 4px !important;
+}
+
+.compact-form .ant-input-number-input {
+  height: 30px !important;
+}
+
+.compact-form .ant-select-selection-item {
+  line-height: 30px !important;
+}
+
+.compact-form textarea.ant-input {
+  height: auto !important;
+  min-height: 60px !important;
+}
+
+/* Sezioni leggere */
+.form-section {
+  background: #fafafa;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #f0f0f0;
+}
+
+.form-section-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-section-title svg {
+  font-size: 14px;
+  color: #1890ff;
+}
+
+/* Grid responsivo */
+.form-grid {
+  display: grid;
+  gap: 8px 12px;
+}
+
+.form-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.form-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .form-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .form-grid-4,
+  .form-grid-3,
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .compact-modal .ant-modal-body {
+    padding: 8px !important;
+  }
+  
+  .form-section {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Campo inline con bottone */
+.field-with-btn {
+  display: flex;
+  gap: 4px;
+}
+
+.field-with-btn .ant-select,
+.field-with-btn .ant-input {
+  flex: 1;
+}
+
+.field-with-btn .ant-btn {
+  flex-shrink: 0;
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tabella interventi compatta */
+.interventions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.interventions-table th {
+  background: #f5f5f5;
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #666;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.interventions-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.interventions-table tr:hover {
+  background: #fafafa;
+}
+
+.interventions-table .ant-input,
+.interventions-table .ant-select-selector,
+.interventions-table .ant-input-number {
+  font-size: 12px !important;
+  height: 28px !important;
+}
+
+.interventions-table .ant-input-number-input {
+  height: 26px !important;
+}
+
+.interventions-table .ant-select-selection-item {
+  line-height: 26px !important;
+}
+
+/* Bottone aggiungi intervento */
+.btn-add-intervention {
+  font-size: 12px;
+  height: 28px;
+  padding: 0 12px;
+}
+
+/* Empty state interventi */
+.interventions-empty {
+  padding: 16px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+/* Header con azioni */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-header-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Campo span full */
+.field-full {
+  grid-column: 1 / -1;
+}
+
+/* Numero scheda badge */
+.scheda-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Status badge colors */
+.status-bozza { background: #f5f5f5; color: #666; }
+.status-aperta { background: #e6f7ff; color: #1890ff; }
+.status-in_lavorazione { background: #fff7e6; color: #fa8c16; }
+.status-completata { background: #f6ffed; color: #52c41a; }
+.status-consegnata { background: #f0f5ff; color: #2f54eb; }
+
+/* Responsive modal width */
+@media (max-width: 768px) {
+  .compact-modal {
+    max-width: 95vw !important;
+    margin: 10px auto !important;
+  }
+}
+
+/* Fix per textarea nel form compatto */
+.compact-form .ant-input-textarea textarea {
+  min-height: 50px !important;
+  font-size: 13px !important;
+  resize: vertical;
+}
+
+/* Animazione focus */
+.compact-form .ant-input:focus,
+.compact-form .ant-select-focused .ant-select-selector,
+.compact-form .ant-picker-focused {
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1) !important;
+}
