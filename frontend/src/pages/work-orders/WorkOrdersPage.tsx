@@ -8,6 +8,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import PageHeader from '@/components/PageHeader'
 import WorkOrderStateTransition from '@/components/WorkOrderStateTransition'
 import { CalendarModal } from '@/components/CalendarModal'
+import VoiceTextarea from '@/components/VoiceTextarea'
 import { useWorkOrders, useCreateWorkOrder, useUpdateWorkOrder, useDeleteWorkOrder } from '@/hooks/useWorkOrders'
 import { useInterventions } from '@/hooks/useInterventions'
 import { useCustomers, useCreateCustomer } from '@/hooks/useCustomers'
@@ -749,7 +750,7 @@ const WorkOrdersPage = () => {
         }}
         onOk={() => form.submit()}
         confirmLoading={createWorkOrderMutation.isPending || updateWorkOrderMutation.isPending}
-        width={screens.md ? 800 : '95vw'}
+        width={screens.md ? 1000 : '95vw'}
         className="compact-modal"
         centered
       >
@@ -1027,11 +1028,27 @@ const WorkOrdersPage = () => {
               label="Descrizione Danno"
               rules={[{ required: true, message: 'Inserisci descrizione' }]}
             >
-              <Input.TextArea rows={2} placeholder="Descrivi il danno..." />
+              <VoiceTextarea
+                placeholder="Clicca il microfono e descrivi a voce il danno... oppure digita manualmente"
+                rows={3}
+                minHeight={150}
+                maxHeight={300}
+                classNamePrefix="descrizione-danno"
+                label="Descrizione Danno"
+                debugPrefix="DescrizioneDanno"
+              />
             </Form.Item>
 
             <Form.Item name="note" label="Note">
-              <Input.TextArea rows={1} placeholder="Note aggiuntive..." />
+              <VoiceTextarea
+                placeholder="Aggiungi note... oppure clicca il microfono per dettare"
+                rows={1}
+                minHeight={60}
+                maxHeight={150}
+                classNamePrefix="notes"
+                label="Note"
+                debugPrefix="Notes"
+              />
             </Form.Item>
           </div>
 
