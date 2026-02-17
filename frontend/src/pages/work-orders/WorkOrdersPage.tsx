@@ -1017,17 +1017,17 @@ const WorkOrdersPage = () => {
             )}
           </div>
 
-          {/* SEZIONE: Descrizione */}
+          {/* SEZIONE: Descrizione Danno */}
           <div className="form-section">
             <div className="form-section-title">
-              📝 Descrizione Lavoro
+              📝 Descrizione Danno
             </div>
             <Form.Item
               name="valutazione_danno"
-              label="Descrizione Lavori"
+              label="Descrizione Danno"
               rules={[{ required: true, message: 'Inserisci descrizione' }]}
             >
-              <Input.TextArea rows={2} placeholder="Descrivi i lavori..." />
+              <Input.TextArea rows={2} placeholder="Descrivi il danno..." />
             </Form.Item>
 
             <Form.Item name="note" label="Note">

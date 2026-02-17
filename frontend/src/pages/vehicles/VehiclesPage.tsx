@@ -66,6 +66,17 @@ const VehiclesPage = () => {
     }
   }
 
+  // Helper function per trovare il cliente per ID
+  const getCustomerName = (customerId: number) => {
+    if (!customersData?.items) return '-'
+    const customer = customersData.items.find(c => c.id === customerId)
+    if (!customer) return '-'
+    if (customer.tipo?.toLowerCase() === 'azienda') {
+      return customer.ragione_sociale || '-'
+    }
+    return `${customer.nome || ''} ${customer.cognome || ''}`.trim() || '-'
+  }
+
   const columns: ColumnsType<Vehicle> = [
     {
       title: 'Targa',
@@ -98,24 +109,13 @@ const VehiclesPage = () => {
     {
       title: 'Cliente',
       key: 'customer',
-      render: (_, record) => 
-        record.customer ? `${record.customer.nome} ${record.customer.cognome}` : '-',
+      render: (_, record) => getCustomerName(record.customer_id),
     },
     {
       title: 'KM Attuali',
       dataIndex: 'km_attuali',
       key: 'km_attuali',
       render: (km) => km ? `${km.toLocaleString()} km` : '-',
-    },
-    {
-      title: 'Stato',
-      dataIndex: 'attivo',
-      key: 'attivo',
-      render: (attivo) => (
-        <Tag color={attivo ? 'green' : 'red'}>
-          {attivo ? 'Attivo' : 'Inattivo'}
-        </Tag>
-      ),
     },
     {
       title: 'Azioni',
