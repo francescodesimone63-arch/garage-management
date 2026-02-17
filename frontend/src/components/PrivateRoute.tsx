@@ -6,16 +6,7 @@ const PrivateRoute = () => {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh' 
-      }}>
-        <Spin size="large" tip="Caricamento..." />
-      </div>
-    )
+    return <Spin fullscreen size="large" tip="Caricamento..." />
   }
 
   return user ? <Outlet /> : <Navigate to="/login" replace />

@@ -1,0 +1,50 @@
+INFO:     Started server process [87111]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:55531 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56799 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57897 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57899 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-17 15:37:07,943 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-17 15:37:07,948 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:07,949 INFO sqlalchemy.engine.Engine [generated in 0.00038s] (1, 1, 0)
+2026-02-17 15:37:07,957 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:57901 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-17 15:37:07,961 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-17 15:37:07,961 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:07,962 INFO sqlalchemy.engine.Engine [cached since 0.01326s ago] (1, 1, 0)
+2026-02-17 15:37:07,963 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:57901 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57899 - "OPTIONS /api/v1/users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57897 - "OPTIONS /api/v1/users/ HTTP/1.1" 200 OK
+2026-02-17 15:37:08,471 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-17 15:37:08,472 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:08,472 INFO sqlalchemy.engine.Engine [cached since 0.524s ago] (1, 1, 0)
+2026-02-17 15:37:08,479 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:08,479 INFO sqlalchemy.engine.Engine [generated in 0.00036s] (100, 0)
+2026-02-17 15:37:08,483 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:57901 - "GET /api/v1/users/ HTTP/1.1" 200 OK
+2026-02-17 15:37:08,490 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-17 15:37:08,490 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = ?
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:08,491 INFO sqlalchemy.engine.Engine [cached since 0.5423s ago] (1, 1, 0)
+2026-02-17 15:37:08,493 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash, users.ruolo AS users_ruolo, users.nome AS users_nome, users.cognome AS users_cognome, users.attivo AS users_attivo, users.ultimo_accesso AS users_ultimo_accesso, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users
+ LIMIT ? OFFSET ?
+2026-02-17 15:37:08,493 INFO sqlalchemy.engine.Engine [cached since 0.01392s ago] (100, 0)
+2026-02-17 15:37:08,496 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:57901 - "GET /api/v1/users/ HTTP/1.1" 200 OK

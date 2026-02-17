@@ -37,12 +37,16 @@ try:
         print(f"   ID: {existing_admin.id}")
     else:
         # Crea nuovo admin
+        from app.models.user import UserRole
+        
         admin = User(
+            username="admin",
             email="admin@garage.local",
-            full_name="Admin User",
-            hashed_password=get_password_hash("admin123"),
-            is_active=True,
-            is_superuser=True
+            nome="Admin",
+            cognome="User",
+            password_hash=get_password_hash("admin123"),
+            ruolo=UserRole.ADMIN,
+            attivo=True
         )
         
         db.add(admin)
@@ -51,6 +55,7 @@ try:
         
         print("✅ Utente admin creato con successo!")
         print(f"   Email: {admin.email}")
+        print(f"   Username: {admin.username}")
         print(f"   Password: admin123")
         print(f"   ID: {admin.id}")
         

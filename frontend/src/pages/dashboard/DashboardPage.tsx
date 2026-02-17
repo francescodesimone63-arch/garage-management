@@ -29,11 +29,7 @@ const CMMDashboard = () => {
   const { data: stats, isLoading, error } = useCMMStats()
 
   if (isLoading) {
-    return (
-      <div style={{ textAlign: 'center', padding: '100px 0' }}>
-        <Spin size="large" tip="Caricamento dashboard CMM..." />
-      </div>
-    )
+    return <Spin fullscreen size="large" tip="Caricamento dashboard CMM..." />
   }
 
   if (error) {
@@ -165,11 +161,7 @@ const GeneralDashboard = () => {
   })
 
   if (isLoading) {
-    return (
-      <div style={{ textAlign: 'center', padding: '100px 0' }}>
-        <Spin size="large" tip="Caricamento dashboard..." />
-      </div>
-    )
+    return <Spin fullscreen size="large" tip="Caricamento dashboard..." />
   }
 
   if (error) {

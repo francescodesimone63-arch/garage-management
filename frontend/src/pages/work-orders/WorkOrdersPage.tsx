@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Table, Button, Modal, Form, Input, Select, Space, Tag, Popconfirm, message, InputNumber, Card, Row, Col, DatePicker, Grid, Divider } from 'antd'
-import { PlusOutlined, EditOutlined, DeleteOutlined, FileTextOutlined, UserAddOutlined, CarOutlined, CalendarOutlined } from '@ant-design/icons'
+import { Table, Button, Modal, Form, Input, Select, Space, Tag, Popconfirm, message, InputNumber, Card, Row, Col, DatePicker, Grid, Divider, Tabs } from 'antd'
+import { PlusOutlined, EditOutlined, DeleteOutlined, FileTextOutlined, UserAddOutlined, CarOutlined, CalendarOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import dayjs from 'dayjs'
 import { useQueryClient } from '@tanstack/react-query'
@@ -45,6 +45,10 @@ const WorkOrdersPage = () => {
   // Calendar modal state
   const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false)
   const [displayedAppointmentDate, setDisplayedAppointmentDate] = useState<string>('')
+  
+  // Dirty state tracking
+  const [isDirty, setIsDirty] = useState(false)
+  const [activeTabKey, setActiveTabKey] = useState<string>('details')
   
   const [form] = Form.useForm()
   const [customerForm] = Form.useForm()
@@ -175,6 +179,9 @@ const WorkOrdersPage = () => {
       setEditingWorkOrder(null)
       setSelectedCustomerId(undefined)
       setDisplayedAppointmentDate('')
+      setIsDirty(false)
+      setActiveTabKey('details')
+      setFormInterventions([])
       form.resetFields()
       const today = dayjs()
       
@@ -201,6 +208,8 @@ const WorkOrdersPage = () => {
   const handleEdit = (record: WorkOrder) => {
     setEditingWorkOrder(record)
     setSelectedCustomerId(record.customer_id)
+    setIsDirty(false)
+    setActiveTabKey('details')
     // Non convertire date qui - il DatePicker gestisce le stringhe YYYY-MM-DD direttamente
     // IMPORTANTE: Escludi 'interventions' e altri campi non di form per evitare errori di serializzazione
     const { interventions, created_at, updated_at, parts_count, labor_hours, total_parts_cost, total_labor_cost, customer_nome, customer_email, customer_telefono, vehicle_targa, vehicle_marca, vehicle_modello, vehicle_anno, vehicle_colore, ...formData } = record
@@ -291,6 +300,20 @@ const WorkOrdersPage = () => {
 
   const handleSubmit = async (values: any) => {
     try {
+      // ==============================================================
+      // VALIDAZIONE: Controlli obbligatori per stato "approvata"
+      // ==============================================================
+      if (values.stato === 'approvata') {
+        if (!values.valutazione_danno || values.valutazione_danno.trim() === '') {
+          message.error('❌ Per approvare la scheda è obbligatorio compilare la "Descrizione Danno"')
+          return
+        }
+        if (formInterventions.length === 0) {
+          message.error('❌ Per approvare la scheda è obbligatorio aggiungere almeno un intervento')
+          return
+        }
+      }
+      
       // Converti i campi data vuoti in null per cancellare i valori nel backend
       const cleanedValues = { ...values }
       
@@ -743,13 +766,29 @@ const WorkOrdersPage = () => {
         title={editingWorkOrder ? 'Modifica Scheda' : 'Nuova Scheda'}
         open={isModalOpen}
         onCancel={() => {
-          setIsModalOpen(false)
-          form.resetFields()
-          setSelectedCustomerId(undefined)
-          setFormInterventions([])
+          if (isDirty) {
+            Modal.confirm({
+              title: 'Modifiche non salvate',
+              content: 'Hai apportato modifiche. Vuoi davvero uscire senza salvarle?',
+              okText: 'Esci',
+              cancelText: 'Continua',
+              onOk() {
+                setIsModalOpen(false)
+                form.resetFields()
+                setSelectedCustomerId(undefined)
+                setFormInterventions([])
+                setIsDirty(false)
+              },
+            })
+          } else {
+            setIsModalOpen(false)
+            form.resetFields()
+            setSelectedCustomerId(undefined)
+            setFormInterventions([])
+            setIsDirty(false)
+          }
         }}
-        onOk={() => form.submit()}
-        confirmLoading={createWorkOrderMutation.isPending || updateWorkOrderMutation.isPending}
+        footer={null}
         width={screens.md ? 1000 : '95vw'}
         className="compact-modal"
         centered
@@ -760,319 +799,484 @@ const WorkOrdersPage = () => {
           onFinish={handleSubmit}
           className="compact-form"
         >
-          {/* SEZIONE: Cliente e Veicolo */}
-          <div className="form-section">
-            <div className="form-section-title">
-              <UserAddOutlined /> Cliente e Veicolo
-            </div>
-            <div className="form-grid form-grid-2">
-              <Form.Item label="Cliente" required style={{ marginBottom: 0 }}>
-                <div className="field-with-btn">
-                  <Form.Item
-                    name="customer_id"
-                    noStyle
-                    rules={[{ required: true, message: 'Seleziona cliente' }]}
-                  >
-                    <Select
-                      showSearch
-                      placeholder="Seleziona cliente"
-                      optionFilterProp="children"
-                      onChange={handleCustomerChange}
-                      filterOption={(input, option) =>
-                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                      }
-                      options={customersData?.items.map(c => ({
-                        value: c.id,
-                        label: `${c.nome} ${c.cognome}`,
-                      }))}
-                    />
-                  </Form.Item>
-                  <Button
-                    type="primary"
-                    icon={<UserAddOutlined />}
-                    onClick={handleQuickAddCustomer}
-                    title="Nuovo cliente"
-                  />
-                </div>
-              </Form.Item>
+          <div style={{ minHeight: '580px' }}>
+            <Tabs
+              activeKey={activeTabKey}
+              onChange={setActiveTabKey}
+              style={{ height: '100%' }}
+              items={[
+                {
+                  key: 'details',
+                  label: 'Dettagli',
+                  children: (
+                    <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                    <>
+                      {/* TAB: Dettagli - Cliente e Veicolo */}
+                      <div className="form-section">
+                      <div className="form-section-title">
+                        <UserAddOutlined /> Cliente e Veicolo
+                      </div>
+                      <div className="form-grid form-grid-2">
+                        <Form.Item label="Cliente" required style={{ marginBottom: 0 }}>
+                          <div className="field-with-btn">
+                            <Form.Item
+                              name="customer_id"
+                              noStyle
+                              rules={[{ required: true, message: 'Seleziona cliente' }]}
+                            >
+                              <Select
+                                showSearch
+                                placeholder="Seleziona cliente"
+                                optionFilterProp="children"
+                                onChange={handleCustomerChange}
+                                filterOption={(input, option) =>
+                                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={customersData?.items.map(c => ({
+                                  value: c.id,
+                                  label: `${c.nome} ${c.cognome}`,
+                                }))}
+                              />
+                            </Form.Item>
+                            <Button
+                              type="primary"
+                              icon={<UserAddOutlined />}
+                              onClick={handleQuickAddCustomer}
+                              title="Nuovo cliente"
+                            />
+                          </div>
+                        </Form.Item>
 
-              <Form.Item label="Veicolo" required style={{ marginBottom: 0 }}>
-                <div className="field-with-btn">
-                  <Form.Item
-                    name="vehicle_id"
-                    noStyle
-                    rules={[{ required: true, message: 'Seleziona veicolo' }]}
-                  >
-                    <Select
-                      showSearch
-                      placeholder={selectedCustomerId ? "Seleziona veicolo" : "Prima il cliente"}
-                      disabled={!selectedCustomerId}
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                      }
-                      options={customerVehicles?.map(v => ({
-                        value: v.id,
-                        label: `${v.targa} - ${v.marca} ${v.modello}`,
-                      }))}
-                    />
-                  </Form.Item>
-                  <Button
-                    type="primary"
-                    icon={<CarOutlined />}
-                    onClick={handleQuickAddVehicle}
-                    disabled={!selectedCustomerId}
-                    title="Nuovo veicolo"
-                  />
-                </div>
-              </Form.Item>
-            </div>
-          </div>
+                        <Form.Item label="Veicolo" required style={{ marginBottom: 0 }}>
+                          <div className="field-with-btn">
+                            <Form.Item
+                              name="vehicle_id"
+                              noStyle
+                              rules={[{ required: true, message: 'Seleziona veicolo' }]}
+                            >
+                              <Select
+                                showSearch
+                                placeholder={selectedCustomerId ? "Seleziona veicolo" : "Prima il cliente"}
+                                disabled={!selectedCustomerId}
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={customerVehicles?.map(v => ({
+                                  value: v.id,
+                                  label: `${v.targa} - ${v.marca} ${v.modello}`,
+                                }))}
+                              />
+                            </Form.Item>
+                            <Button
+                              type="primary"
+                              icon={<CarOutlined />}
+                              onClick={handleQuickAddVehicle}
+                              disabled={!selectedCustomerId}
+                              title="Nuovo veicolo"
+                            />
+                          </div>
+                        </Form.Item>
+                      </div>
+                    </div>
 
-          {/* SEZIONE: Dettagli */}
-          <div className="form-section">
-            <div className="form-section-title">
-              <FileTextOutlined /> Dettagli Scheda
-            </div>
-            <div className="form-grid form-grid-4">
-              <Form.Item name="numero_scheda" label="N. Scheda">
-                <Input disabled placeholder="Auto" size="small" />
-              </Form.Item>
-              
-              <Form.Item name="stato" label="Stato" rules={[{ required: true }]}>
-                <Select size="small" options={statuses.map(s => ({ value: s.value, label: s.label }))} />
-              </Form.Item>
-              
-              <Form.Item name="priorita" label="Priorità" initialValue={priorityTypes?.[0]?.nome || "media"}>
-                <Select size="small" placeholder="Priorità">
-                  {priorityTypes?.filter(p => p.attivo).map(priority => (
-                    <Select.Option key={priority.id} value={priority.nome}>
-                      {priority.nome}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                name="costo_stimato"
-                label="Costo €"
-              >
-                <InputNumber min={0} step={0.01} style={{ width: '100%' }} size="small" />
-              </Form.Item>
-            </div>
-
-            <div className="form-grid form-grid-3">
-              <Form.Item
-                name="data_compilazione"
-                label="Data Compilazione"
-                rules={[{ required: true }]}
-                getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
-                normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
-              >
-                <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="small" />
-              </Form.Item>
-
-              <Form.Item
-                name="data_appuntamento"
-                label="Appuntamento"
-                getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
-                normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
-              >
-                <div className="field-with-btn">
-                  <Input 
-                    placeholder="Nessuna data"
-                    readOnly
-                    value={displayedAppointmentDate}
-                    size="small"
-                  />
-                  <Button
-                    type="primary"
-                    icon={<CalendarOutlined />}
-                    onClick={() => setIsCalendarModalOpen(true)}
-                    size="small"
-                  />
-                </div>
-              </Form.Item>
-
-              <Form.Item
-                name="data_fine_prevista"
-                label="Consegna Prevista"
-                getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
-                normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
-              >
-                <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="small" />
-              </Form.Item>
-            </div>
-          </div>
-
-          {/* SEZIONE: Interventi */}
-          <div className="form-section">
-            <div className="section-header">
-              <span className="section-header-title">🔧 Interventi</span>
-              <Button 
-                type="primary" 
-                size="small"
-                className="btn-add-intervention"
-                onClick={() => {
-                  const newIntervention: any = {
-                    progressivo: (formInterventions.filter(i => i.progressivo).length > 0 ? Math.max(...formInterventions.filter(i => i.progressivo).map(i => i.progressivo!)) : 0) + 1,
-                    descrizione_intervento: '',
-                    durata_stimata: 0,
-                    tipo_intervento: 'Meccanico',
-                    _isNew: true
-                  }
-                  setFormInterventions([...formInterventions, newIntervention])
-                }}
-              >
-                <PlusOutlined /> Aggiungi
-              </Button>
-            </div>
-            
-            {formInterventions.length === 0 ? (
-              <div className="interventions-empty">
-                Nessun intervento. Clicca "Aggiungi" per iniziare.
-              </div>
-            ) : (
-              <div style={{ overflowX: 'auto' }}>
-                <table className="interventions-table">
-                  <colgroup>
-                    <col style={{ width: '5%' }} />
-                    <col style={{ width: '60%' }} />
-                    <col style={{ width: '10%' }} />
-                    <col style={{ width: '15%' }} />
-                    <col style={{ width: '10%' }} />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Descrizione</th>
-                      <th>Ore</th>
-                      <th>Tipo</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formInterventions.map((intervention, idx) => (
-                      <tr key={`intervention-${idx}-${intervention.id || 'new'}`}>
-                        <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>{intervention.progressivo}</td>
-                        <td style={{ paddingTop: 4, paddingBottom: 4 }}>
-                          <Input
-                            value={intervention.descrizione_intervento}
-                            onChange={(e) => {
-                              const updated = [...formInterventions]
-                              updated[idx].descrizione_intervento = e.target.value
-                              updated[idx]._modified = true
-                              setFormInterventions(updated)
-                            }}
-                            placeholder="Descrizione intervento"
-                            size="small"
-                          />
-                        </td>
-                        <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
-                          <InputNumber
-                            value={intervention.durata_stimata}
-                            onChange={(value) => {
-                              const updated = [...formInterventions]
-                              updated[idx].durata_stimata = value || 0
-                              updated[idx]._modified = true
-                              setFormInterventions(updated)
-                            }}
-                            min={0}
-                            max={100}
-                            step={0.5}
-                            style={{ width: '100%' }}
-                            size="small"
-                          />
-                        </td>
-                        <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
-                          <Select
-                            value={intervention.tipo_intervento}
-                            onChange={(value) => {
-                              const updated = [...formInterventions]
-                              updated[idx].tipo_intervento = value as 'Meccanico' | 'Carrozziere'
-                              updated[idx]._modified = true
-                              setFormInterventions(updated)
-                            }}
-                            style={{ width: '100%' }}
-                            size="small"
-                          >
-                            <Select.Option value="Meccanico">Mecc.</Select.Option>
-                            <Select.Option value="Carrozziere">Carr.</Select.Option>
+                    {/* TAB: Dettagli - Dettagli Scheda */}
+                    <div className="form-section">
+                      <div className="form-section-title">
+                        <FileTextOutlined /> Dettagli Scheda
+                      </div>
+                      <div className="form-grid form-grid-4">
+                        <Form.Item name="numero_scheda" label="N. Scheda">
+                          <Input disabled placeholder="Auto" size="small" onChange={() => setIsDirty(true)} />
+                        </Form.Item>
+                        
+                        <Form.Item name="stato" label="Stato" rules={[{ required: true }]}>
+                          <Select size="small" options={statuses.map(s => ({ value: s.value, label: s.label }))} onChange={() => setIsDirty(true)} />
+                        </Form.Item>
+                        
+                        <Form.Item name="priorita" label="Priorità" initialValue={priorityTypes?.[0]?.nome || "media"}>
+                          <Select size="small" placeholder="Priorità" onChange={() => setIsDirty(true)}>
+                            {priorityTypes?.filter(p => p.attivo).map(priority => (
+                              <Select.Option key={priority.id} value={priority.nome}>
+                                {priority.nome}
+                              </Select.Option>
+                            ))}
                           </Select>
-                        </td>
-                        <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>
-                          <Button
-                            type="text"
-                            danger
-                            size="small"
-                            onClick={() => setFormInterventions(formInterventions.filter((_, i) => i !== idx))}
-                          >
-                            <DeleteOutlined />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                        </Form.Item>
+
+                        <Form.Item
+                          name="costo_stimato"
+                          label="Costo €"
+                        >
+                          <InputNumber min={0} step={0.01} style={{ width: '100%' }} size="small" onChange={() => setIsDirty(true)} />
+                        </Form.Item>
+                      </div>
+
+                      <div className="form-grid form-grid-3">
+                        <Form.Item
+                          name="data_compilazione"
+                          label="Data Compilazione"
+                          rules={[{ required: true }]}
+                          getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
+                          normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
+                        >
+                          <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="small" onChange={() => setIsDirty(true)} />
+                        </Form.Item>
+
+                        <Form.Item
+                          name="data_appuntamento"
+                          label="Appuntamento"
+                          getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
+                          normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
+                        >
+                          <div className="field-with-btn">
+                            <Input 
+                              placeholder="Nessuna data"
+                              readOnly
+                              value={displayedAppointmentDate}
+                              size="small"
+                            />
+                            <Button
+                              type="primary"
+                              icon={<CalendarOutlined />}
+                              onClick={() => setIsCalendarModalOpen(true)}
+                              size="small"
+                            />
+                          </div>
+                        </Form.Item>
+
+                        <Form.Item
+                          name="data_fine_prevista"
+                          label="Consegna Prevista"
+                          getValueProps={(value) => ({ value: value ? dayjs(value) : undefined })}
+                          normalize={(value) => value?.format ? value.format('YYYY-MM-DD') : value}
+                        >
+                          <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" size="small" onChange={() => setIsDirty(true)} />
+                        </Form.Item>
+                      </div>
+                    </div>
+                    </>
+                  </div>
+                ),
+              },
+              {
+                key: 'description',
+                label: 'Descrizione & Note',
+                children: (
+                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                    <div className="form-section">
+                    <Form.Item
+                      name="valutazione_danno"
+                      label="Descrizione Danno"
+                      rules={[{ required: true, message: 'Inserisci descrizione' }]}
+                    >
+                      <VoiceTextarea
+                        placeholder="Clicca il microfono e descrivi a voce il danno... oppure digita manualmente"
+                        rows={3}
+                        minHeight={150}
+                        maxHeight={300}
+                        classNamePrefix="descrizione-danno"
+                        label="Descrizione Danno"
+                        debugPrefix="DescrizioneDanno"
+                        onChange={() => setIsDirty(true)}
+                      />
+                    </Form.Item>
+
+                    <Form.Item name="note" label="Note">
+                      <VoiceTextarea
+                        placeholder="Aggiungi note... oppure clicca il microfono per dettare"
+                        rows={1}
+                        minHeight={60}
+                        maxHeight={150}
+                        classNamePrefix="notes"
+                        label="Note"
+                        debugPrefix="Notes"
+                        onChange={() => setIsDirty(true)}
+                      />
+                    </Form.Item>
+                  </div>
+                  </div>
+                ),
+              },
+              {
+                key: 'interventions',
+                label: 'Interventi',
+                children: (
+                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                    <div className="form-section">
+                    <div className="section-header">
+                      <span className="section-header-title">🔧 Interventi</span>
+                      <Button 
+                        type="primary" 
+                        size="small"
+                        className="btn-add-intervention"
+                        onClick={() => {
+                          const newIntervention: any = {
+                            progressivo: (formInterventions.filter(i => i.progressivo).length > 0 ? Math.max(...formInterventions.filter(i => i.progressivo).map(i => i.progressivo!)) : 0) + 1,
+                            descrizione_intervento: '',
+                            durata_stimata: 0,
+                            tipo_intervento: 'Meccanico',
+                            _isNew: true
+                          }
+                          setFormInterventions([...formInterventions, newIntervention])
+                          setIsDirty(true)
+                        }}
+                      >
+                        <PlusOutlined /> Aggiungi
+                      </Button>
+                    </div>
+                    
+                    {formInterventions.length === 0 ? (
+                      <div className="interventions-empty">
+                        Nessun intervento. Clicca "Aggiungi" per iniziare.
+                      </div>
+                    ) : (
+                      <div style={{ overflowX: 'auto' }}>
+                        <table className="interventions-table">
+                          <colgroup>
+                            <col style={{ width: '5%' }} />
+                            <col style={{ width: '60%' }} />
+                            <col style={{ width: '10%' }} />
+                            <col style={{ width: '15%' }} />
+                            <col style={{ width: '10%' }} />
+                          </colgroup>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Descrizione</th>
+                              <th>Ore</th>
+                              <th>Tipo</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {formInterventions.map((intervention, idx) => (
+                              <tr key={`intervention-${idx}-${intervention.id || 'new'}`}>
+                                <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>{intervention.progressivo}</td>
+                                <td style={{ paddingTop: 4, paddingBottom: 4 }}>
+                                  <Input
+                                    value={intervention.descrizione_intervento}
+                                    onChange={(e) => {
+                                      const updated = [...formInterventions]
+                                      updated[idx].descrizione_intervento = e.target.value
+                                      updated[idx]._modified = true
+                                      setFormInterventions(updated)
+                                      setIsDirty(true)
+                                    }}
+                                    placeholder="Descrizione intervento"
+                                    size="small"
+                                  />
+                                </td>
+                                <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
+                                  <InputNumber
+                                    value={intervention.durata_stimata}
+                                    onChange={(value) => {
+                                      const updated = [...formInterventions]
+                                      updated[idx].durata_stimata = value || 0
+                                      updated[idx]._modified = true
+                                      setFormInterventions(updated)
+                                      setIsDirty(true)
+                                    }}
+                                    min={0}
+                                    max={100}
+                                    step={0.5}
+                                    style={{ width: '100%' }}
+                                    size="small"
+                                  />
+                                </td>
+                                <td style={{ textAlign: 'center', paddingTop: 4, paddingBottom: 4 }}>
+                                  <Select
+                                    value={intervention.tipo_intervento}
+                                    onChange={(value) => {
+                                      const updated = [...formInterventions]
+                                      updated[idx].tipo_intervento = value as 'Meccanico' | 'Carrozziere'
+                                      updated[idx]._modified = true
+                                      setFormInterventions(updated)
+                                      setIsDirty(true)
+                                    }}
+                                    style={{ width: '100%' }}
+                                    size="small"
+                                  >
+                                    <Select.Option value="Meccanico">Mecc.</Select.Option>
+                                    <Select.Option value="Carrozziere">Carr.</Select.Option>
+                                  </Select>
+                                </td>
+                                <td style={{ textAlign: 'center', paddingTop: 6, paddingBottom: 6 }}>
+                                  <Button
+                                    type="text"
+                                    danger
+                                    size="small"
+                                    onClick={() => {
+                                      setFormInterventions(formInterventions.filter((_, i) => i !== idx))
+                                      setIsDirty(true)
+                                    }}
+                                  >
+                                    <DeleteOutlined />
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                  </div>
+                ),
+              },
+              {
+                key: 'courtesy',
+                label: 'Auto di Cortesia',
+                children: (
+                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                    <div className="form-section">
+                      {editingWorkOrder?.vehicle?.auto_cortesia_stato !== undefined && editingWorkOrder?.vehicle?.auto_cortesia_stato !== null ? (
+                        <div style={{ padding: '20px' }}>
+                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '4px', border: '1px solid #b3e5fc' }}>
+                            <div style={{ marginBottom: '8px', fontSize: '14px' }}>
+                              <strong>✅ Questa è un'auto di cortesia</strong>
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#01579b' }}>
+                              Questo veicolo è registrato come auto di cortesia nel sistema
+                            </div>
+                          </div>
+
+                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px', border: '1px solid #d9d9d9' }}>
+                            <div style={{ marginBottom: '8px' }}>
+                              <strong>📋 Informazioni Veicolo:</strong>
+                            </div>
+                            <div style={{ fontSize: '12px', lineHeight: '1.8', color: '#666' }}>
+                              <div>🏷️ Targa: <strong>{editingWorkOrder?.vehicle?.targa}</strong></div>
+                              <div>🚗 Marca/Modello: <strong>{editingWorkOrder?.vehicle?.marca} {editingWorkOrder?.vehicle?.modello}</strong></div>
+                              {editingWorkOrder?.vehicle?.anno && (
+                                <div>📅 Anno: <strong>{editingWorkOrder?.vehicle?.anno}</strong></div>
+                              )}
+                            </div>
+                          </div>
+
+                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px', border: '1px solid #d9d9d9' }}>
+                            <div style={{ marginBottom: '8px' }}>
+                              <strong>📊 Stato Disponibilità (Sola Lettura):</strong>
+                            </div>
+                            <div style={{ marginTop: '8px' }}>
+                              <Tag color="blue" style={{ fontSize: '13px', padding: '4px 8px' }}>
+                                {editingWorkOrder?.vehicle?.auto_cortesia_stato || 'Non assegnato'}
+                              </Tag>
+                            </div>
+                            <div style={{ fontSize: '11px', color: '#999', marginTop: '8px' }}>
+                              ⓘ Per modificare lo stato, accedi al gestionale veicoli
+                            </div>
+                          </div>
+
+                          <div style={{ marginTop: '20px', padding: '12px', backgroundColor: '#e6f7ff', borderRadius: '4px', border: '1px solid #91d5ff' }}>
+                            <div style={{ fontSize: '12px', color: '#0050b3' }}>
+                              <strong>📚 Significato degli Stati:</strong>
+                              <ul style={{ marginTop: '8px', marginBottom: 0, paddingLeft: '20px' }}>
+                                <li><strong>disponibile</strong>: Pronta per l'affitto/assegnazione</li>
+                                <li><strong>in_uso</strong>: Attualmente assegnata a un cliente</li>
+                                <li><strong>manutenzione</strong>: Sottoposta a manutenzione</li>
+                                <li><strong>non_disponibile</strong>: Non disponibile per l'assegnazione</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+                          <div style={{ marginBottom: '12px', marginTop: '20px' }}>
+                            <span style={{ fontSize: '32px' }}>🚗</span>
+                          </div>
+                          <div style={{ marginBottom: '12px' }}>
+                            <span style={{ fontSize: '14px' }}>Questo veicolo non è registrato come auto di cortesia</span>
+                          </div>
+                          {editingWorkOrder?.vehicle && (
+                            <div style={{ fontSize: '12px', color: '#999', marginTop: '12px', padding: '12px', backgroundColor: '#fafafa', borderRadius: '4px' }}>
+                              <div style={{ marginBottom: '4px' }}>Veicolo selezionato:</div>
+                              <div><strong>{editingWorkOrder.vehicle.targa}</strong></div>
+                              <div>{editingWorkOrder.vehicle.marca} {editingWorkOrder.vehicle.modello}</div>
+                            </div>
+                          )}
+                          <div style={{ fontSize: '12px', color: '#999', marginTop: '16px', padding: '12px', backgroundColor: '#fffbe6', borderRadius: '4px', border: '1px solid #ffe58f' }}>
+                            ⚠️ Per registrare questo veicolo come auto di cortesia, contatta l'amministratore del sistema
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ),
+              },
+            ]}
+          />
           </div>
+        </Form>
 
-          {/* SEZIONE: Descrizione Danno */}
-          <div className="form-section">
-            <div className="form-section-title">
-              📝 Descrizione Danno
-            </div>
-            <Form.Item
-              name="valutazione_danno"
-              label="Descrizione Danno"
-              rules={[{ required: true, message: 'Inserisci descrizione' }]}
-            >
-              <VoiceTextarea
-                placeholder="Clicca il microfono e descrivi a voce il danno... oppure digita manualmente"
-                rows={3}
-                minHeight={150}
-                maxHeight={300}
-                classNamePrefix="descrizione-danno"
-                label="Descrizione Danno"
-                debugPrefix="DescrizioneDanno"
-              />
-            </Form.Item>
-
-            <Form.Item name="note" label="Note">
-              <VoiceTextarea
-                placeholder="Aggiungi note... oppure clicca il microfono per dettare"
-                rows={1}
-                minHeight={60}
-                maxHeight={150}
-                classNamePrefix="notes"
-                label="Note"
-                debugPrefix="Notes"
-              />
-            </Form.Item>
-          </div>
-
-          {/* State Transition */}
+        {/* CUSTOM FOOTER */}
+        <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* State Transition Component */}
           {editingWorkOrder && (
             <WorkOrderStateTransition
               workOrderId={editingWorkOrder.id}
               currentState={editingWorkOrder.stato}
               interventionsCount={formInterventions.length}
-              hasDescrizione={!!form.getFieldValue('descrizione')}
+              hasDescrizione={!!form.getFieldValue('valutazione_danno')}
               onStateChange={(newState) => {
-                // Aggiorna lo stato locale
                 setEditingWorkOrder({
                   ...editingWorkOrder,
                   stato: newState as WorkOrderStatus
                 })
-                // Aggiorna anche il form per sincronizzare la UI
                 form.setFieldsValue({ stato: newState })
-                // Invalida la cache per ricaricare i dati dal server
                 queryClient.invalidateQueries({ queryKey: ['work-orders'] })
               }}
             />
           )}
-        </Form>
+
+          {/* Action Buttons - Full Width */}
+          <Row gutter={8}>
+            <Col span={12}>
+              <Button
+                type="primary"
+                block
+                icon={<SaveOutlined />}
+                size="large"
+                loading={createWorkOrderMutation.isPending || updateWorkOrderMutation.isPending}
+                onClick={() => form.submit()}
+              >
+                Salva la scheda
+              </Button>
+            </Col>
+            <Col span={12}>
+              <Button
+                block
+                icon={<CloseOutlined />}
+                size="large"
+                onClick={() => {
+                  if (isDirty) {
+                    Modal.confirm({
+                      title: 'Modifiche non salvate',
+                      content: 'Hai apportato modifiche. Vuoi davvero annullare?',
+                      okText: 'Annulla',
+                      cancelText: 'Continua',
+                      onOk() {
+                        setIsModalOpen(false)
+                        form.resetFields()
+                        setSelectedCustomerId(undefined)
+                        setFormInterventions([])
+                        setIsDirty(false)
+                      },
+                    })
+                  } else {
+                    setIsModalOpen(false)
+                    form.resetFields()
+                    setSelectedCustomerId(undefined)
+                    setFormInterventions([])
+                    setIsDirty(false)
+                  }
+                }}
+              >
+                Annulla
+              </Button>
+            </Col>
+          </Row>
+        </div>
       </Modal>
 
       {/* QUICK ADD CUSTOMER MODAL */}
