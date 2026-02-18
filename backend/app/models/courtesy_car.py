@@ -33,7 +33,12 @@ class AssignmentStatus(str, enum.Enum):
 
 
 class CourtesyCar(Base):
-    """Courtesy car model"""
+    """
+    Courtesy car model.
+    
+    NOTA IMPORTANTE: La disponibilità è gestita SOLO dal campo Vehicle.disponibile.
+    Il campo CourtesyCar.stato è usato per altri scopi (es: manutenzione, stato del contratto).
+    """
     __tablename__ = "courtesy_cars"
     
     id = Column(Integer, primary_key=True, index=True)

@@ -10,7 +10,13 @@ from app.models.courtesy_car import CourtesyCarStatus, AssignmentStatus
 
 
 class CourtesyCarBase(BaseModel):
-    """Base courtesy car schema - ALLINEATO AL MODELLO"""
+    """
+    Base courtesy car schema - ALLINEATO AL MODELLO.
+    
+    NOTA IMPORTANTE: La disponibilità è gestita SOLO dal campo Vehicle.disponibile.
+    Il campo 'stato' è usato per tracciare il ciclo di vita del contratto (manutenzione, etc.)
+    e NON determina la disponibilità per l'assegnazione a schede lavoro.
+    """
     vehicle_id: int = Field(..., gt=0)
     contratto_tipo: str = Field(..., pattern="^(leasing|affitto|proprieta)$")
     fornitore_contratto: Optional[str] = Field(None, max_length=200)

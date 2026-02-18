@@ -35,7 +35,7 @@ def get_courtesy_cars(
 ):
     """
     Recupera lista auto di cortesia con filtri.
-    ALLINEATO AL MODELLO: usa 'stato' non 'status'
+    NOTA: La disponibilità è determinata da Vehicle.disponibile, non da CourtesyCar.stato.
     """
     query = db.query(CourtesyCar)
     
@@ -43,9 +43,9 @@ def get_courtesy_cars(
     if stato_filter:
         query = query.filter(CourtesyCar.stato == stato_filter)
     
-    # Solo disponibili
+    # Solo disponibili (basato su Vehicle.disponibile, non CourtesyCar.stato)
     if available_only:
-        query = query.filter(CourtesyCar.stato == CourtesyCarStatus.DISPONIBILE)
+        query = query.filter(Vehicle.disponibile == True)
     
     # Join con vehicle per ordinare per targa
     query = query.join(Vehicle).order_by(Vehicle.targa)
@@ -102,12 +102,12 @@ def get_available_cars(
 ):
     """
     Recupera auto di cortesia disponibili.
+    La disponibilità è determinata da Vehicle.disponibile = True, non da CourtesyCar.stato.
     
     Se specificate date, verifica disponibilità nel periodo usando CarAssignment.
-    ALLINEATO AL MODELLO: usa stato=DISPONIBILE e verifico assignmentssenza sovrapposizioni
     """
-    query = db.query(CourtesyCar).filter(
-        CourtesyCar.stato == CourtesyCarStatus.DISPONIBILE
+    query = db.query(CourtesyCar).join(Vehicle).filter(
+        Vehicle.disponibile == True
     )
     
     # TODO: Se specificate date, controllare sovrapposizioni con assegnazioni in corso

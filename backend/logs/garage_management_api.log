@@ -8906,3 +8906,13 @@ pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unk
 18:17:12 | INFO     | ← OPTIONS /api/v1/work-orders/                               | Status:200 | 0.75ms
 18:17:17 | INFO     | → GET    /api/v1/work-orders/                               | Anonymous
 18:17:17 | ERROR    | ← GET    /api/v1/work-orders/                               | Status:401 | 1.93ms
+16:44:24 | INFO     | ================================================================================
+16:44:24 | INFO     | Sistema di logging inizializzato - 2026-02-18 16:44:24.601273
+16:44:24 | INFO     | Livello: DEBUG
+16:44:24 | INFO     | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+16:44:24 | INFO     | ================================================================================
+16:44:24 | INFO     | ================================================================================
+16:44:24 | INFO     | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+16:44:24 | INFO     | ================================================================================
+16:44:24 | INFO     | ✅ Logging middleware attivato
+16:44:24 | INFO     | ✅ API router registrato: /api/v1

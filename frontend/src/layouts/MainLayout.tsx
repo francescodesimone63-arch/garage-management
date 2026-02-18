@@ -99,7 +99,7 @@ const MainLayout = () => {
       {
         key: '/courtesy-cars',
         icon: <CarOutlined />,
-        label: 'Auto Cortesia',
+        label: 'Auto di Cortesia',
       },
       {
         key: '/maintenance',

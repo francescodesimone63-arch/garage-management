@@ -75,7 +75,7 @@ const WorkOrdersPage = () => {
     }
   }, [editingWorkOrder?.id])
 
-  const { data, isLoading, error: workOrdersError } = useWorkOrders(page, 10, searchText, statusFilter)
+  const { data, isLoading, error: workOrdersError, refetch: refetchWorkOrders } = useWorkOrders(page, 10, searchText, statusFilter)
   const { data: customersData, refetch: refetchCustomers } = useCustomers(1, 1000)
   const { data: vehiclesData, refetch: refetchVehicles } = useVehicles(1, 1000)
   const { interventions: dbInterventions, create: createInterventionMutation, update: updateInterventionMutation, delete: deleteInterventionMutation } = useInterventions(editingWorkOrderId)
@@ -225,6 +225,9 @@ const WorkOrdersPage = () => {
   }
 
   const handleEdit = (record: WorkOrder) => {
+    console.log('📝 handleEdit record:', record)
+    console.log('🚗 auto_cortesia_id dal record:', record.auto_cortesia_id)
+    
     setEditingWorkOrder(record)
     setSelectedCustomerId(record.customer_id)
     setIsDirty(false)
@@ -232,6 +235,9 @@ const WorkOrdersPage = () => {
     // Non convertire date qui - il DatePicker gestisce le stringhe YYYY-MM-DD direttamente
     // IMPORTANTE: Escludi 'interventions' e altri campi non di form per evitare errori di serializzazione
     const { interventions, created_at, updated_at, parts_count, labor_hours, total_parts_cost, total_labor_cost, customer_nome, customer_email, customer_telefono, vehicle_targa, vehicle_marca, vehicle_modello, vehicle_anno, vehicle_colore, ...formData } = record
+    
+    console.log('📋 formData da caricare nel form:', formData)
+    
     form.setFieldsValue(formData)
     // Aggiorna la data visualizzata per l'appuntamento
     if (record.data_appuntamento) {
@@ -320,28 +326,22 @@ const WorkOrdersPage = () => {
   const handleSubmit = async (values: any) => {
     try {
       // ==============================================================
-      // VALIDAZIONE: Controlli obbligatori per stato "approvata"
+      // VALIDAZIONE: Controlli obbligatori SOLO per stato "approvata"
       // ==============================================================
-      // Validazione frontend per tutti gli stati: blocca se manca valutazione_danno o interventi
-      if (!values.valutazione_danno || values.valutazione_danno.trim() === '') {
-        message.error('❌ Devi compilare la "Descrizione Danno" per salvare la scheda lavoro.')
-        return
-      }
-      if (!formInterventions || formInterventions.length === 0) {
-        message.error('❌ Devi inserire almeno un intervento per salvare la scheda lavoro.')
-        return
-      }
-      // Validazione aggiuntiva per stato "approvata"
+      // Se lo stato è "approvata", verificare che siano presenti descrizione danno e interventi
       if (values.stato === 'approvata') {
+        // Obbliga descrizione danno
         if (!values.valutazione_danno || values.valutazione_danno.trim() === '') {
           message.error('❌ Per approvare la scheda è obbligatorio compilare la "Descrizione Danno"')
           return
         }
-        if (formInterventions.length === 0) {
-          message.error('❌ Una scheda in stato di "bozza" deve avere almeno un intervento per poter essere approvata.')
+        // Obbliga almeno un intervento
+        if (!formInterventions || formInterventions.length === 0) {
+          message.error('❌ Per approvare la scheda è necessario aggiungere almeno un intervento')
           return
         }
       }
+      // Se stato è "bozza"permetti salvataggio senza validazione dei campi descrizione danno e interventi
       
       // Converti i campi data vuoti in null per cancellare i valori nel backend
       const cleanedValues = { ...values }
@@ -361,6 +361,10 @@ const WorkOrdersPage = () => {
         interventions: normalizedInterventions,
         auto_cortesia_id: selectedCourtesyCarId
       }
+      
+      console.log('📤 PAYLOAD CON AUTO_CORTESIA_ID:', payloadWithInterventions)
+      console.log('🚗 selectedCourtesyCarId nel payload:', selectedCourtesyCarId)
+      console.log('🚗 cleanedValues.auto_cortesia_id nel payload:', cleanedValues.auto_cortesia_id)
       
       // Assicura che data_compilazione sia sempre presente (obbligatorio)
       if (!cleanedValues.data_compilazione) {
@@ -509,29 +513,50 @@ const WorkOrdersPage = () => {
       }
       
       // ==============================================================
-      // STEP 3: Aggiorna il veicolo di cortesia se assegnato
+      // STEP 3: Aggiorna la disponibilità del veicolo di cortesia
       // ==============================================================
-      if (selectedCourtesyCarId) {
+      const previousAutoId = editingWorkOrder?.auto_cortesia_id
+      const currentAutoId = selectedCourtesyCarId
+      
+      // Se è cambiato (era assegnata una e adesso è un'altra o nessuna)
+      if (previousAutoId && previousAutoId !== currentAutoId) {
         try {
-          console.log('🚗 Aggiornando disponibilità del veicolo di cortesia:', selectedCourtesyCarId)
+          console.log('🚗 Riportando disponibile il veicolo precedente:', previousAutoId)
           
-          // Trova il veicolo nella lista per ottenere l'ID corretto
-          const selectedVehicle = vehiclesData?.items?.find(v => v.id === selectedCourtesyCarId)
+          const previousVehicle = vehiclesData?.items?.find(v => v.id === previousAutoId)
+          
+          if (previousVehicle) {
+            await updateVehicleMutation.mutateAsync({
+              id: previousVehicle.id,
+              data: {
+                disponibile: true
+              } as Partial<Vehicle>
+            })
+            console.log('✅ Veicolo precedente riportato a disponibile')
+          }
+        } catch (error) {
+          console.warn('⚠️  Avviso: Errore nel ripristino della disponibilità del veicolo precedente:', error)
+        }
+      }
+      
+      // Se è assegnata una nuova auto
+      if (currentAutoId) {
+        try {
+          console.log('🚗 Aggiornando disponibilità del nuovo veicolo di cortesia:', currentAutoId)
+          
+          const selectedVehicle = vehiclesData?.items?.find(v => v.id === currentAutoId)
           
           if (selectedVehicle) {
-            // Aggiorna il veicolo per impostare disponibile=false
             await updateVehicleMutation.mutateAsync({
               id: selectedVehicle.id,
               data: {
                 disponibile: false
               } as Partial<Vehicle>
             })
-            console.log('✅ Veicolo di cortesia aggiornato a non disponibile')
+            console.log('✅ Nuovo veicolo di cortesia aggiornato a non disponibile')
           }
         } catch (error) {
-          console.warn('⚠️  Avviso: Errore nel salvataggio della disponibilità del veicolo:', error)
-          // Non bloccare il flusso se l'aggiornamento del veicolo fallisce
-          // Il salvataggio della work order ha avuto successo
+          console.warn('⚠️  Avviso: Errore nel salvataggio della disponibilità del nuovo veicolo:', error)
         }
       }
       
@@ -541,7 +566,9 @@ const WorkOrdersPage = () => {
       setIsModalOpen(false)
       form.resetFields()
       setSelectedCustomerId(undefined)
+      setSelectedCourtesyCarId(undefined)
       setFormInterventions([])
+      setEditingWorkOrder(null)
       
       // Mostra messaggio di successo SOLO se tutto ha funzionato
       if (newWorkOrderData) {
@@ -871,6 +898,11 @@ const WorkOrdersPage = () => {
           onFinish={handleSubmit}
           className="compact-form"
         >
+          {/* Campo nascosto per auto_cortesia_id */}
+          <Form.Item name="auto_cortesia_id" style={{ display: 'none' }}>
+            <Input type="hidden" />
+          </Form.Item>
+
           <div style={{ minHeight: '580px' }}>
             <Tabs
               activeKey={activeTabKey}
@@ -1229,7 +1261,7 @@ const WorkOrdersPage = () => {
                         <>
                           {(() => {
                             const availableCourtesyCars = vehiclesData.items.filter(
-                              v => v.courtesy_car === true && v.disponibile === true
+                              v => v.courtesy_car === true && v.id !== editingWorkOrder?.vehicle_id
                             );
 
                             if (availableCourtesyCars.length === 0) {
@@ -1257,7 +1289,7 @@ const WorkOrdersPage = () => {
                                         onClick={() => {
                                           const newSelected = isSelected ? undefined : car.id
                                           setSelectedCourtesyCarId(newSelected)
-                                          form.setFieldValue('auto_cortesia_id', newSelected)
+                                          form.setFieldsValue({ auto_cortesia_id: newSelected })
                                         }}
                                         style={{
                                           padding: '16px',

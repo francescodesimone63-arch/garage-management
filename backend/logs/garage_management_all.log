@@ -10599,3 +10599,13 @@ pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unk
 2026-02-15 18:17:17 | DEBUG    | garage_management.middleware | dispatch:34 | Query params: {'skip': '0', 'limit': '10'}
 2026-02-15 18:17:17 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer test...
 2026-02-15 18:17:17 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/work-orders/                               | Status:401 | 1.93ms
+2026-02-18 16:44:24 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-18 16:44:24 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-18 16:44:24.601273
+2026-02-18 16:44:24 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-18 16:44:24 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-18 16:44:24 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-18 16:44:24 | INFO     | garage_management | <module>:17 | ================================================================================
+2026-02-18 16:44:24 | INFO     | garage_management | <module>:18 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-18 16:44:24 | INFO     | garage_management | <module>:19 | ================================================================================
+2026-02-18 16:44:24 | INFO     | garage_management | <module>:51 | ✅ Logging middleware attivato
+2026-02-18 16:44:24 | INFO     | garage_management | <module>:55 | ✅ API router registrato: /api/v1

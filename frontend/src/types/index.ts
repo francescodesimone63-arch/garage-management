@@ -385,6 +385,7 @@ export interface CourtesyCar {
   km_inclusi_anno?: number
   stato: CourtesyCarStatus
   note?: string
+  contratto_firmato?: string // Path al file PDF del contratto
   created_at: string
   updated_at?: string
   vehicle?: Vehicle

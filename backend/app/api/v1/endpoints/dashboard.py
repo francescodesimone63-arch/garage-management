@@ -56,9 +56,9 @@ def get_dashboard_summary(
         Part.quantita <= Part.quantita_minima
     ).scalar() or 0
     
-    # Auto cortesia disponibili
-    courtesy_cars_available = db.query(func.count(CourtesyCar.id)).filter(
-        CourtesyCar.stato == CourtesyCarStatus.DISPONIBILE
+    # Auto cortesia disponibili (basato su Vehicle.disponibile, non CourtesyCar.stato)
+    courtesy_cars_available = db.query(func.count(CourtesyCar.id)).join(Vehicle).filter(
+        Vehicle.disponibile == True
     ).scalar() or 0
     
     # Manutenzioni in scadenza/scadute
@@ -157,9 +157,9 @@ def get_gm_dashboard(db: Session, today: date, week_start: date, month_start: da
         Part.quantita <= Part.quantita_minima
     ).scalar() or 0
     
-    # Auto cortesia
-    available_cars = db.query(func.count(CourtesyCar.id)).filter(
-        CourtesyCar.stato == CourtesyCarStatus.DISPONIBILE
+    # Auto cortesia (basato su Vehicle.disponibile, non CourtesyCar.stato)
+    available_cars = db.query(func.count(CourtesyCar.id)).join(Vehicle).filter(
+        Vehicle.disponibile == True
     ).scalar() or 0
     cars_on_loan = db.query(func.count(CourtesyCar.id)).filter(
         CourtesyCar.stato == CourtesyCarStatus.ASSEGNATA
@@ -247,9 +247,9 @@ def get_workshop_dashboard(db: Session, current_user: User, today: date) -> Dict
         )
     ).scalar() or 0
     
-    # Auto cortesia disponibili
-    available_cars = db.query(func.count(CourtesyCar.id)).filter(
-        CourtesyCar.stato == CourtesyCarStatus.DISPONIBILE
+    # Auto cortesia disponibili (basato su Vehicle.disponibile, non CourtesyCar.stato)
+    available_cars = db.query(func.count(CourtesyCar.id)).join(Vehicle).filter(
+        Vehicle.disponibile == True
     ).scalar() or 0
     
     # Ricambi scorte basse
