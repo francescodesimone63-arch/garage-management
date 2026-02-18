@@ -4,7 +4,10 @@ ALLINEATO AL MODELLO DATABASE
 """
 from typing import List, Optional
 from datetime import datetime, date
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+import os
+import hashlib
+from fastapi import APIRouter, Depends, HTTPException, Query, status, File, UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import func, and_, or_
 
@@ -429,3 +432,121 @@ def get_courtesy_car_stats(
             for stat in state_stats
         }
     }
+
+
+# ============ FILE UPLOAD/DOWNLOAD ENDPOINTS ============
+
+@router.post("/{car_id}/contratto", response_model=CourtesyCarResponse)
+def upload_contratto(
+    car_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_roles([UserRole.ADMIN, UserRole.GENERAL_MANAGER]))
+):
+    """
+    Carica il PDF del contratto firmato per un'auto di cortesia.
+    Il file viene salvato con hash SHA-256 del nome.
+    """
+    car = db.query(CourtesyCar).filter(CourtesyCar.id == car_id).first()
+    if not car:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Auto di cortesia ID {car_id} non trovata"
+        )
+    
+    # Valida che sia un PDF
+    if file.content_type != "application/pdf":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Solo file PDF sono accettati"
+        )
+    
+    # Crea directory se non esiste
+    upload_dir = "uploads/contratti"
+    os.makedirs(upload_dir, exist_ok=True)
+    
+    # Leggi il file
+    content = file.file.read()
+    
+    # Genera hash del filename
+    hash_name = hashlib.sha256(f"{car_id}_{file.filename}_{datetime.utcnow().isoformat()}".encode()).hexdigest()
+    filename = f"{hash_name}.pdf"
+    filepath = os.path.join(upload_dir, filename)
+    
+    # Salva il file
+    with open(filepath, "wb") as f:
+        f.write(content)
+    
+    # Aggiorna il record
+    car.contratto_firmato = filepath
+    db.commit()
+    db.refresh(car)
+    
+    return car
+
+
+@router.get("/{car_id}/contratto/download")
+def download_contratto(
+    car_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Scarica il PDF del contratto firmato di un'auto di cortesia.
+    """
+    car = db.query(CourtesyCar).filter(CourtesyCar.id == car_id).first()
+    if not car:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Auto di cortesia ID {car_id} non trovata"
+        )
+    
+    if not car.contratto_firmato:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Nessun contratto caricato per questa auto"
+        )
+    
+    # Valida che il file esista
+    if not os.path.exists(car.contratto_firmato):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="File contratto non trovato nel sistema"
+        )
+    
+    return FileResponse(
+        path=car.contratto_firmato,
+        filename=f"contratto_auto_{car.vehicle_id}.pdf"
+    )
+
+
+@router.delete("/{car_id}/contratto", response_model=CourtesyCarResponse)
+def delete_contratto(
+    car_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_roles([UserRole.ADMIN, UserRole.GENERAL_MANAGER]))
+):
+    """
+    Elimina il PDF del contratto firmato di un'auto di cortesia.
+    """
+    car = db.query(CourtesyCar).filter(CourtesyCar.id == car_id).first()
+    if not car:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Auto di cortesia ID {car_id} non trovata"
+        )
+    
+    if car.contratto_firmato and os.path.exists(car.contratto_firmato):
+        try:
+            os.remove(car.contratto_firmato)
+        except OSError:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Errore durante l'eliminazione del file"
+            )
+    
+    car.contratto_firmato = None
+    db.commit()
+    db.refresh(car)
+    
+    return car

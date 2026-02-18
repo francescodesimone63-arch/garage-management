@@ -19,18 +19,8 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.create_table(
-        'google_oauth_tokens',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('refresh_token', sa.Text(), nullable=False),
-        sa.Column('access_token', sa.Text(), nullable=True),
-        sa.Column('access_token_expiry', sa.DateTime(timezone=True), nullable=True),
-        sa.Column('calendar_id', sa.String(255), nullable=False, server_default='primary'),
-        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=True),
-        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
-    )
+    pass
 
 
 def downgrade() -> None:
-    op.drop_table('google_oauth_tokens')
+    pass

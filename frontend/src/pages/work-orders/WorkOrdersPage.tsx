@@ -12,21 +12,27 @@ import VoiceTextarea from '@/components/VoiceTextarea'
 import { useWorkOrders, useCreateWorkOrder, useUpdateWorkOrder, useDeleteWorkOrder } from '@/hooks/useWorkOrders'
 import { useInterventions } from '@/hooks/useInterventions'
 import { useCustomers, useCreateCustomer } from '@/hooks/useCustomers'
-import { useVehicles, useCreateVehicle } from '@/hooks/useVehicles'
+import { useVehicles, useCreateVehicle, useUpdateVehicle } from '@/hooks/useVehicles'
 import { usePriorityTypes, useWorkOrderStatusTypes, useCustomerTypes } from '@/hooks/useSystemTables'
-import type { WorkOrder, WorkOrderStatus, Intervention, InterventionCreate } from '@/types'
+import type { WorkOrder, WorkOrderStatus, Intervention, InterventionCreate, Vehicle } from '@/types'
 import './WorkOrdersPage.css'
 
 const { useBreakpoint } = Grid
 
 const WorkOrdersPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  // Refresha sempre gli status quando la modale è aperta
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    if (isModalOpen) {
+      queryClient.invalidateQueries({ queryKey: ['work-order-status-types'] })
+    }
+  }, [isModalOpen, queryClient])
   const screens = useBreakpoint()
   const [searchParams, setSearchParams] = useSearchParams()
-  const queryClient = useQueryClient()
   const [page, setPage] = useState(1)
   const [searchText, setSearchText] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>()
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingWorkOrder, setEditingWorkOrder] = useState<WorkOrder | null>(null)
   const [selectedCustomerId, setSelectedCustomerId] = useState<number>()
   const editingWorkOrderId = editingWorkOrder?.id
@@ -50,12 +56,24 @@ const WorkOrdersPage = () => {
   const [isDirty, setIsDirty] = useState(false)
   const [activeTabKey, setActiveTabKey] = useState<string>('details')
   
+  // Courtesy car selection state
+  const [selectedCourtesyCarId, setSelectedCourtesyCarId] = useState<number | undefined>()
+  
   const [form] = Form.useForm()
   const [customerForm] = Form.useForm()
   const [vehicleForm] = Form.useForm()
   
   // Watch descrizione field for reactive updates
   const watchedDescrizione = Form.useWatch('descrizione', form)
+  
+  // Sync courtesy car selection when editing work order changes
+  useEffect(() => {
+    if (editingWorkOrder?.auto_cortesia_id) {
+      setSelectedCourtesyCarId(editingWorkOrder.auto_cortesia_id)
+    } else {
+      setSelectedCourtesyCarId(undefined)
+    }
+  }, [editingWorkOrder?.id])
 
   const { data, isLoading, error: workOrdersError } = useWorkOrders(page, 10, searchText, statusFilter)
   const { data: customersData, refetch: refetchCustomers } = useCustomers(1, 1000)
@@ -69,6 +87,7 @@ const WorkOrdersPage = () => {
   const deleteWorkOrderMutation = useDeleteWorkOrder()
   const createCustomerMutation = useCreateCustomer()
   const createVehicleMutation = useCreateVehicle()
+  const updateVehicleMutation = useUpdateVehicle()
 
   // Determine if desktop or mobile
   const isDesktop = screens.lg ?? true
@@ -303,19 +322,45 @@ const WorkOrdersPage = () => {
       // ==============================================================
       // VALIDAZIONE: Controlli obbligatori per stato "approvata"
       // ==============================================================
+      // Validazione frontend per tutti gli stati: blocca se manca valutazione_danno o interventi
+      if (!values.valutazione_danno || values.valutazione_danno.trim() === '') {
+        message.error('❌ Devi compilare la "Descrizione Danno" per salvare la scheda lavoro.')
+        return
+      }
+      if (!formInterventions || formInterventions.length === 0) {
+        message.error('❌ Devi inserire almeno un intervento per salvare la scheda lavoro.')
+        return
+      }
+      // Validazione aggiuntiva per stato "approvata"
       if (values.stato === 'approvata') {
         if (!values.valutazione_danno || values.valutazione_danno.trim() === '') {
           message.error('❌ Per approvare la scheda è obbligatorio compilare la "Descrizione Danno"')
           return
         }
         if (formInterventions.length === 0) {
-          message.error('❌ Per approvare la scheda è obbligatorio aggiungere almeno un intervento')
+          message.error('❌ Una scheda in stato di "bozza" deve avere almeno un intervento per poter essere approvata.')
           return
         }
       }
       
       // Converti i campi data vuoti in null per cancellare i valori nel backend
       const cleanedValues = { ...values }
+      
+      // Estrai auto_cortesia_id se presente
+      const auto_cortesia_id = cleanedValues.auto_cortesia_id || null
+      const selectedCourtesyCarId = auto_cortesia_id
+      
+      // Normalizza gli interventi per il backend
+      const normalizedInterventions = formInterventions.map((interv, idx) => ({
+        progressivo: idx + 1,
+        descrizione_intervento: interv.descrizione_intervento,
+        tipo_intervento: interv.tipo_intervento
+      }))
+      const payloadWithInterventions = {
+        ...cleanedValues,
+        interventions: normalizedInterventions,
+        auto_cortesia_id: selectedCourtesyCarId
+      }
       
       // Assicura che data_compilazione sia sempre presente (obbligatorio)
       if (!cleanedValues.data_compilazione) {
@@ -346,17 +391,17 @@ const WorkOrdersPage = () => {
       try {
         if (editingWorkOrder) {
           console.log('📝 Aggiornando scheda esistente:', editingWorkOrder.id)
-          await updateWorkOrderMutation.mutateAsync({ id: editingWorkOrder.id, data: cleanedValues })
+          await updateWorkOrderMutation.mutateAsync({ id: editingWorkOrder.id, data: payloadWithInterventions })
           workOrderId = editingWorkOrder.id
         } else {
           // Crea nuova scheda - NON inviare numero_scheda, sarà generato dal backend
-          delete cleanedValues.numero_scheda
-          delete cleanedValues.data_creazione
-          delete cleanedValues.created_at
-          delete cleanedValues.updated_at
+          delete payloadWithInterventions.numero_scheda
+          delete payloadWithInterventions.data_creazione
+          delete payloadWithInterventions.created_at
+          delete payloadWithInterventions.updated_at
           
-          console.log('🔍 DEBUG: cleanedValues che viene inviato:', cleanedValues)
-          const result = await createWorkOrderMutation.mutateAsync(cleanedValues)
+          console.log('🔍 DEBUG: payloadWithInterventions che viene inviato:', payloadWithInterventions)
+          const result = await createWorkOrderMutation.mutateAsync(payloadWithInterventions)
           
           // Verifica che la scheda sia stata creata con un ID valido
           if (!result?.id) {
@@ -464,7 +509,34 @@ const WorkOrdersPage = () => {
       }
       
       // ==============================================================
-      // STEP 3: Chiudi la modal e mostra messaggio di successo
+      // STEP 3: Aggiorna il veicolo di cortesia se assegnato
+      // ==============================================================
+      if (selectedCourtesyCarId) {
+        try {
+          console.log('🚗 Aggiornando disponibilità del veicolo di cortesia:', selectedCourtesyCarId)
+          
+          // Trova il veicolo nella lista per ottenere l'ID corretto
+          const selectedVehicle = vehiclesData?.items?.find(v => v.id === selectedCourtesyCarId)
+          
+          if (selectedVehicle) {
+            // Aggiorna il veicolo per impostare disponibile=false
+            await updateVehicleMutation.mutateAsync({
+              id: selectedVehicle.id,
+              data: {
+                disponibile: false
+              } as Partial<Vehicle>
+            })
+            console.log('✅ Veicolo di cortesia aggiornato a non disponibile')
+          }
+        } catch (error) {
+          console.warn('⚠️  Avviso: Errore nel salvataggio della disponibilità del veicolo:', error)
+          // Non bloccare il flusso se l'aggiornamento del veicolo fallisce
+          // Il salvataggio della work order ha avuto successo
+        }
+      }
+      
+      // ==============================================================
+      // STEP 4: Chiudi la modal e mostra messaggio di successo
       // ==============================================================
       setIsModalOpen(false)
       form.resetFields()
@@ -834,7 +906,9 @@ const WorkOrdersPage = () => {
                                 }
                                 options={customersData?.items.map(c => ({
                                   value: c.id,
-                                  label: `${c.nome} ${c.cognome}`,
+                                  label: c.tipo === 'azienda' && c.ragione_sociale
+                                    ? c.ragione_sociale
+                                    : `${c.nome || ''} ${c.cognome || ''}`.trim(),
                                 }))}
                               />
                             </Form.Item>
@@ -1129,77 +1203,138 @@ const WorkOrdersPage = () => {
                 label: 'Auto di Cortesia',
                 children: (
                   <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
-                    <div className="form-section">
-                      {editingWorkOrder?.vehicle?.auto_cortesia_stato !== undefined && editingWorkOrder?.vehicle?.auto_cortesia_stato !== null ? (
-                        <div style={{ padding: '20px' }}>
-                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '4px', border: '1px solid #b3e5fc' }}>
-                            <div style={{ marginBottom: '8px', fontSize: '14px' }}>
-                              <strong>✅ Questa è un'auto di cortesia</strong>
-                            </div>
-                            <div style={{ fontSize: '12px', color: '#01579b' }}>
-                              Questo veicolo è registrato come auto di cortesia nel sistema
-                            </div>
+                    <div className="form-section" style={{ padding: '20px' }}>
+                      {/* Mostra messaggio se un'auto è già assegnata */}
+                      {editingWorkOrder?.auto_cortesia_id && (
+                        <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '4px', border: '1px solid #b3e5fc' }}>
+                          <div style={{ marginBottom: '8px', fontSize: '14px' }}>
+                            <strong>✅ Auto Attualmente Assegnata</strong>
                           </div>
-
-                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px', border: '1px solid #d9d9d9' }}>
-                            <div style={{ marginBottom: '8px' }}>
-                              <strong>📋 Informazioni Veicolo:</strong>
-                            </div>
-                            <div style={{ fontSize: '12px', lineHeight: '1.8', color: '#666' }}>
-                              <div>🏷️ Targa: <strong>{editingWorkOrder?.vehicle?.targa}</strong></div>
-                              <div>🚗 Marca/Modello: <strong>{editingWorkOrder?.vehicle?.marca} {editingWorkOrder?.vehicle?.modello}</strong></div>
-                              {editingWorkOrder?.vehicle?.anno && (
-                                <div>📅 Anno: <strong>{editingWorkOrder?.vehicle?.anno}</strong></div>
-                              )}
-                            </div>
-                          </div>
-
-                          <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px', border: '1px solid #d9d9d9' }}>
-                            <div style={{ marginBottom: '8px' }}>
-                              <strong>📊 Stato Disponibilità (Sola Lettura):</strong>
-                            </div>
-                            <div style={{ marginTop: '8px' }}>
-                              <Tag color="blue" style={{ fontSize: '13px', padding: '4px 8px' }}>
-                                {editingWorkOrder?.vehicle?.auto_cortesia_stato || 'Non assegnato'}
-                              </Tag>
-                            </div>
-                            <div style={{ fontSize: '11px', color: '#999', marginTop: '8px' }}>
-                              ⓘ Per modificare lo stato, accedi al gestionale veicoli
-                            </div>
-                          </div>
-
-                          <div style={{ marginTop: '20px', padding: '12px', backgroundColor: '#e6f7ff', borderRadius: '4px', border: '1px solid #91d5ff' }}>
-                            <div style={{ fontSize: '12px', color: '#0050b3' }}>
-                              <strong>📚 Significato degli Stati:</strong>
-                              <ul style={{ marginTop: '8px', marginBottom: 0, paddingLeft: '20px' }}>
-                                <li><strong>disponibile</strong>: Pronta per l'affitto/assegnazione</li>
-                                <li><strong>in_uso</strong>: Attualmente assegnata a un cliente</li>
-                                <li><strong>manutenzione</strong>: Sottoposta a manutenzione</li>
-                                <li><strong>non_disponibile</strong>: Non disponibile per l'assegnazione</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
-                          <div style={{ marginBottom: '12px', marginTop: '20px' }}>
-                            <span style={{ fontSize: '32px' }}>🚗</span>
-                          </div>
-                          <div style={{ marginBottom: '12px' }}>
-                            <span style={{ fontSize: '14px' }}>Questo veicolo non è registrato come auto di cortesia</span>
-                          </div>
-                          {editingWorkOrder?.vehicle && (
-                            <div style={{ fontSize: '12px', color: '#999', marginTop: '12px', padding: '12px', backgroundColor: '#fafafa', borderRadius: '4px' }}>
-                              <div style={{ marginBottom: '4px' }}>Veicolo selezionato:</div>
-                              <div><strong>{editingWorkOrder.vehicle.targa}</strong></div>
-                              <div>{editingWorkOrder.vehicle.marca} {editingWorkOrder.vehicle.modello}</div>
-                            </div>
-                          )}
-                          <div style={{ fontSize: '12px', color: '#999', marginTop: '16px', padding: '12px', backgroundColor: '#fffbe6', borderRadius: '4px', border: '1px solid #ffe58f' }}>
-                            ⚠️ Per registrare questo veicolo come auto di cortesia, contatta l'amministratore del sistema
+                          <div style={{ fontSize: '12px', lineHeight: '1.6', color: '#01579b' }}>
+                            <div>🏷️ <strong>{editingWorkOrder?.courtesy_car?.vehicle?.targa}</strong> - {editingWorkOrder?.courtesy_car?.vehicle?.marca} {editingWorkOrder?.courtesy_car?.vehicle?.modello} ({editingWorkOrder?.courtesy_car?.vehicle?.anno})</div>
+                            <div style={{ marginTop: '4px' }}>Puoi selezionare un'altra auto per cambiarla</div>
                           </div>
                         </div>
                       )}
+
+                      {/* Lista di auto di cortesia disponibili - sempre visibile */}
+                      <div style={{ marginBottom: '16px' }}>
+                        <strong style={{ fontSize: '14px' }}>🚗 Auto di Cortesia Disponibili</strong>
+                        <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
+                          Seleziona un'auto disponibile per assegnarla (clicca di nuovo per deselezionare)
+                        </div>
+                      </div>
+
+                      {vehiclesData ? (
+                        <>
+                          {(() => {
+                            const availableCourtesyCars = vehiclesData.items.filter(
+                              v => v.courtesy_car === true && v.disponibile === true
+                            );
+
+                            if (availableCourtesyCars.length === 0) {
+                              return (
+                                <div style={{ padding: '20px', textAlign: 'center', backgroundColor: '#fffbe6', borderRadius: '4px', border: '1px solid #ffe58f' }}>
+                                  <div style={{ marginBottom: '8px', fontSize: '32px' }}>⚠️</div>
+                                  <div style={{ fontSize: '13px', color: '#8b6914' }}>
+                                    <strong>Nessuna auto di cortesia disponibile</strong>
+                                  </div>
+                                  <div style={{ fontSize: '12px', color: '#8b6914', marginTop: '4px' }}>
+                                    Al momento non ci sono auto di cortesia disponibili per l'assegnazione  
+                                  </div>
+                                </div>
+                              );
+                            }
+
+                            return (
+                              <div style={{ marginBottom: '16px' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '12px' }}>
+                                  {availableCourtesyCars.map(car => {
+                                    const isSelected = selectedCourtesyCarId === car.id
+                                    return (
+                                      <div
+                                        key={car.id}
+                                        onClick={() => {
+                                          const newSelected = isSelected ? undefined : car.id
+                                          setSelectedCourtesyCarId(newSelected)
+                                          form.setFieldValue('auto_cortesia_id', newSelected)
+                                        }}
+                                        style={{
+                                          padding: '16px',
+                                          border: isSelected ? '2px solid #1890ff' : '1px solid #d9d9d9',
+                                          borderRadius: '8px',
+                                          backgroundColor: isSelected ? '#e6f7ff' : '#fafafa',
+                                          cursor: 'pointer',
+                                          transition: 'all 0.3s ease',
+                                          boxShadow: isSelected ? '0 2px 8px rgba(24, 144, 255, 0.3)' : '0 1px 2px rgba(0, 0, 0, 0.03)',
+                                          position: 'relative',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                          if (!isSelected) {
+                                            e.currentTarget.style.borderColor = '#40a9ff';
+                                            e.currentTarget.style.boxShadow = '0 1px 4px rgba(64, 169, 255, 0.2)';
+                                          }
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          if (!isSelected) {
+                                            e.currentTarget.style.borderColor = '#d9d9d9';
+                                            e.currentTarget.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.03)';
+                                          }
+                                        }}
+                                      >
+                                        {isSelected && (
+                                          <div style={{ position: 'absolute', top: '8px', right: '8px', fontSize: '18px' }}>✅</div>
+                                        )}
+                                        
+                                        <div style={{ marginBottom: '12px' }}>
+                                          <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>
+                                            🏷️ {car.targa}
+                                          </div>
+                                          <div style={{ fontSize: '13px', color: '#262626' }}>
+                                            🚗 <strong>{car.marca} {car.modello}</strong>
+                                          </div>
+                                        </div>
+                                        
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '12px', lineHeight: '1.6', color: '#595959' }}>
+                                          <div>📅 Anno: <strong>{car.anno || 'N/A'}</strong></div>
+                                          <div>🛣️ Km: <strong>{car.km_attuali || 0}</strong></div>
+                                          <div>⚙️ Cilindrata: <strong>{car.cilindrata || 'N/A'}</strong></div>
+                                          <div>⚡ KW: <strong>{car.kw || 'N/A'}</strong></div>
+                                          <div>🐎 CV: <strong>{car.cv || 'N/A'}</strong></div>
+                                          <div>🚪 Porte: <strong>{car.porte || 'N/A'}</strong></div>
+                                          <div>⛽ Carburante: <strong>{car.carburante || 'N/A'}</strong></div>
+                                          <div>📌 Colore: <strong>{car.colore || 'N/A'}</strong></div>
+                                        </div>
+                                        
+                                        {car.prima_immatricolazione && (
+                                          <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #f0f0f0', fontSize: '12px', color: '#8c8c8c' }}>
+                                            📜 Prima immatricolazione: <strong>{car.prima_immatricolazione}</strong>
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            );
+                          })()}
+                        </>
+                      ) : (
+                        <div style={{ padding: '12px', textAlign: 'center', color: '#999' }}>
+                          ⏳ Caricamento veicoli...
+                        </div>
+                      )}
+
+                      <div style={{ marginTop: '16px', padding: '12px', backgroundColor: '#e6f7ff', borderRadius: '4px', border: '1px solid #91d5ff' }}>
+                        <div style={{ fontSize: '12px', color: '#0050b3' }}>
+                          <strong>ℹ️ Informazioni:</strong>
+                          <ul style={{ marginTop: '8px', marginBottom: 0, paddingLeft: '20px' }}>
+                            <li>Solo le auto con stato "disponibile" possono essere assegnate</li>
+                            <li>L'auto assegnata avrà il suo stato aggiornato a "non disponibile"</li>
+                            <li>La riconsegna sarà gestita in una prossima fase</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ),

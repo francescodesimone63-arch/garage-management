@@ -93,7 +93,7 @@ export const useUpdateVehicle = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: Partial<VehicleCreate> }) => {
+    mutationFn: async ({ id, data }: { id: number; data: Partial<Vehicle> }) => {
       const response = await axiosInstance.put<Vehicle>(
         `${API_ENDPOINTS.VEHICLES}/${id}`,
         data

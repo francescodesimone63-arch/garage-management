@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Checkbox } from 'antd'
 import { Table, Button, Modal, Form, Input, Select, Space, Tag, Popconfirm, message, InputNumber, Row, Col, Divider, Spin, AutoComplete } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined, CarOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
@@ -9,14 +10,19 @@ import { useMarche, useModelli, useCarburanti } from '@/hooks/useAuto'
 import type { Vehicle } from '@/types'
 
 const VehiclesPage = () => {
+    // Stato per abilitazione checkbox courtesy_car
+    const [isTiberCar, setIsTiberCar] = useState(false)
   const [page, setPage] = useState(1)
   const [searchText, setSearchText] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
   const [selectedMarca, setSelectedMarca] = useState<string>('')
+  const [sortField, setSortField] = useState<string | undefined>('targa')
+  const [sortOrder, setSortOrder] = useState<'ascend' | 'descend' | undefined>('ascend')
   const [form] = Form.useForm()
 
-  const { data, isLoading } = useVehicles(page, 10, searchText)
+  // Recupera TUTTI i veicoli per il sorting
+  const { data: allVehiclesData, isLoading } = useVehicles(1, 10000, searchText)
   const { data: customersData } = useCustomers(1, 1000) // Get all customers for select
   const createMutation = useCreateVehicle()
   const updateMutation = useUpdateVehicle()
@@ -27,10 +33,60 @@ const VehiclesPage = () => {
   const { data: modelliData, isLoading: loadingModelli } = useModelli(selectedMarca)
   const { data: carburanti } = useCarburanti()
 
+  // Funzione per ordinare e paginare i dati
+  const getSortedAndPaginatedData = () => {
+    if (!allVehiclesData?.items) return { items: [], total: 0 }
+
+    let sortedData = [...allVehiclesData.items]
+
+    // Applica sorting solo se sortField e sortOrder sono definiti
+    if (sortField && sortOrder) {
+      sortedData.sort((a, b) => {
+        let aValue: any = a[sortField as keyof Vehicle]
+        let bValue: any = b[sortField as keyof Vehicle]
+
+        // Se ordunare  i valori null
+        if (aValue == null && bValue == null) return 0
+        if (aValue == null) return sortOrder === 'ascend' ? 1 : -1
+        if (bValue == null) return sortOrder === 'ascend' ? -1 : 1
+
+        // Comparazione per stringhe
+        if (typeof aValue === 'string') {
+          aValue = aValue.toLowerCase()
+          bValue = (bValue as string).toLowerCase()
+          return sortOrder === 'ascend'
+            ? aValue.localeCompare(bValue)
+            : bValue.localeCompare(aValue)
+        }
+
+        // Comparazione per numeri e boolean
+        if (typeof aValue === 'number' || typeof aValue === 'boolean') {
+          return sortOrder === 'ascend' ? (aValue > bValue ? 1 : -1) : (aValue < bValue ? 1 : -1)
+        }
+
+        return 0
+      })
+    }
+
+    // Applica paginazione
+    const pageSize = 10
+    const startIdx = (page - 1) * pageSize
+    const endIdx = startIdx + pageSize
+    const paginatedItems = sortedData.slice(startIdx, endIdx)
+
+    return {
+      items: paginatedItems,
+      total: sortedData.length,
+    }
+  }
+
+  const displayData = getSortedAndPaginatedData()
+
   const handleCreate = () => {
     setEditingVehicle(null)
     setSelectedMarca('')
     form.resetFields()
+    setIsTiberCar(false)
     setIsModalOpen(true)
   }
 
@@ -38,6 +94,9 @@ const VehiclesPage = () => {
     setEditingVehicle(record)
     setSelectedMarca(record.marca || '')
     form.setFieldsValue(record)
+    // Controlla se il cliente è Tiber Car
+    const customer = customersData?.items.find(c => c.id === record.customer_id)
+    setIsTiberCar(!!customer && (customer.ragione_sociale === 'Tiber Car'))
     setIsModalOpen(true)
   }
 
@@ -82,6 +141,7 @@ const VehiclesPage = () => {
       title: 'Targa',
       dataIndex: 'targa',
       key: 'targa',
+      sorter: true,
       render: (text) => (
         <Space>
           <CarOutlined />
@@ -92,30 +152,47 @@ const VehiclesPage = () => {
     {
       title: 'Veicolo',
       key: 'vehicle',
+      sorter: true,
       render: (_, record) => `${record.marca} ${record.modello}`,
     },
     {
       title: 'Anno',
       dataIndex: 'anno',
       key: 'anno',
+      sorter: true,
       render: (year) => year || '-',
     },
     {
       title: 'Colore',
       dataIndex: 'colore',
       key: 'colore',
+      sorter: true,
       render: (colore) => colore || '-',
     },
     {
       title: 'Cliente',
       key: 'customer',
+      sorter: true,
       render: (_, record) => getCustomerName(record.customer_id),
     },
     {
       title: 'KM Attuali',
       dataIndex: 'km_attuali',
       key: 'km_attuali',
+      sorter: true,
       render: (km) => km ? `${km.toLocaleString()} km` : '-',
+    },
+    {
+      title: 'Auto di Cortesia',
+      dataIndex: 'courtesy_car',
+      key: 'courtesy_car',
+      sorter: true,
+      render: (isCourtesyCar) => (
+        <Tag color={isCourtesyCar ? 'green' : 'default'}>
+          {isCourtesyCar ? '✅ Sì' : '❌ No'}
+        </Tag>
+      ),
+      width: 140,
     },
     {
       title: 'Azioni',
@@ -169,13 +246,27 @@ const VehiclesPage = () => {
 
       <Table
         columns={columns}
-        dataSource={data?.items}
+        dataSource={displayData.items}
         rowKey="id"
         loading={isLoading}
+        onChange={(pagination, filters, sorter: any) => {
+          // Gestione del sorting - gestisce il ciclo ascend -> descend -> undefined
+          if (sorter && sorter.order) {
+            // Se c'è un order definito (ascend o descend)
+            setSortField(sorter.field || sorter.column?.dataIndex || 'targa')
+            setSortOrder(sorter.order)
+          } else {
+            // Se sorter è undefined o order è undefined, resetta il sorting
+            setSortField(undefined)
+            setSortOrder(undefined)
+          }
+          // Reset a pagina 1 quando cambia l'ordinamento
+          setPage(1)
+        }}
         pagination={{
           current: page,
           pageSize: 10,
-          total: data?.total,
+          total: displayData.total,
           onChange: setPage,
           showTotal: (total) => `Totale ${total} veicoli`,
         }}
@@ -197,6 +288,15 @@ const VehiclesPage = () => {
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
+          onValuesChange={(changed, all) => {
+            if ('customer_id' in changed) {
+              const customer = customersData?.items.find(c => c.id === changed.customer_id)
+              setIsTiberCar(!!customer && (customer.ragione_sociale === 'Tiber Car'))
+              if (!customer || customer.ragione_sociale !== 'Tiber Car') {
+                form.setFieldValue('courtesy_car', false)
+              }
+            }
+          }}
         >
           <Form.Item
             name="customer_id"
@@ -212,7 +312,9 @@ const VehiclesPage = () => {
               }
               options={customersData?.items.map(c => ({
                 value: c.id,
-                label: `${c.nome} ${c.cognome}`,
+                label: c.tipo?.toLowerCase() === 'azienda'
+                  ? (c.ragione_sociale || '(azienda senza nome)')
+                  : `${c.nome || ''} ${c.cognome || ''}`.trim() || '(privato senza nome)',
               }))}
             />
           </Form.Item>
@@ -392,6 +494,14 @@ const VehiclesPage = () => {
               </Form.Item>
             </Col>
           </Row>
+
+          <Form.Item
+            name="courtesy_car"
+            valuePropName="checked"
+            label="Auto di cortesia"
+          >
+            <Checkbox disabled={!isTiberCar}>Auto di cortesia</Checkbox>
+          </Form.Item>
 
           <Form.Item
             name="note"

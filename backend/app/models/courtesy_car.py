@@ -46,11 +46,12 @@ class CourtesyCar(Base):
     km_inclusi_anno = Column(Integer)
     stato = Column(Enum(CourtesyCarStatus), default=CourtesyCarStatus.DISPONIBILE, index=True)
     note = Column(String)
+    contratto_firmato = Column(String(500))  # Path al file PDF
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     # Relationships
-    vehicle = relationship("Vehicle", back_populates="courtesy_car")
+    vehicle = relationship("Vehicle", back_populates="courtesy_car_rel")
     assignments = relationship("CarAssignment", back_populates="courtesy_car")
     
     def __repr__(self):

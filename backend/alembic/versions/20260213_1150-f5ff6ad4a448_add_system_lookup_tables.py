@@ -19,77 +19,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    # Create damage_types table
-    op.create_table(
-        'damage_types',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('nome', sa.String(100), nullable=False),
-        sa.Column('descrizione', sa.Text(), nullable=True),
-        sa.Column('attivo', sa.Boolean(), nullable=False, server_default='true'),
-        sa.Column('created_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('nome')
-    )
-    op.create_index(op.f('ix_damage_types_id'), 'damage_types', ['id'])
-    op.create_index(op.f('ix_damage_types_nome'), 'damage_types', ['nome'])
-
-    # Create customer_types table
-    op.create_table(
-        'customer_types',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('nome', sa.String(50), nullable=False),
-        sa.Column('descrizione', sa.Text(), nullable=True),
-        sa.Column('attivo', sa.Boolean(), nullable=False, server_default='true'),
-        sa.Column('created_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('nome')
-    )
-    op.create_index(op.f('ix_customer_types_id'), 'customer_types', ['id'])
-    op.create_index(op.f('ix_customer_types_nome'), 'customer_types', ['nome'])
-
-    # Create work_order_status_types table
-    op.create_table(
-        'work_order_status_types',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('nome', sa.String(50), nullable=False),
-        sa.Column('descrizione', sa.Text(), nullable=True),
-        sa.Column('attivo', sa.Boolean(), nullable=False, server_default='true'),
-        sa.Column('created_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('nome')
-    )
-    op.create_index(op.f('ix_work_order_status_types_id'), 'work_order_status_types', ['id'])
-    op.create_index(op.f('ix_work_order_status_types_nome'), 'work_order_status_types', ['nome'])
-
-    # Create priority_types table
-    op.create_table(
-        'priority_types',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('nome', sa.String(50), nullable=False),
-        sa.Column('descrizione', sa.Text(), nullable=True),
-        sa.Column('attivo', sa.Boolean(), nullable=False, server_default='true'),
-        sa.Column('created_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
-        sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('nome')
-    )
-    op.create_index(op.f('ix_priority_types_id'), 'priority_types', ['id'])
-    op.create_index(op.f('ix_priority_types_nome'), 'priority_types', ['nome'])
-
+    pass
 
 def downgrade() -> None:
-    op.drop_index(op.f('ix_priority_types_nome'), 'priority_types')
-    op.drop_index(op.f('ix_priority_types_id'), 'priority_types')
-    op.drop_table('priority_types')
-    op.drop_index(op.f('ix_work_order_status_types_nome'), 'work_order_status_types')
-    op.drop_index(op.f('ix_work_order_status_types_id'), 'work_order_status_types')
-    op.drop_table('work_order_status_types')
-    op.drop_index(op.f('ix_customer_types_nome'), 'customer_types')
-    op.drop_index(op.f('ix_customer_types_id'), 'customer_types')
-    op.drop_table('customer_types')
-    op.drop_index(op.f('ix_damage_types_nome'), 'damage_types')
-    op.drop_index(op.f('ix_damage_types_id'), 'damage_types')
-    op.drop_table('damage_types')
+    pass

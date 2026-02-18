@@ -163,6 +163,9 @@ def create_work_order(
             detail="Cliente non trovato"
         )
     
+    # LOG dettagliato della richiesta ricevuta
+    import logging
+    logging.warning(f"[WORKORDER][CREATE] Payload ricevuto: {work_order_in.model_dump()}")
     # Crea ordine di lavoro con campi CORRETTI
     work_order_data = work_order_in.model_dump()
     work_order_data['creato_da'] = current_user.id  # CORRETTO: creato_da non created_by
@@ -283,6 +286,9 @@ def update_work_order(
             detail="Ordine di lavoro non trovato"
         )
     
+    # LOG dettagliato della richiesta ricevuta
+    import logging
+    logging.warning(f"[WORKORDER][UPDATE] Payload ricevuto: {work_order_in.model_dump(exclude_unset=True)}")
     # Aggiorna campi con model_dump
     update_data = work_order_in.model_dump(exclude_unset=True)
     for field, value in update_data.items():

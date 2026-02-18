@@ -20,6 +20,7 @@ class CourtesyCarBase(BaseModel):
     km_inclusi_anno: Optional[int] = Field(None, ge=0)
     stato: CourtesyCarStatus = CourtesyCarStatus.DISPONIBILE
     note: Optional[str] = None
+    contratto_firmato: Optional[str] = Field(None, max_length=500)  # Path al file PDF
     
     @validator('data_scadenza_contratto')
     def validate_scadenza(cls, v, values):
@@ -45,6 +46,7 @@ class CourtesyCarUpdate(BaseModel):
     km_inclusi_anno: Optional[int] = Field(None, ge=0)
     stato: Optional[CourtesyCarStatus] = None
     note: Optional[str] = None
+    contratto_firmato: Optional[str] = Field(None, max_length=500)  # Path al file PDF
 
 
 class CourtesyCarInDBBase(CourtesyCarBase):

@@ -23,15 +23,17 @@ const CustomersPage = () => {
 
   const handleCreate = () => {
     setEditingCustomer(null)
-    setCustomerType('privato')
+    setCustomerType('Privato') // Usa il valore esatto dal database
     form.resetFields()
     setIsModalOpen(true)
   }
 
   const handleEdit = (record: Customer) => {
     setEditingCustomer(record)
-    setCustomerType(record.tipo || 'privato')
-    form.setFieldsValue(record)
+    // Normalizza il tipo al formato database (Azienda o Privato)
+    const normalizedTipo = record.tipo ? (record.tipo.charAt(0).toUpperCase() + record.tipo.slice(1).toLowerCase()) : 'Privato'
+    setCustomerType(normalizedTipo)
+    form.setFieldsValue({ ...record, tipo: normalizedTipo })
     setIsModalOpen(true)
   }
 
@@ -41,10 +43,15 @@ const CustomersPage = () => {
 
   const handleSubmit = async (values: any) => {
     try {
+      // Normalizza tipo a lowercase per il backend
+      const normalized = {
+        ...values,
+        tipo: values.tipo ? values.tipo.toLowerCase() : undefined,
+      }
       if (editingCustomer) {
-        await updateMutation.mutateAsync({ id: editingCustomer.id, data: values })
+        await updateMutation.mutateAsync({ id: editingCustomer.id, data: normalized })
       } else {
-        await createMutation.mutateAsync(values)
+        await createMutation.mutateAsync(normalized)
       }
       setIsModalOpen(false)
       form.resetFields()
@@ -183,23 +190,23 @@ const CustomersPage = () => {
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
-          initialValues={{ tipo: 'privato' }}
+          initialValues={{ tipo: 'Privato' }}
         >
           <Form.Item
             name="tipo"
             label="Tipo Cliente"
             rules={[{ required: true, message: 'Seleziona il tipo' }]}
           >
-            <Select onChange={(value) => setCustomerType(value)}>
+            <Select placeholder="Seleziona un tipo" onChange={(value) => setCustomerType(value)}>
               {customerTypes?.filter(ct => ct.attivo).map(customerType => (
-                <Select.Option key={customerType.id} value={customerType.nome.toLowerCase()}>
+                <Select.Option key={customerType.id} value={customerType.nome}>
                   {customerType.nome}
                 </Select.Option>
               ))}
             </Select>
           </Form.Item>
 
-          {customerType === 'azienda' ? (
+          {customerType === 'Azienda' ? (
             <Form.Item
               name="ragione_sociale"
               label="Ragione Sociale"

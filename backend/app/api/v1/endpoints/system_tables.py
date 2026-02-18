@@ -1,12 +1,10 @@
-"""
-System tables endpoints for master data management
-"""
+from typing import List, Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import Any, List
 
 from app.core.deps import get_db, get_current_user, get_current_active_superuser
-from app.models import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType, User
+from app.models.user import User
+from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType
 from app.schemas.system_tables import (
     DamageTypeCreate,
     DamageTypeUpdate,

@@ -12,6 +12,7 @@ from app.models.user import User
 from app.models.vehicle import Vehicle
 from app.models.customer import Customer
 from app.models.work_order import WorkOrder
+from app.models.courtesy_car import CourtesyCar
 from app.schemas.vehicle import VehicleCreate, VehicleUpdate, VehicleResponse, VehicleWithHistory
 
 router = APIRouter()
@@ -230,15 +231,40 @@ def update_vehicle(
                 detail="Questo telaio è già in uso"
             )
     
-    # Aggiorna campi
+    # ========== VALIDAZIONE COURTESY CAR ==========
+    # Controlla se sta cambiando courtesy_car flag o cliente
     update_data = vehicle_in.dict(exclude_unset=True)
+    is_changing_courtesy_flag = "courtesy_car" in update_data and update_data["courtesy_car"] != vehicle.courtesy_car
+    is_changing_customer = "customer_id" in update_data and update_data["customer_id"] != vehicle.customer_id
+    
+    if is_changing_courtesy_flag or is_changing_customer:
+        # Controlla se esiste un record in courtesy_cars per questo veicolo
+        courtesy_car_record = db.query(CourtesyCar).filter(CourtesyCar.vehicle_id == vehicle_id).first()
+        
+        if courtesy_car_record:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Questo veicolo è un'auto di cortesia. Per poter cambiare stato si devono cancellare i dati nella funzione preposta"
+            )
+    
+    # ========== AGGIORNA CAMPI ==========
+    old_customer_id = vehicle.customer_id
+    new_customer_id = update_data.get("customer_id", old_customer_id)
     for field, value in update_data.items():
         setattr(vehicle, field, value)
-    
+
     db.add(vehicle)
     db.commit()
     db.refresh(vehicle)
-    
+
+    # Se il customer_id è cambiato, aggiorna tutte le work order associate a questo veicolo
+    if "customer_id" in update_data and new_customer_id != old_customer_id:
+        work_orders = db.query(WorkOrder).filter(WorkOrder.vehicle_id == vehicle_id).all()
+        for wo in work_orders:
+            wo.customer_id = new_customer_id
+            db.add(wo)
+        db.commit()
+
     return VehicleResponse.model_validate(vehicle)
 
 

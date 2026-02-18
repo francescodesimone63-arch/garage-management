@@ -95,6 +95,9 @@ export interface Vehicle {
   porte?: number
   carburante?: string
   prima_immatricolazione?: string
+  // Nuovi campi per auto di cortesia
+  courtesy_car?: boolean
+  disponibile?: boolean
   created_at: string
   updated_at?: string
   customer?: Customer
@@ -167,6 +170,7 @@ export interface WorkOrder {
   vehicle_anno?: number
   vehicle_colore?: string
   interventions?: Intervention[]
+  courtesy_car?: CourtesyCar  // Auto di cortesia assegnata
 }
 
 // Intervention Status Type

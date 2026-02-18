@@ -19,28 +19,11 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    # Create interventions table
-    op.create_table(
-        'interventions',
-        sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('work_order_id', sa.Integer(), nullable=False),
-        sa.Column('progressivo', sa.Integer(), nullable=False),
-        sa.Column('descrizione_intervento', sa.Text(), nullable=False),
-        sa.Column('durata_stimata', sa.DECIMAL(precision=4, scale=2), nullable=False, server_default='0'),
-        sa.Column('tipo_intervento', sa.String(length=20), nullable=False),
-        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=True),
-        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=True),
-        sa.ForeignKeyConstraint(['work_order_id'], ['work_orders.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index('ix_interventions_id', 'interventions', ['id'], unique=False)
-    op.create_index('ix_interventions_work_order_id', 'interventions', ['work_order_id'], unique=False)
-    
-    # Drop tipo_danno column from work_orders
-    op.drop_column('work_orders', 'tipo_danno')
+    pass
 
 
 def downgrade() -> None:
+    pass
     # Add tipo_danno column back to work_orders
     op.add_column('work_orders', sa.Column('tipo_danno', sa.String(length=50), nullable=True))
     

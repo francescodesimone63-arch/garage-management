@@ -1,7 +1,7 @@
 """
 Vehicle model for managing cars (customer and courtesy)
 """
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum, Boolean
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import enum
@@ -38,6 +38,8 @@ class Vehicle(Base):
     km_attuali = Column(Integer)
     customer_id = Column(Integer, ForeignKey("customers.id", ondelete="SET NULL"))
     tipo = Column(Enum(VehicleType), default=VehicleType.CLIENTE, index=True)
+    courtesy_car = Column(Boolean, default=False, nullable=True)
+    disponibile = Column(Boolean, default=True, nullable=True)
     note = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
@@ -46,7 +48,7 @@ class Vehicle(Base):
     customer = relationship("Customer", back_populates="vehicles")
     work_orders = relationship("WorkOrder", back_populates="vehicle")
     tires = relationship("Tire", back_populates="vehicle", cascade="all, delete-orphan")
-    courtesy_car = relationship("CourtesyCar", back_populates="vehicle", uselist=False, cascade="all, delete-orphan")
+    courtesy_car_rel = relationship("CourtesyCar", back_populates="vehicle", uselist=False, cascade="all, delete-orphan")
     maintenance_schedules = relationship("MaintenanceSchedule", back_populates="vehicle", cascade="all, delete-orphan")
     
     def __repr__(self):

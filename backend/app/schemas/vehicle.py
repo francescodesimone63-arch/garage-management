@@ -32,6 +32,10 @@ class VehicleBase(BaseModel):
     carburante: Optional[str] = Field(None, max_length=30)
     prima_immatricolazione: Optional[str] = Field(None, max_length=10)
     
+    # Campi per auto di cortesia
+    courtesy_car: Optional[bool] = Field(None, description="Se il veicolo è un'auto di cortesia")
+    disponibile: Optional[bool] = Field(None, description="Se il veicolo è disponibile per l'uso")
+    
     @validator('targa')
     def validate_targa(cls, v):
         # Italian license plate format validation (simplified)
@@ -69,6 +73,10 @@ class VehicleUpdate(BaseModel):
     porte: Optional[int] = Field(None, ge=2, le=7)
     carburante: Optional[str] = Field(None, max_length=30)
     prima_immatricolazione: Optional[str] = Field(None, max_length=10)
+    
+    # Campi per auto di cortesia
+    courtesy_car: Optional[bool] = Field(None, description="Se il veicolo è un'auto di cortesia")
+    disponibile: Optional[bool] = Field(None, description="Se il veicolo è disponibile per l'uso")
 
 
 class VehicleInDBBase(VehicleBase):
