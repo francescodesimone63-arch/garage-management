@@ -1,6 +1,10 @@
 """
 Main FastAPI application entry point
 """
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
@@ -11,6 +15,14 @@ from app.core.database import sync_engine, Base
 from app.api.v1.api import api_router
 from app.core.logging_config import setup_logging, get_logger
 from app.middleware.logging_middleware import LoggingMiddleware
+
+# Load environment variables from .env file
+env_path = Path(__file__).parent / ".env"
+if env_path.exists():
+    load_dotenv(env_path)
+    print(f"✓ Caricato .env da: {env_path}")
+else:
+    print(f"⚠️  File .env non trovato: {env_path}")
 
 # Setup logging system
 logger = setup_logging("garage_management", level="DEBUG")

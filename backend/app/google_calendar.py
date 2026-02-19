@@ -170,7 +170,7 @@ def exchange_code_for_token(code: str) -> Optional[dict]:
 
 async def get_calendar_service(db: AsyncSession):
     """
-    Build Google Calendar service with auto-refresh credentials.
+    Build Google Calendar service with auto-refresh credentials (ASYNC version).
     
     Reads refresh_token from DB, creates Credentials object with automatic
     refresh on expired access_token.
@@ -182,10 +182,14 @@ async def get_calendar_service(db: AsyncSession):
         googleapiclient.discovery.Resource for calendar v3
         
     Raises:
-        ValueError if no stored token found
+        ValueError if no stored token found or credentials not configured
     """
     from sqlalchemy.ext.asyncio import AsyncSession
     from sqlalchemy import select
+    
+    # Validate credentials are configured
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
+        raise ValueError("GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables must be set")
     
     result = await db.execute(select(GoogleOAuthToken).filter(GoogleOAuthToken.id == 1))
     token_record = result.scalars().first()
@@ -210,6 +214,59 @@ async def get_calendar_service(db: AsyncSession):
         token_record.access_token_expiry = creds.expiry
         # SQLAlchemy tracks ORM objects, no need for db.add()
         await db.commit()
+    
+    service = build("calendar", "v3", credentials=creds)
+    return service
+
+
+def get_calendar_service_sync(db: Session):
+    """
+    Build Google Calendar service with auto-refresh credentials (SYNC version).
+    
+    Reads refresh_token from DB, creates Credentials object with automatic
+    refresh on expired access_token. Use this for synchronous endpoints.
+    
+    Args:
+        db: SQLAlchemy Session (sync)
+        
+    Returns:
+        googleapiclient.discovery.Resource for calendar v3
+        
+    Raises:
+        ValueError if no stored token found or credentials not configured
+    """
+    from sqlalchemy import select
+    
+    # Validate credentials are configured
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
+        raise ValueError("GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables must be set")
+    
+    result = db.execute(select(GoogleOAuthToken).filter(GoogleOAuthToken.id == 1))
+    token_record = result.scalars().first()
+    
+    if not token_record or not token_record.refresh_token:
+        raise ValueError("No Google OAuth token found. Run OAuth flow first.")
+    
+    # Create credentials from stored refresh token
+    creds = Credentials(
+        token=token_record.access_token,
+        refresh_token=token_record.refresh_token,
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=GOOGLE_CLIENT_ID,
+        client_secret=GOOGLE_CLIENT_SECRET,
+    )
+    
+    # Refresh if expired
+    if creds.expired and creds.refresh_token:
+        try:
+            creds.refresh(Request())
+            # Update cached access token in DB
+            token_record.access_token = creds.token
+            token_record.access_token_expiry = creds.expiry
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            raise ValueError(f"Failed to refresh token: {str(e)}")
     
     service = build("calendar", "v3", credentials=creds)
     return service

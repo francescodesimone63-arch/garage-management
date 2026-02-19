@@ -105,7 +105,7 @@ def create_calendar_event(
     
     # Get calendar service
     try:
-        service = gc.get_calendar_service(db)
+        service = gc.get_calendar_service_sync(db)
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))
     
@@ -214,7 +214,7 @@ def update_calendar_event(
     
     # Get calendar service
     try:
-        service = gc.get_calendar_service(db)
+        service = gc.get_calendar_service_sync(db)
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))
     
@@ -288,7 +288,7 @@ def delete_calendar_event(
     
     # Get calendar service
     try:
-        service = gc.get_calendar_service(db)
+        service = gc.get_calendar_service_sync(db)
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))
     

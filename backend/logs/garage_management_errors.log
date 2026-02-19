@@ -5839,3 +5839,109 @@ data_fine_prevista
 2026-02-19 09:20:48 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/auth/login                                 | Status:422 | 1.56ms
 2026-02-19 09:20:48 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/work-orders/                               | Status:401 | 2.46ms
 2026-02-19 09:20:55 | ERROR    | garage_management.api | log_response:106 | ← OPTIONS /api/v1/work-orders/                               | Status:405 | 1.55ms
+2026-02-19 10:15:15 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/vehicles/                                  | ERROR: FlushError: Instance <Vehicle at 0x10acbd3d0> has a NULL identity key.  If this is an auto-generated value, check that the database table allows generation of new primary key values, and that the mapped Column object is configured to expect these generated values.  Ensure also that this flush() is not occurring at an inappropriate time, such as within a load() event.
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/sessions.py", line 83, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 24, in __call__
+    await responder(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 44, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 299, in app
+    raise e
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/concurrency.py", line 40, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/api/v1/endpoints/vehicles.py", line 101, in create_vehicle
+    db.commit()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1969, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1256, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1231, in _prepare_impl
+    self.session.flush()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4312, in flush
+    self._flush(objects)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4447, in _flush
+    with util.safe_reraise():
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4414, in _flush
+    flush_context.finalize_flush_changes()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 487, in finalize_flush_changes
+    self.session._register_persistent(other)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 3313, in _register_persistent
+    raise exc.FlushError(
+sqlalchemy.orm.exc.FlushError: Instance <Vehicle at 0x10acbd3d0> has a NULL identity key.  If this is an auto-generated value, check that the database table allows generation of new primary key values, and that the mapped Column object is configured to expect these generated values.  Ensure also that this flush() is not occurring at an inappropriate time, such as within a load() event.
+2026-02-19 10:15:15 | ERROR    | garage_management.middleware | dispatch:61 | Error details: FlushError: Instance <Vehicle at 0x10acbd3d0> has a NULL identity key.  If this is an auto-generated value, check that the database table allows generation of new primary key values, and that the mapped Column object is configured to expect these generated values.  Ensure also that this flush() is not occurring at an inappropriate time, such as within a load() event.
+2026-02-19 10:15:15 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/vehicles/
+2026-02-19 10:15:15 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 11.47ms
+2026-02-19 10:17:57 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/calendar/book                              | Status:502 | 284.11ms
+2026-02-19 10:24:21 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/calendar/book                              | Status:502 | 20.85ms
+2026-02-19 10:27:51 | ERROR    | garage_management.api | log_response:106 | ← GET    /docs                                              | Status:404 | 1.52ms
+2026-02-19 10:28:18 | ERROR    | garage_management.api | log_response:106 | ← HEAD   /docs                                              | Status:404 | 1.26ms
