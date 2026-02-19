@@ -101,25 +101,52 @@
   transform: scale(0.95);
 }
 
-/* Stato "listening" - rosso pulsante */
+/* Stato "listening" - rosso pulsante con lampeggio */
 .voice-textarea-mic-btn.listening,
 .descrizione-danno-mic-btn.listening,
 .notes-mic-btn.listening {
   background-color: #ff4d4f;
-  animation: pulse-voice 1s infinite;
+  animation: pulse-red 1.2s infinite;
   box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.7);
 }
 
-/* Animazione pulse */
-@keyframes pulse-voice {
+/* Stato "initializing" - blu pulsante con fade */
+.voice-textarea-mic-btn.initializing,
+.descrizione-danno-mic-btn.initializing,
+.notes-mic-btn.initializing {
+  background-color: #1890ff;
+  animation: pulse-blue 1.5s infinite;
+  box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.5);
+}
+
+/* Animazione pulse rosso (lampeggio veloce durante la registrazione) */
+@keyframes pulse-red {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.7);
+    opacity: 1;
   }
   50% {
     box-shadow: 0 0 0 10px rgba(255, 77, 79, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 77, 79, 0);
+    opacity: 1;
+  }
+}
+
+/* Animazione pulse blu (fade lento durante initializzazione) */
+@keyframes pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.5);
+    opacity: 0.8;
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(24, 144, 255, 0);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.5);
+    opacity: 0.8;
   }
 }
 
@@ -139,6 +166,49 @@
   font-size: 13px;
   color: #0050b3;
   animation: slideDown 0.3s ease-out;
+  font-weight: 500;
+}
+
+/* Stato "initializing" - messaggio azzurro soft con animazione di attesa */
+.voice-textarea-speech-status.initializing,
+.descrizione-danno-speech-status.initializing,
+.notes-speech-status.initializing {
+  background: #f0f5ff;
+  border: 1px solid #adc6ff;
+  color: #1890ff;
+  animation: slideDown 0.3s ease-out, pulse-status-init 2s infinite;
+}
+
+/* Stato "listening-active" - messaggio rosso brillante con animazione energica */
+.voice-textarea-speech-status.listening-active,
+.descrizione-danno-speech-status.listening-active,
+.notes-speech-status.listening-active {
+  background: #fff1f0;
+  border: 1px solid #ffccc7;
+  color: #cf1322;
+  animation: slideDown 0.3s ease-out, pulse-status-listen 0.8s infinite;
+}
+
+/* Animazione per messaggio initializing (pulsazione lenta) */
+@keyframes pulse-status-init {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Animazione per messaggio listening (pulsazione veloce e energica) */
+@keyframes pulse-status-listen {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
 }
 
 .voice-textarea-listening-dot,
@@ -150,6 +220,23 @@
   border-radius: 50%;
   background: #0050b3;
   animation: blink 1s infinite;
+  transition: background-color 0.3s ease;
+}
+
+/* Dot rosso quando sta listening */
+.voice-textarea-speech-status.listening-active .voice-textarea-listening-dot,
+.descrizione-danno-speech-status.listening-active .descrizione-danno-listening-dot,
+.notes-speech-status.listening-active .notes-listening-dot {
+  background: #cf1322;
+  animation: blink-red 0.6s infinite;
+}
+
+/* Dot blu when initializing */
+.voice-textarea-speech-status.initializing .voice-textarea-listening-dot,
+.descrizione-danno-speech-status.initializing .descrizione-danno-listening-dot,
+.notes-speech-status.initializing .notes-listening-dot {
+  background: #1890ff;
+  animation: blink-slow 1.5s infinite;
 }
 
 @keyframes blink {
@@ -158,6 +245,24 @@
   }
   50%, 99% {
     opacity: 0.3;
+  }
+}
+
+@keyframes blink-red {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes blink-slow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
 

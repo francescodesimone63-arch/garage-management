@@ -6,6 +6,7 @@ import { ConfigProvider } from 'antd'
 import itIT from 'antd/locale/it_IT'
 import dayjs from 'dayjs'
 import 'dayjs/locale/it'
+import { SpeechProvider } from './contexts/SpeechContext'
 import App from './App'
 import './index.css'
 
@@ -36,7 +37,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         }}
       >
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <App />
+          <SpeechProvider>
+            <App />
+          </SpeechProvider>
         </BrowserRouter>
       </ConfigProvider>
     </QueryClientProvider>

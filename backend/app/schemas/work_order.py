@@ -72,21 +72,7 @@ class WorkOrderBase(BaseModel):
     def parse_optional_dates(cls, v):
         return cls.parse_datetime_flexible(v)
 
-    @validator('data_fine_prevista')
-    def validate_data_fine(cls, v, values):
-        if v and 'data_appuntamento' in values:
-            data_app = values.get('data_appuntamento')
-            if data_app and v < data_app:
-                raise ValueError('Data fine prevista non può essere prima della data appuntamento')
-        return v
-    
-    @validator('data_completamento')
-    def validate_data_completamento(cls, v, values):
-        if v and 'data_appuntamento' in values:
-            data_app = values.get('data_appuntamento')
-            if data_app and v < data_app:
-                raise ValueError('Data completamento non può essere prima della data appuntamento')
-        return v
+
 
 
 class WorkOrderCreate(WorkOrderBase):

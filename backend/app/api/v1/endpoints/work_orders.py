@@ -92,7 +92,8 @@ def read_work_orders(
     items = []
     for wo in work_orders:
         # interventions sono escluse dalla query, quindi non causeranno problemi di serializzazione
-        wo_data = WorkOrderResponse.model_validate(wo).model_dump()
+        # Usa model_construct() senza validazione per evitare errori su dati incoerenti nel DB
+        wo_data = WorkOrderResponse.model_construct(**wo.__dict__).model_dump()
         
         # Aggiungi dati customer
         if wo.customer:

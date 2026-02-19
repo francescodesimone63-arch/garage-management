@@ -5655,3 +5655,187 @@ pydantic_core._pydantic_core.PydanticSerializationError: Unable to serialize unk
 2026-02-15 18:15:08 | ERROR    | garage_management.middleware | dispatch:62 | Request: GET /api/v1/work-orders/
 2026-02-15 18:15:08 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 8.39ms
 2026-02-15 18:17:17 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/work-orders/                               | Status:401 | 1.93ms
+2026-02-19 09:00:29 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/health                                     | Status:404 | 1.54ms
+2026-02-19 09:00:57 | ERROR    | garage_management.api | log_error:110 | ✗ GET    /api/v1/work-orders/                               | ERROR: ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/sessions.py", line 83, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 24, in __call__
+    await responder(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 44, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 299, in app
+    raise e
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/concurrency.py", line 40, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/api/v1/endpoints/work_orders.py", line 95, in read_work_orders
+    wo_data = WorkOrderResponse.model_validate(wo).model_dump()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/pydantic/main.py", line 503, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+2026-02-19 09:00:57 | ERROR    | garage_management.middleware | dispatch:61 | Error details: ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+2026-02-19 09:00:57 | ERROR    | garage_management.middleware | dispatch:62 | Request: GET /api/v1/work-orders/
+2026-02-19 09:00:57 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 166.53ms
+2026-02-19 09:00:58 | ERROR    | garage_management.api | log_error:110 | ✗ GET    /api/v1/work-orders/                               | ERROR: ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/sessions.py", line 83, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 24, in __call__
+    await responder(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/gzip.py", line 44, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 299, in app
+    raise e
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/concurrency.py", line 40, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/api/v1/endpoints/work_orders.py", line 95, in read_work_orders
+    wo_data = WorkOrderResponse.model_validate(wo).model_dump()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/pydantic/main.py", line 503, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+2026-02-19 09:00:58 | ERROR    | garage_management.middleware | dispatch:61 | Error details: ValidationError: 1 validation error for WorkOrder
+data_fine_prevista
+  Value error, Data fine prevista non può essere prima della data appuntamento [type=value_error, input_value=datetime.datetime(2026, 2, 20, 15, 8, 3, 864805), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.5/v/value_error
+2026-02-19 09:00:58 | ERROR    | garage_management.middleware | dispatch:62 | Request: GET /api/v1/work-orders/
+2026-02-19 09:00:58 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 13.15ms
+2026-02-19 09:06:54 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/work-orders/                               | Status:401 | 2.38ms
+2026-02-19 09:15:09 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/health                                     | Status:404 | 1.37ms
+2026-02-19 09:20:48 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/auth/login                                 | Status:422 | 1.56ms
+2026-02-19 09:20:48 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/work-orders/                               | Status:401 | 2.46ms
+2026-02-19 09:20:55 | ERROR    | garage_management.api | log_response:106 | ← OPTIONS /api/v1/work-orders/                               | Status:405 | 1.55ms

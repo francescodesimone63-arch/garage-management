@@ -1,4 +1,4 @@
-import { useEffect, useRef, forwardRef, useState } from 'react'
+import { useEffect, useRef, forwardRef, useState, useMemo } from 'react'
 import { useSpeechToText } from '@/hooks/useSpeechToText'
 import './VoiceTextarea.css'
 
@@ -22,6 +22,9 @@ interface VoiceTextareaProps {
  * 
  * IMPORTANTE: Usa uno stato interno per garantire il funzionamento anche quando
  * il Form non passa correttamente onChange
+ * 
+ * NUOVO: Instance tracking - ogni VoiceTextarea ha il suo ID univoco
+ * solo il textarea con il mic attivo mostra il testo durante il parlato
  */
 const VoiceTextarea = forwardRef<HTMLTextAreaElement, VoiceTextareaProps>(
   ({
@@ -35,12 +38,15 @@ const VoiceTextarea = forwardRef<HTMLTextAreaElement, VoiceTextareaProps>(
     label = 'Campo',
     debugPrefix = 'VoiceTextarea',
   }, ref) => {
+    // ID univoco per questo componente (generato una sola volta)
+    const instanceId = useMemo(() => `voice-textarea-${Math.random().toString(36).substr(2, 9)}`, [])
+
     // Stato interno per gestire il valore localmente INDIPENDENTEMENTE dal Form
     const [internalValue, setInternalValue] = useState<string>(value || '')
 
-    console.log(`🔧 ${debugPrefix} render - externalValue:`, value, 'internalValue:', internalValue, 'onChange:', !!onChange)
+    console.log(`🔧 ${debugPrefix} render - externalValue:`, value, 'internalValue:', internalValue, 'onChange:', !!onChange, 'instanceId:', instanceId)
 
-    const { transcript, isListening, startListening, stopListening, resetTranscript, error, supported } = useSpeechToText()
+    const { transcript, isListening, isInitializing, startListening, stopListening, resetTranscript, error, supported } = useSpeechToText(instanceId)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const wasListeningRef = useRef<boolean>(false)
     const addedTranscriptRef = useRef<boolean>(false)
@@ -128,7 +134,7 @@ const VoiceTextarea = forwardRef<HTMLTextAreaElement, VoiceTextareaProps>(
             <textarea
               ref={actualRef as any}
               className={`${classNamePrefix}-textarea`}
-              value={internalValue}
+              value={internalValue + (isListening && transcript ? ' ' + transcript : '')}
               onChange={handleTextAreaChange}
               placeholder={placeholder}
               rows={rows}
@@ -142,7 +148,7 @@ const VoiceTextarea = forwardRef<HTMLTextAreaElement, VoiceTextareaProps>(
             <div className={`${classNamePrefix}-mic-button-container`}>
               <button
                 type="button"
-                className={`${classNamePrefix}-mic-btn ${isListening ? 'listening' : ''}`}
+                className={`${classNamePrefix}-mic-btn ${isListening ? 'listening' : ''} ${isInitializing && !isListening ? 'initializing' : ''}`}
                 onClick={handleMicClick}
                 title={isListening ? 'Ferma registrazione' : 'Avvia registrazione vocale'}
                 disabled={!supported}
@@ -157,16 +163,16 @@ const VoiceTextarea = forwardRef<HTMLTextAreaElement, VoiceTextareaProps>(
         {/* Messaggi di stato e errore */}
         {supported ? (
           <>
-            {isListening && (
-              <div className={`${classNamePrefix}-speech-status`}>
+            {(isInitializing || isListening) && (
+              <div className={`${classNamePrefix}-speech-status ${isListening ? 'listening-active' : 'initializing'}`}>
                 <span className={`${classNamePrefix}-listening-dot`} />
-                🎤 Ascolto... parla ora
+                {isInitializing && !isListening ? '⏳ Accendo il microfono...' : '🎤 Parla ora'}
               </div>
             )}
 
             {error && <div className={`${classNamePrefix}-speech-error`}>{error}</div>}
 
-            {!isListening && transcript && (
+            {!isListening && !isInitializing && transcript && (
               <div className={`${classNamePrefix}-speech-status`} style={{ background: '#f6ffed', border: '1px solid #b7eb8f', color: '#274d00' }}>
                 ✓ Testo riconosciuto e aggiunto
               </div>

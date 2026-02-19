@@ -1,8 +1,27 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+/**
+ * Hook Speech-to-Text semplice e affidabile
+ * Basato su react-speech-recognition library
+ * 
+ * FUNCTIONALITÀ:
+ * - Testo appare istantaneamente mentre parli (interim results)
+ * - Testo completo e accurato
+ * - Lingua: it-IT (italiano)
+ * - Supporto: Chrome, Edge, Firefox (moderni)
+ * - Zero complicazioni, funziona subito
+ * - Instance tracking: ogni campo ha il suo isListening indipendente
+ * 
+ * USO:
+ * const { transcript, isListening, startListening, stopListening } = useSpeechToText('field-id')
+ */
+
+import { useState, useEffect } from 'react'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { useSpeechContext } from '@/contexts/SpeechContext'
 
 interface UseSpeechToTextResult {
   transcript: string
   isListening: boolean
+  isInitializing: boolean
   startListening: () => void
   stopListening: () => void
   resetTranscript: () => void
@@ -10,209 +29,103 @@ interface UseSpeechToTextResult {
   supported: boolean
 }
 
-/**
- * Hook per speech-to-text usando Web Speech API (supporta Chrome/Edge/Firefox)
- * Lingua: it-IT (italiano)
- * @returns UseSpeechToTextResult
- */
-export const useSpeechToText = (): UseSpeechToTextResult => {
-  const [transcript, setTranscript] = useState<string>('')
-  const [isListening, setIsListening] = useState<boolean>(false)
+export const useSpeechToText = (instanceId: string): UseSpeechToTextResult => {
   const [error, setError] = useState<string | null>(null)
-  const [supported, setSupported] = useState<boolean>(true)
+  const [supported, setSupported] = useState<boolean>(false)
+  const [isInitializing, setIsInitializing] = useState<boolean>(false)
+  const { activeInstanceId, setActiveInstanceId } = useSpeechContext()
 
-  const recognitionRef = useRef<any>(null)
+  // Hook da react-speech-recognition
+  // - transcript: il testo corrente (interim + final results)
+  // - listening: se il microfono è attivo
+  // - resetTranscript: resetta il testo
+  // - browserSupportsSpeechRecognition: se il browser lo supporta
+  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition()
+
+  // isListening è true SOLO se QUESTO instanceId è attivo
+  const isListening = activeInstanceId === instanceId && listening
 
   // Verifica supporto al mount
   useEffect(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-
-    if (!SpeechRecognition) {
+    console.log('🎤 useSpeechToText mounted - Browser supporta?: ', browserSupportsSpeechRecognition)
+    
+    if (!browserSupportsSpeechRecognition) {
+      setError('Speech-to-text non supportato su questo browser. Usa Chrome, Edge o Firefox moderni.')
       setSupported(false)
-      setError('Speech-to-text non supportato su questo browser. Usa Chrome o Edge.')
-      return
-    }
-
-    setSupported(true)
-    setError(null)
-  }, [])
-
-  const startListening = useCallback(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-
-    if (!SpeechRecognition) {
-      setSupported(false)
-      setError('Speech-to-text non supportato su questo browser. Usa Chrome o Edge.')
-      return
-    }
-
-    // Azzera stato precedente
-    setTranscript('')
-    setError(null)
-
-    // Cleanup dell'istanza precedente se esiste
-    if (recognitionRef.current) {
-      console.warn('🧹 Cleanuppo istanza PRECEDENTE di SpeechRecognition')
-      try {
-        recognitionRef.current.abort()
-      } catch (err) {
-        console.error('Errore durante abort della vecchia istanza:', err)
-      }
-    }
-
-    // Crea nuova istanza
-    console.log('🆕 Creando NUOVA istanza di SpeechRecognition')
-    const recognition = new SpeechRecognition()
-    recognitionRef.current = recognition
-    console.log('✅ Istanza creata e assegnata a ref')
-
-    // Dichiarazione anticipata del timeout
-    let debugTimeout: NodeJS.Timeout | null = null
-
-    // Configurazione
-    recognition.continuous = true
-    recognition.interimResults = true
-    recognition.maxAlternatives = 1
-    recognition.lang = 'it-IT'
-
-    // Event: inizio ascolto
-    recognition.onstart = () => {
-      console.log('🎤 Speech recognition avviato - ora aspetto il parlato...')
-      console.log('📢 PARLA ADESSO - Il browser sta ascoltando!')
-      console.log('🔧 State at onstart:', {
-        continuous: recognition.continuous,
-        interimResults: recognition.interimResults,
-        lang: recognition.lang,
-      })
-      
-      // Imposta timeout di debug quando inizia l'ascolto
-      debugTimeout = setTimeout(() => {
-        console.warn('⚠️ ATTENZIONE: Nessun risultato ricevuto dopo 3 secondi!')
-        console.warn('Possibili cause:')
-        console.warn('1. Permessi microfono negati')
-        console.warn('2. Nessun audio rilevato')
-        console.warn('3. Errore del browser nella cattura audio')
-      }, 3000)
-      
-      setIsListening(true)
+    } else {
+      setSupported(true)
       setError(null)
     }
+  }, [browserSupportsSpeechRecognition])
 
-    // Event: risultati
-    recognition.onresult = (event: any) => {
-      console.log('📋 onresult triggered - resultIndex:', event.resultIndex, 'results.length:', event.results.length)
-      
-      let interimTranscript = ''
-      let finalTranscript = ''
-
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript
-        console.log(`📝 Result ${i}: isFinal=${event.results[i].isFinal}, transcript="${transcript}"`)
-
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript + ' '
-        } else {
-          interimTranscript += transcript
-        }
-      }
-
-      // Aggiorna transcript (mostra sia testo finale che intermedio)
-      const newTranscript = finalTranscript + interimTranscript
-      console.log('✍️ Aggiornato transcript:', newTranscript)
-      console.log('📊 Stato transcript - finale:', finalTranscript.trim(), 'intermedio:', interimTranscript)
-      setTranscript(newTranscript)
-    }
-
-    // Event: errore
-    recognition.onerror = (event: any) => {
-      console.error('❌ Speech recognition error:', event.error)
-      console.log('📊 Errore dettagli:', {
-        error: event.error,
-        isSpeechFinal: event.isSpeechFinal,
-        resultIndex: event.resultIndex,
-      })
-      
-      if (event.error === 'not-allowed') {
-        console.error('🔴 PERMESSO MICROFONO NEGATO!')
-        console.error('Soluzione: System Preferences → Security & Privacy → Microphone → Autorizza browser')
-        setError('Permesso microfono negato. Abilita l\'accesso al microfono nelle impostazioni del browser.')
-      } else if (event.error === 'network') {
-        setError('Errore di rete. Controlla la connessione internet.')
-      } else if (event.error === 'no-speech') {
-        setError('Nessun parlato rilevato. Riprova.')
-      } else {
-        setError(`Errore riconoscimento vocale: ${event.error}`)
-      }
-      setIsListening(false)
-    }
-
-    // Event: fine
-    recognition.onend = () => {
-      console.log('🎤 Speech recognition terminato')
-      if (debugTimeout) clearTimeout(debugTimeout)
-      setIsListening(false)
-    }
-
-    // Event: fine del parlato (opzionale - quando l'utente smette di parlare)
-    recognition.onspeechend = () => {
-      console.log('🤐 Fine del parlato rilevata dal browser - ora elaboro il testo...')
-    }
-
-    // Avvia
-    try {
-      recognition.start()
-      console.log('✅ recognition.start() chiamato')
-      
-      // Debug: log gli audio context
-      if ((window as any).AudioContext) {
-        console.log('✅ AudioContext disponibile')
-      } else if ((window as any).webkitAudioContext) {
-        console.log('✅ webkitAudioContext disponibile')
-      } else {
-        console.warn('⚠️ Nessun AudioContext disponibile')
-      }
-    } catch (err) {
-      console.error('❌ Errore durante start:', err)
-      setError('Errore durante l\'avvio del riconoscimento vocale.')
-    }
-  }, [])
-
-  const stopListening = useCallback(() => {
-    console.log('🛑 stopListening called - recognitionRef.current:', !!recognitionRef.current)
-    if (recognitionRef.current) {
-      try {
-        recognitionRef.current.stop()
-        console.log('✅ SpeechRecognition.stop() eseguito')
-      } catch (err) {
-        console.error('❌ Errore durante stop:', err)
-      }
-    } else {
-      console.warn('⚠️ recognitionRef.current è null')
-    }
-    setIsListening(false)
-  }, [])
-
-  const resetTranscript = useCallback(() => {
-    setTranscript('')
-  }, [])
-
-  // Cleanup al unmount
+  // Configura il riconoscimento vocale quando component monta
   useEffect(() => {
-    return () => {
-      console.log('🧹 Cleanup: fermando SpeechRecognition')
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.abort()
-        } catch (err) {
-          console.error('Errore durante cleanup:', err)
+    const setupSpeechRecognition = () => {
+      try {
+        const recognition = (SpeechRecognition as any).getRecognition()
+        if (recognition) {
+          recognition.lang = 'it-IT'
+          recognition.continuous = true
+          recognition.interimResults = true
+          recognition.maxAlternatives = 1
+          console.log('✅ Speech Recognition configurato: lingua=it-IT, continuous=true, interimResults=true')
         }
+      } catch (err) {
+        console.error('❌ Errore durante setup:', err)
       }
     }
-  }, [])
+
+    if (supported) {
+      setupSpeechRecognition()
+    }
+  }, [supported])
+
+  // Quando il microfono è veramente pronto (listening === true), disattiva lo stato initializing
+  useEffect(() => {
+    if (isListening) {
+      setIsInitializing(false)
+    }
+  }, [isListening])
+
+  const startListening = () => {
+    if (!supported) {
+      setError('Speech-to-text non supportato su questo browser.')
+      return
+    }
+
+    console.log(`🎤 [${instanceId}] Avvio ascolto... Parla adesso!`)
+    // Feedback IMMEDIATO: attiva initializing
+    setIsInitializing(true)
+    // Imposta QUESTO instanceId come attivo
+    setActiveInstanceId(instanceId)
+    resetTranscript()
+    setError(null)
+
+    try {
+      SpeechRecognition.startListening({ continuous: true, interimResults: true, language: 'it-IT' })
+    } catch (err: any) {
+      console.error('❌ Errore durante startListening:', err)
+      setError(`Errore: ${err.message}`)
+      setIsInitializing(false)
+    }
+  }
+
+  const stopListening = () => {
+    console.log(`⏹️ [${instanceId}] Stop ascolto`)
+    // Disattiva initializing e activeInstanceId
+    setIsInitializing(false)
+    setActiveInstanceId(null)
+    try {
+      SpeechRecognition.stopListening()
+    } catch (err: any) {
+      console.error('❌ Errore durante stopListening:', err)
+    }
+  }
 
   return {
-    transcript,
-    isListening,
+    transcript, // Il testo corrente (interim + final results, appare istantaneamente!)
+    isListening, // True SOLO se questo instanceId è attivo E il mic è veramente pronto
+    isInitializing, // True quando il mic è stato cliccato ma non è ancora pronto
     startListening,
     stopListening,
     resetTranscript,
@@ -220,3 +133,4 @@ export const useSpeechToText = (): UseSpeechToTextResult => {
     supported,
   }
 }
+
