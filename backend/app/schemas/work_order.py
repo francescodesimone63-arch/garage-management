@@ -14,6 +14,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field, validator
 from app.models.work_order import WorkOrderStatus
 from app.schemas.intervention import Intervention
+from app.schemas.system_tables import InsuranceBranchTypeResponse
 
 
 class WorkOrderBase(BaseModel):
@@ -158,6 +159,7 @@ class WorkOrder(WorkOrderInDBBase):
     labor_hours: Optional[float] = 0
     total_parts_cost: Optional[float] = 0
     total_labor_cost: Optional[float] = 0
+    insurance_branch: Optional[InsuranceBranchTypeResponse] = None
     
     class Config:
         from_attributes = True

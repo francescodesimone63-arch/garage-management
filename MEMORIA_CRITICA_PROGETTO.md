@@ -166,6 +166,14 @@ Frasi tipo:
 ✅ Debug: Sistema operativo (Ctrl+Shift+D)
 ✅ Documentazione: Completa e organizzata
 
+### ⭐ PAGINA ADMIN CENTRALE
+**File:** `/frontend/src/pages/settings/SettingsPage.tsx`
+**IMPORTANTE:** Questa pagina contiene TUTTE le funzioni di gestione dell'applicazione:
+- Gestione Utenti (Create/Edit/Delete)
+- Sistema Tabelle Lookup (Damage Types, Customer Types, Work Order Status, Priority Types, Intervention Status Types)
+- ✅ NUOVO: Rami Sinistro (Insurance Branch Types)
+- Aggiungi SEMPRE qui nuove funzioni admin
+
 ---
 
 📊 DOCUMENTAZIONE DISPONIBILE

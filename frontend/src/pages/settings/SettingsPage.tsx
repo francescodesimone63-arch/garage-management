@@ -8,6 +8,7 @@ import { API_ENDPOINTS } from '@/config/api'
 import { UserFormModal } from './UserFormModal'
 import { SystemTableManager } from '@/components/SystemTableManager'
 import { InterventionStatusTypeManager } from '@/components/InterventionStatusTypeManager'
+import { InsuranceBranchTypeManager } from '@/components/InsuranceBranchTypeManager'
 
 interface User {
   id: number
@@ -330,6 +331,16 @@ const SettingsPage = () => {
                         <InterventionStatusTypeManager
                           title="Stato Intervento"
                           endpoint={API_ENDPOINTS.SYSTEM_INTERVENTION_STATUS_TYPES}
+                        />
+                      )
+                    },
+                    {
+                      key: 'insurance-branch-types',
+                      label: '🛡️ Rami Sinistro',
+                      children: (
+                        <InsuranceBranchTypeManager
+                          title="Ramo di Sinistro"
+                          endpoint={API_ENDPOINTS.SYSTEM_INSURANCE_BRANCH_TYPES}
                         />
                       )
                     }
