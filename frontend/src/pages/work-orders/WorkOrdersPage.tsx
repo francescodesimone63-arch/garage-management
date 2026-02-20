@@ -9,11 +9,14 @@ import PageHeader from '@/components/PageHeader'
 import WorkOrderStateTransition from '@/components/WorkOrderStateTransition'
 import { CalendarModal } from '@/components/CalendarModal'
 import VoiceTextarea from '@/components/VoiceTextarea'
+import CustomerFormModal from '@/components/CustomerFormModal'
+import VehicleFormModal from '@/components/VehicleFormModal'
 import { useWorkOrders, useCreateWorkOrder, useUpdateWorkOrder, useDeleteWorkOrder } from '@/hooks/useWorkOrders'
 import { useInterventions } from '@/hooks/useInterventions'
-import { useCustomers, useCreateCustomer } from '@/hooks/useCustomers'
-import { useVehicles, useCreateVehicle, useUpdateVehicle } from '@/hooks/useVehicles'
+import { useCustomers } from '@/hooks/useCustomers'
+import { useVehicles, useUpdateVehicle } from '@/hooks/useVehicles'
 import { usePriorityTypes, useWorkOrderStatusTypes, useCustomerTypes } from '@/hooks/useSystemTables'
+import { useInsuranceBranchTypes } from '@/hooks/useInsuranceBranchTypes'
 import type { WorkOrder, WorkOrderStatus, Intervention, InterventionCreate, Vehicle } from '@/types'
 import './WorkOrdersPage.css'
 
@@ -60,11 +63,10 @@ const WorkOrdersPage = () => {
   const [selectedCourtesyCarId, setSelectedCourtesyCarId] = useState<number | undefined>()
   
   const [form] = Form.useForm()
-  const [customerForm] = Form.useForm()
-  const [vehicleForm] = Form.useForm()
   
   // Watch descrizione field for reactive updates
   const watchedDescrizione = Form.useWatch('descrizione', form)
+  const watchedSinistro = Form.useWatch('sinistro', form)
   
   // Sync courtesy car selection when editing work order changes
   useEffect(() => {
@@ -82,11 +84,10 @@ const WorkOrdersPage = () => {
   const { data: priorityTypes } = usePriorityTypes()
   const { data: workOrderStatusTypes } = useWorkOrderStatusTypes()
   const { data: customerTypes } = useCustomerTypes()
+  const { data: insuranceBranchTypes } = useInsuranceBranchTypes()
   const createWorkOrderMutation = useCreateWorkOrder()
   const updateWorkOrderMutation = useUpdateWorkOrder()
   const deleteWorkOrderMutation = useDeleteWorkOrder()
-  const createCustomerMutation = useCreateCustomer()
-  const createVehicleMutation = useCreateVehicle()
   const updateVehicleMutation = useUpdateVehicle()
 
   // Determine if desktop or mobile
@@ -278,24 +279,7 @@ const WorkOrdersPage = () => {
 
   // Quick add customer
   const handleQuickAddCustomer = () => {
-    customerForm.resetFields()
-    customerForm.setFieldsValue({ tipo: 'privato' })
     setIsCustomerModalOpen(true)
-  }
-
-  const handleCustomerSubmit = async (values: any) => {
-    try {
-      const newCustomer = await createCustomerMutation.mutateAsync(values)
-      setIsCustomerModalOpen(false)
-      customerForm.resetFields()
-      await refetchCustomers()
-      // Auto-select the new customer
-      form.setFieldsValue({ customer_id: newCustomer.id })
-      setSelectedCustomerId(newCustomer.id)
-      message.success('Cliente creato! Ora seleziona o crea il veicolo.')
-    } catch (error) {
-      message.error('Errore durante la creazione del cliente')
-    }
   }
 
   // Quick add vehicle
@@ -304,23 +288,7 @@ const WorkOrdersPage = () => {
       message.warning('Seleziona prima un cliente!')
       return
     }
-    vehicleForm.resetFields()
-    vehicleForm.setFieldsValue({ customer_id: selectedCustomerId })
     setIsVehicleModalOpen(true)
-  }
-
-  const handleVehicleSubmit = async (values: any) => {
-    try {
-      const newVehicle = await createVehicleMutation.mutateAsync(values)
-      setIsVehicleModalOpen(false)
-      vehicleForm.resetFields()
-      await refetchVehicles()
-      // Auto-select the new vehicle
-      form.setFieldsValue({ vehicle_id: newVehicle.id })
-      message.success('Veicolo creato! Ora completa i dettagli della scheda lavoro.')
-    } catch (error) {
-      message.error('Errore durante la creazione del veicolo')
-    }
   }
 
   const handleSubmit = async (values: any) => {
@@ -888,9 +856,10 @@ const WorkOrdersPage = () => {
           }
         }}
         footer={null}
-        width={screens.md ? 1000 : '95vw'}
+        width={screens.md ? 900 : '95vw'}
         className="compact-modal"
         centered
+        bodyStyle={{ padding: '12px' }}
       >
         <Form
           form={form}
@@ -903,7 +872,7 @@ const WorkOrdersPage = () => {
             <Input type="hidden" />
           </Form.Item>
 
-          <div style={{ minHeight: '580px' }}>
+          <div style={{ minHeight: '450px' }}>
             <Tabs
               activeKey={activeTabKey}
               onChange={setActiveTabKey}
@@ -913,7 +882,7 @@ const WorkOrdersPage = () => {
                   key: 'details',
                   label: 'Dettagli',
                   children: (
-                    <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                    <div style={{ height: '450px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '4px', margin: '-12px 0 0 -12px', padding: '8px 8px 8px 8px' }}>
                     <>
                       {/* TAB: Dettagli - Cliente e Veicolo */}
                       <div className="form-section">
@@ -1067,14 +1036,51 @@ const WorkOrdersPage = () => {
               },
               {
                 key: 'description',
-                label: 'Descrizione & Note',
+                label: 'Descrizione Danno',
                 children: (
-                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                  <div style={{ height: '450px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '4px', margin: '-12px 0 0 -12px', padding: '8px 8px 8px 8px' }}>
                     <div className="form-section">
+                    {/* Header con Descrizione Danno e checkbox Sinistro - stessi linea */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '12px' }}>
+                      <label style={{ fontWeight: 500, marginBottom: 0 }}>Descrizione Danno</label>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Form.Item 
+                          name="sinistro" 
+                          valuePropName="checked" 
+                          initialValue={false}
+                          style={{ margin: 0 }}
+                        >
+                          <input 
+                            type="checkbox" 
+                            onChange={(e) => {
+                              setIsDirty(true)
+                              // Se deseleziono sinistro, pulisco i dati
+                              if (!e.target.checked) {
+                                form.setFieldsValue({
+                                  ramo_sinistro_id: undefined,
+                                  legale: undefined,
+                                  autorita: undefined,
+                                  numero_sinistro: undefined,
+                                  compagnia_sinistro: undefined,
+                                  compagnia_debitrice_sinistro: undefined,
+                                  scoperto: undefined,
+                                  perc_franchigia: undefined
+                                })
+                              }
+                            }}
+                            style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
+                          />
+                        </Form.Item>
+                        <label style={{ marginBottom: 0, cursor: 'pointer', fontSize: '12px', userSelect: 'none' }}>
+                          Sinistro Assicurativo
+                        </label>
+                      </div>
+                    </div>
+
                     <Form.Item
                       name="valutazione_danno"
-                      label="Descrizione Danno"
                       rules={[{ required: true, message: 'Inserisci descrizione' }]}
+                      style={{ margin: 0 }}
                     >
                       <VoiceTextarea
                         placeholder="Clicca il microfono e descrivi a voce il danno... oppure digita manualmente"
@@ -1088,18 +1094,107 @@ const WorkOrdersPage = () => {
                       />
                     </Form.Item>
 
-                    <Form.Item name="note" label="Note">
-                      <VoiceTextarea
-                        placeholder="Aggiungi note... oppure clicca il microfono per dettare"
-                        rows={1}
-                        minHeight={60}
-                        maxHeight={150}
-                        classNamePrefix="notes"
-                        label="Note"
-                        debugPrefix="Notes"
-                        onChange={() => setIsDirty(true)}
-                      />
-                    </Form.Item>
+                    {watchedSinistro && (
+                      <>
+                        <Divider />
+                        <div style={{ marginBottom: '16px' }}>
+                          <h4 style={{ marginBottom: '12px' }}>📋 Dettagli Sinistro</h4>
+                          
+                          {/* Ramo, Scoperto, Franchigia - 3 colonne sulla stessa riga */}
+                          <Row gutter={[8, 8]}>
+                            <Col xs={24} md={8}>
+                              <Form.Item 
+                                name="ramo_sinistro_id" 
+                                label="Ramo Sinistro"
+                                rules={[{ required: watchedSinistro, message: 'Seleziona il ramo' }]}
+                                style={{ marginBottom: '0' }}
+                              >
+                                <Select 
+                                  placeholder="Seleziona ramo sinistro" 
+                                  onChange={() => setIsDirty(true)}
+                                  options={insuranceBranchTypes?.map(branch => ({
+                                    label: branch.nome,
+                                    value: branch.id
+                                  })) || []}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} md={8}>
+                              <Form.Item name="scoperto" label="Scoperto (€)" style={{ marginBottom: '0' }}>
+                                <InputNumber 
+                                  placeholder="Importo"
+                                  min={0}
+                                  step={0.01}
+                                  onChange={() => setIsDirty(true)}
+                                  style={{ width: '80px' }}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} md={8}>
+                              <Form.Item name="perc_franchigia" label="Franchigia (%)" style={{ marginBottom: '0' }}>
+                                <InputNumber 
+                                  placeholder="Percentuale"
+                                  min={0}
+                                  max={100}
+                                  step={0.1}
+                                  onChange={() => setIsDirty(true)}
+                                  style={{ width: '80px' }}
+                                />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+
+                          {/* Numero Sinistro, Legale, Autorità - 3 colonne */}
+                          <Row gutter={[8, 8]}>
+                            <Col xs={24} sm={12} md={8}>
+                              <Form.Item name="numero_sinistro" label="Numero Sinistro" style={{ marginBottom: '0' }}>
+                                <Input 
+                                  placeholder="Codice sinistro" 
+                                  onChange={() => setIsDirty(true)}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} sm={12} md={8}>
+                              <Form.Item name="legale" label="Legale" style={{ marginBottom: '0' }}>
+                                <Input 
+                                  placeholder="Nome legale"
+                                  onChange={() => setIsDirty(true)}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} sm={12} md={8}>
+                              <Form.Item name="autorita" label="Autorità" style={{ marginBottom: '0' }}>
+                                <Input 
+                                  placeholder="Autorità"
+                                  onChange={() => setIsDirty(true)}
+                                />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+
+                          {/* Compagnia Gestrice, Compagnia Debitrice - 2 colonne */}
+                          <Row gutter={[8, 8]}>
+                            <Col xs={24} sm={12}>
+                              <Form.Item name="compagnia_sinistro" label="Compagnia Gestrice" style={{ marginBottom: '0' }}>
+                                <Input 
+                                  placeholder="Assicurazione"
+                                  onChange={() => setIsDirty(true)}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} sm={12}>
+                              <Form.Item name="compagnia_debitrice_sinistro" label="Compagnia Debitrice" style={{ marginBottom: '0' }}>
+                                <Input 
+                                  placeholder="Chi paga"
+                                  onChange={() => setIsDirty(true)}
+                                />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+
+                        </div>
+                      </>
+                    )}
                   </div>
                   </div>
                 ),
@@ -1108,37 +1203,37 @@ const WorkOrdersPage = () => {
                 key: 'interventions',
                 label: 'Interventi',
                 children: (
-                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
+                  <div style={{ height: '450px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '4px', margin: '-12px 0 0 -12px', padding: '8px 8px 8px 8px' }}>
                     <div className="form-section">
-                    <div className="section-header">
-                      <span className="section-header-title">🔧 Interventi</span>
-                      <Button 
-                        type="primary" 
-                        size="small"
-                        className="btn-add-intervention"
-                        onClick={() => {
-                          const newIntervention: any = {
-                            progressivo: (formInterventions.filter(i => i.progressivo).length > 0 ? Math.max(...formInterventions.filter(i => i.progressivo).map(i => i.progressivo!)) : 0) + 1,
-                            descrizione_intervento: '',
-                            durata_stimata: 0,
-                            tipo_intervento: 'Meccanico',
-                            _isNew: true
-                          }
-                          setFormInterventions([...formInterventions, newIntervention])
-                          setIsDirty(true)
-                        }}
-                      >
-                        <PlusOutlined /> Aggiungi
-                      </Button>
-                    </div>
-                    
-                    {formInterventions.length === 0 ? (
-                      <div className="interventions-empty">
-                        Nessun intervento. Clicca "Aggiungi" per iniziare.
+                      <div className="section-header">
+                        <span className="section-header-title">🔧 Interventi</span>
+                        <Button 
+                          type="primary" 
+                          size="small"
+                          className="btn-add-intervention"
+                          onClick={() => {
+                            const newIntervention: any = {
+                              progressivo: (formInterventions.filter(i => i.progressivo).length > 0 ? Math.max(...formInterventions.filter(i => i.progressivo).map(i => i.progressivo!)) : 0) + 1,
+                              descrizione_intervento: '',
+                              durata_stimata: 0,
+                              tipo_intervento: 'Meccanico',
+                              _isNew: true
+                            }
+                            setFormInterventions([...formInterventions, newIntervention])
+                            setIsDirty(true)
+                          }}
+                        >
+                          <PlusOutlined /> Aggiungi
+                        </Button>
                       </div>
-                    ) : (
-                      <div style={{ overflowX: 'auto' }}>
-                        <table className="interventions-table">
+                    
+                      {formInterventions.length === 0 ? (
+                        <div className="interventions-empty">
+                          Nessun intervento. Clicca "Aggiungi" per iniziare.
+                        </div>
+                      ) : (
+                        <div style={{ overflowX: 'auto' }}>
+                          <table className="interventions-table">
                           <colgroup>
                             <col style={{ width: '5%' }} />
                             <col style={{ width: '60%' }} />
@@ -1226,7 +1321,7 @@ const WorkOrdersPage = () => {
                         </table>
                       </div>
                     )}
-                  </div>
+                    </div>
                   </div>
                 ),
               },
@@ -1234,8 +1329,8 @@ const WorkOrdersPage = () => {
                 key: 'courtesy',
                 label: 'Auto di Cortesia',
                 children: (
-                  <div style={{ height: '500px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '8px' }}>
-                    <div className="form-section" style={{ padding: '20px' }}>
+                  <div style={{ height: '450px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '4px', margin: '-12px 0 0 -12px', padding: '8px 8px 8px 8px' }}>
+                    <div className="form-section">
                       {/* Mostra messaggio se un'auto è già assegnata */}
                       {editingWorkOrder?.auto_cortesia_id && (
                         <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '4px', border: '1px solid #b3e5fc' }}>
@@ -1446,154 +1541,28 @@ const WorkOrdersPage = () => {
         </div>
       </Modal>
 
-      {/* QUICK ADD CUSTOMER MODAL */}
-      <Modal
-        title={<Space><UserAddOutlined /> Crea Nuovo Cliente</Space>}
+      {/* Centralized modals for customer and vehicle creation */}
+      <CustomerFormModal
         open={isCustomerModalOpen}
-        onCancel={() => {
-          setIsCustomerModalOpen(false)
-          customerForm.resetFields()
+        onCancel={() => setIsCustomerModalOpen(false)}
+        onSuccess={(customer) => {
+          // Auto-select the new customer
+          form.setFieldsValue({ customer_id: customer.id })
+          setSelectedCustomerId(customer.id)
+          message.success('Cliente creato! Ora seleziona o crea il veicolo.')
         }}
-        onOk={() => customerForm.submit()}
-        confirmLoading={createCustomerMutation.isPending}
-        width={700}
-      >
-        <Form
-          form={customerForm}
-          layout="vertical"
-          onFinish={handleCustomerSubmit}
-          initialValues={{ tipo: 'privato' }}
-        >
-          <Form.Item
-            name="tipo"
-            label="Tipo Cliente"
-            rules={[{ required: true, message: 'Seleziona il tipo' }]}
-          >
-            <Select>
-              {customerTypes?.filter(ct => ct.attivo).map(customerType => (
-                <Select.Option key={customerType.id} value={customerType.nome.toLowerCase()}>
-                  {customerType.nome}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
+      />
 
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="nome"
-                label="Nome"
-                rules={[{ required: true, message: 'Inserisci il nome' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="cognome"
-                label="Cognome"
-                rules={[{ required: true, message: 'Inserisci il cognome' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="email" label="Email">
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="cellulare" label="Cellulare">
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Form.Item 
-            name="codice_fiscale" 
-            label="Codice Fiscale"
-            tooltip="Opzionale ma consigliato"
-          >
-            <Input placeholder="Es. RSSMRA80A01H501U" />
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      {/* QUICK ADD VEHICLE MODAL */}
-      <Modal
-        title={<Space><CarOutlined /> Crea Nuovo Veicolo</Space>}
+      <VehicleFormModal
         open={isVehicleModalOpen}
-        onCancel={() => {
-          setIsVehicleModalOpen(false)
-          vehicleForm.resetFields()
+        preSelectedCustomerId={selectedCustomerId}
+        onCancel={() => setIsVehicleModalOpen(false)}
+        onSuccess={(vehicle) => {
+          // Auto-select the new vehicle
+          form.setFieldsValue({ vehicle_id: vehicle.id })
+          message.success('Veicolo creato! Ora completa i dettagli della scheda lavoro.')
         }}
-        onOk={() => vehicleForm.submit()}
-        confirmLoading={createVehicleMutation.isPending}
-        width={700}
-      >
-        <Form
-          form={vehicleForm}
-          layout="vertical"
-          onFinish={handleVehicleSubmit}
-        >
-          <Form.Item name="customer_id" hidden>
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="targa"
-            label="Targa"
-            rules={[{ required: true, message: 'Inserisci la targa' }]}
-          >
-            <Input placeholder="XX000XX" />
-          </Form.Item>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="marca"
-                label="Marca"
-                rules={[{ required: true, message: 'Inserisci la marca' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="modello"
-                label="Modello"
-                rules={[{ required: true, message: 'Inserisci il modello' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item 
-                name="anno" 
-                label="Anno"
-                rules={[{ required: true, message: 'Inserisci l\'anno' }]}
-              >
-                <InputNumber min={1900} max={new Date().getFullYear() + 1} style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="colore" label="Colore">
-                <Input placeholder="Colore veicolo" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Form.Item name="telaio" label="Numero Telaio (opzionale)">
-            <Input placeholder="17 caratteri VIN" />
-          </Form.Item>
-        </Form>
-      </Modal>
+      />
 
       {/* CALENDAR MODAL FOR GOOGLE CALENDAR BOOKING */}
       {isCalendarModalOpen && (

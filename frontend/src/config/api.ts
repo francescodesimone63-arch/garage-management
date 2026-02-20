@@ -108,6 +108,7 @@ export const API_ENDPOINTS = {
   SYSTEM_WORKORDER_STATUS_TYPES: '/system-tables/work-order-status-types',
   SYSTEM_PRIORITY_TYPES: '/system-tables/priority-types',
   SYSTEM_INTERVENTION_STATUS_TYPES: '/system-tables/intervention-status-types',
+  SYSTEM_INSURANCE_BRANCH_TYPES: '/system-tables/insurance-branch-types',
   
   // CMM (Capo Meccanica) specific endpoints
   CMM_WORK_ORDERS: '/cmm/work-orders',

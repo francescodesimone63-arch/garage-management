@@ -27,7 +27,15 @@ class WorkOrderBase(BaseModel):
     data_completamento: Optional[datetime] = None
     priorita: Optional[str] = Field('media', max_length=20)
     valutazione_danno: str
-    note: Optional[str] = None
+    sinistro: Optional[bool] = Field(False, description="Se è un sinistro assicurativo")
+    ramo_sinistro_id: Optional[int] = None
+    legale: Optional[str] = None
+    autorita: Optional[str] = None
+    numero_sinistro: Optional[str] = None
+    compagnia_sinistro: Optional[str] = None
+    compagnia_debitrice_sinistro: Optional[str] = None
+    scoperto: Optional[float] = Field(None, ge=0)
+    perc_franchigia: Optional[float] = Field(None, ge=0, le=100)
     stato: WorkOrderStatus = WorkOrderStatus.BOZZA
     creato_da: Optional[int] = None
     approvato_da: Optional[int] = None
@@ -87,7 +95,15 @@ class WorkOrderUpdate(BaseModel):
     data_completamento: Optional[datetime] = None
     priorita: Optional[str] = Field(None, max_length=20)
     valutazione_danno: Optional[str] = None
-    note: Optional[str] = None
+    sinistro: Optional[bool] = None
+    ramo_sinistro_id: Optional[int] = None
+    legale: Optional[str] = None
+    autorita: Optional[str] = None
+    numero_sinistro: Optional[str] = None
+    compagnia_sinistro: Optional[str] = None
+    compagnia_debitrice_sinistro: Optional[str] = None
+    scoperto: Optional[float] = Field(None, ge=0)
+    perc_franchigia: Optional[float] = Field(None, ge=0, le=100)
     stato: Optional[WorkOrderStatus] = None
     approvato_da: Optional[int] = None
     auto_cortesia_id: Optional[int] = None

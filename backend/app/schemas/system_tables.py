@@ -133,3 +133,30 @@ class InterventionStatusTypeResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# Insurance Branch Type Schemas
+class InsuranceBranchTypeCreate(BaseModel):
+    nome: str = Field(..., min_length=1, max_length=100, description="Nome del ramo di sinistro (es: RC Civile)")
+    codice: str = Field(..., min_length=1, max_length=30, description="Codice univoco (es: RC)")
+    descrizione: Optional[str] = Field(None, description="Descrizione del ramo")
+
+
+class InsuranceBranchTypeUpdate(BaseModel):
+    nome: Optional[str] = Field(None, min_length=1, max_length=100)
+    codice: Optional[str] = Field(None, min_length=1, max_length=30)
+    descrizione: Optional[str] = None
+    attivo: Optional[bool] = None
+
+
+class InsuranceBranchTypeResponse(BaseModel):
+    id: int
+    nome: str
+    codice: str
+    descrizione: Optional[str]
+    attivo: bool
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True

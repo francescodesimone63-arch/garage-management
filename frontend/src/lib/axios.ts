@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { API_URL, TOKEN_KEY } from '@/config/api'
+import { errorTracker } from '@/utils/errorTracker'
 
 // Crea istanza axios
 const axiosInstance = axios.create({
@@ -52,6 +53,17 @@ axiosInstance.interceptors.response.use(
       })
     }
     
+    const url = error.config?.url || 'unknown'
+    const method = error.config?.method?.toUpperCase() || 'unknown'
+    const status = error.response?.status
+    
+    // Traccia l'errore nel sistema di debug
+    errorTracker.trackAPIError(url, method, status, error, {
+      data: error.response?.data,
+      endpoint: url,
+      method: method,
+    })
+    
     console.error('❌ API Error:', {
       url: error.config?.url,
       status: error.response?.status,
@@ -61,7 +73,7 @@ axiosInstance.interceptors.response.use(
 
     // Errore di rete - ma NON mostrare messaggio per alcuni endpoint non-critici
     if (!error.response) {
-      // Url non-critiche che non devono mostrare erro re di connessione
+      // Url non-critiche che non devono mostrare errore di connessione
       const nonCriticalUrls = [
         'available-transitions',  // Caricamento transizioni
         'audit-trail',  // Caricamento audit trail
@@ -75,9 +87,9 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error)
     }
 
-    const { status, data } = error.response
+    const { status: statusCode, data } = error.response
 
-    switch (status) {
+    switch (statusCode) {
       case 400:
         message.error(data.detail || 'Richiesta non valida')
         break

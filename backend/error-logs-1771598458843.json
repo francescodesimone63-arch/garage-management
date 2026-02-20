@@ -1,0 +1,25 @@
+{
+  "sessionId": "1771598379754",
+  "exportedAt": "2026-02-20T14:40:58.842Z",
+  "logs": [
+    {
+      "id": "1771598379754-0-1771598434833",
+      "timestamp": "2026-02-20T14:40:34.833Z",
+      "type": "api",
+      "severity": "critical",
+      "message": "API Error: POST /vehicles/",
+      "details": {
+        "endpoint": "/vehicles/",
+        "method": "POST",
+        "status": "Network Error",
+        "error": "Network Error",
+        "errorType": "AxiosError"
+      },
+      "stackTrace": "AxiosError: Network Error\n    at XMLHttpRequest.handleError (http://localhost:3000/node_modules/.vite/deps/axios.js?v=c194bb1a:1669:19)",
+      "context": {
+        "endpoint": "/vehicles/",
+        "method": "POST"
+      }
+    }
+  ]
+}

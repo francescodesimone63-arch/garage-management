@@ -290,8 +290,23 @@ def update_work_order(
     # LOG dettagliato della richiesta ricevuta
     import logging
     logging.warning(f"[WORKORDER][UPDATE] Payload ricevuto: {work_order_in.model_dump(exclude_unset=True)}")
+    
     # Aggiorna campi con model_dump
     update_data = work_order_in.model_dump(exclude_unset=True)
+    
+    # Gestisci la logica di pulizia per sinistro
+    if 'sinistro' in update_data and not update_data['sinistro']:
+        # Se sinistro viene deselezionato, pulisci i campi correlati
+        work_order.ramo_sinistro_id = None
+        work_order.legale = None
+        work_order.autorita = None
+        work_order.numero_sinistro = None
+        work_order.compagnia_sinistro = None
+        work_order.compagnia_debitrice_sinistro = None
+        work_order.scoperto = None
+        work_order.perc_franchigia = None
+    
+    # Applica i campi aggiornati
     for field, value in update_data.items():
         setattr(work_order, field, value)
     

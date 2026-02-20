@@ -9,7 +9,7 @@ interface VehicleCreate {
   targa: string
   marca: string
   modello: string
-  anno: number
+  anno?: number
   telaio?: string
   colore?: string
   km_attuali?: number

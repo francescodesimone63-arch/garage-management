@@ -54,7 +54,6 @@ class WorkOrderCMMSummary(BaseModel):
     data_appuntamento: Optional[datetime]
     data_fine_prevista: Optional[datetime]
     priorita: Optional[str]
-    note: Optional[str]
     
     # Dati cliente
     cliente_nome: Optional[str]
@@ -264,7 +263,6 @@ def get_cmm_work_orders(
             data_appuntamento=wo.data_appuntamento,
             data_fine_prevista=wo.data_fine_prevista,
             priorita=wo.priorita.value if wo.priorita else None,
-            note=wo.note,
             cliente_nome=wo.customer.nome if wo.customer else None,
             cliente_cognome=wo.customer.cognome if wo.customer else None,
             cliente_telefono=wo.customer.telefono if wo.customer else None,

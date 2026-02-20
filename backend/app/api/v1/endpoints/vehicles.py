@@ -1,6 +1,3 @@
-"""
-Endpoint per gestione veicoli
-"""
 from typing import Any, List, Optional
 from datetime import datetime
 
@@ -9,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.core.deps import get_db, get_current_user
 from app.models.user import User
-from app.models.vehicle import Vehicle
+from app.models.vehicle import Vehicle, VehicleType
 from app.models.customer import Customer
 from app.models.work_order import WorkOrder
 from app.models.courtesy_car import CourtesyCar
@@ -94,8 +91,14 @@ def create_vehicle(
                 detail="Un veicolo con questo telaio esiste già"
             )
     
-    # Crea veicolo
-    vehicle = Vehicle(**vehicle_in.dict())
+    # Crea veicolo dal dict dei dati in input
+    vehicle_data = vehicle_in.dict()
+    
+    # Assicura che il tipo sia sempre impostato (default: CLIENTE)
+    if 'tipo' not in vehicle_data or vehicle_data['tipo'] is None:
+        vehicle_data['tipo'] = VehicleType.CLIENTE.value
+    
+    vehicle = Vehicle(**vehicle_data)
     
     db.add(vehicle)
     db.commit()

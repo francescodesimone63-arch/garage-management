@@ -15,6 +15,8 @@ from app.core.database import sync_engine, Base
 from app.api.v1.api import api_router
 from app.core.logging_config import setup_logging, get_logger
 from app.middleware.logging_middleware import LoggingMiddleware
+from app.middleware.debug_middleware import DebugMiddleware, ErrorHandlerMiddleware
+from app.middleware.cors_preflight import CORSPreflightMiddleware
 
 # Load environment variables from .env file
 env_path = Path(__file__).parent / ".env"
@@ -43,24 +45,41 @@ app = FastAPI(
     redirect_slashes=False  # Disabilita redirect automatici da /vehicles a /vehicles/
 )
 
-# Set up CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React dev server
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# IMPORTANTE: L'ordine è INVERSO! Gli ultimi middleware aggiunti vengono eseguiti PRIMA (outermost)
+# Quindi CORS deve essere aggiunto PER ULTIMO per essere eseguito per primo
 
-# Add GZip middleware
-app.add_middleware(GZipMiddleware, minimum_size=1000)
+# Add error handler middleware
+app.add_middleware(ErrorHandlerMiddleware)
+logger.info("✅ Error handler middleware attivato")
 
-# Add session middleware (for Google OAuth)
-app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
+# Add debug middleware to track all requests
+app.add_middleware(DebugMiddleware)
+logger.info("✅ Debug middleware attivato")
 
 # Add logging middleware to track all requests
 app.add_middleware(LoggingMiddleware)
 logger.info("✅ Logging middleware attivato")
+
+# Add session middleware (for Google OAuth)
+app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
+
+# Add GZip middleware
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+# Set up CORS - DEVE ESSERE AGGIUNTO PER ULTIMO (verrà eseguito PRIMO)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+logger.info("✅ CORS middleware attivato")
+
+# Add CORS Preflight middleware AFTER CORS (executes BEFORE CORSMiddleware)
+# Handles OPTIONS requests before CORSMiddleware can reject them with 405
+app.add_middleware(CORSPreflightMiddleware)
+logger.info("✅ CORS Preflight middleware attivato")
 
 # Include API router
 app.include_router(api_router, prefix=settings.api_v1_str)

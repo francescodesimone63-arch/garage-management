@@ -1,63 +1,33 @@
 import { useState } from 'react'
-import { Table, Button, Modal, Form, Input, Space, Tag, Popconfirm, message, Select } from 'antd'
+import { Table, Button, Space, Tag, Popconfirm, message, Input } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import PageHeader from '@/components/PageHeader'
-import { useCustomers, useCreateCustomer, useUpdateCustomer, useDeleteCustomer } from '@/hooks/useCustomers'
-import { useCustomerTypes } from '@/hooks/useSystemTables'
+import CustomerFormModal from '@/components/CustomerFormModal'
+import { useCustomers, useDeleteCustomer } from '@/hooks/useCustomers'
 import type { Customer } from '@/types'
 
 const CustomersPage = () => {
   const [searchText, setSearchText] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
-  const [customerType, setCustomerType] = useState<string>('privato')
-  const [form] = Form.useForm()
+  const deleteMutation = useDeleteCustomer()
 
   // Carica tutti i clienti per permettere ordinamento completo
   const { data, isLoading } = useCustomers(1, 1000, searchText)
-  const createMutation = useCreateCustomer()
-  const updateMutation = useUpdateCustomer()
-  const deleteMutation = useDeleteCustomer()
-  const { data: customerTypes } = useCustomerTypes()
 
   const handleCreate = () => {
     setEditingCustomer(null)
-    setCustomerType('Privato') // Usa il valore esatto dal database
-    form.resetFields()
     setIsModalOpen(true)
   }
 
   const handleEdit = (record: Customer) => {
     setEditingCustomer(record)
-    // Normalizza il tipo al formato database (Azienda o Privato)
-    const normalizedTipo = record.tipo ? (record.tipo.charAt(0).toUpperCase() + record.tipo.slice(1).toLowerCase()) : 'Privato'
-    setCustomerType(normalizedTipo)
-    form.setFieldsValue({ ...record, tipo: normalizedTipo })
     setIsModalOpen(true)
   }
 
   const handleDelete = async (id: number) => {
     await deleteMutation.mutateAsync(id)
-  }
-
-  const handleSubmit = async (values: any) => {
-    try {
-      // Normalizza tipo a lowercase per il backend
-      const normalized = {
-        ...values,
-        tipo: values.tipo ? values.tipo.toLowerCase() : undefined,
-      }
-      if (editingCustomer) {
-        await updateMutation.mutateAsync({ id: editingCustomer.id, data: normalized })
-      } else {
-        await createMutation.mutateAsync(normalized)
-      }
-      setIsModalOpen(false)
-      form.resetFields()
-    } catch (error) {
-      message.error('Errore durante il salvataggio')
-    }
   }
 
   const columns: ColumnsType<Customer> = [
@@ -175,144 +145,15 @@ const CustomersPage = () => {
         }}
       />
 
-      <Modal
-        title={editingCustomer ? 'Modifica Cliente' : 'Nuovo Cliente'}
+      <CustomerFormModal
         open={isModalOpen}
-        onCancel={() => {
+        editingCustomer={editingCustomer}
+        onCancel={() => setIsModalOpen(false)}
+        onSuccess={() => {
           setIsModalOpen(false)
-          form.resetFields()
+          setEditingCustomer(null)
         }}
-        onOk={() => form.submit()}
-        confirmLoading={createMutation.isPending || updateMutation.isPending}
-        width={800}
-      >
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={handleSubmit}
-          initialValues={{ tipo: 'Privato' }}
-        >
-          <Form.Item
-            name="tipo"
-            label="Tipo Cliente"
-            rules={[{ required: true, message: 'Seleziona il tipo' }]}
-          >
-            <Select placeholder="Seleziona un tipo" onChange={(value) => setCustomerType(value)}>
-              {customerTypes?.filter(ct => ct.attivo).map(customerType => (
-                <Select.Option key={customerType.id} value={customerType.nome}>
-                  {customerType.nome}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-
-          {customerType === 'Azienda' ? (
-            <Form.Item
-              name="ragione_sociale"
-              label="Ragione Sociale"
-              rules={[{ required: true, message: 'Inserisci la ragione sociale' }]}
-            >
-              <Input placeholder="es. Carrozzeria Rossi S.r.l." />
-            </Form.Item>
-          ) : (
-            <>
-              <Form.Item
-                name="nome"
-                label="Nome"
-                rules={[{ required: true, message: 'Inserisci il nome' }]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                name="cognome"
-                label="Cognome"
-                rules={[{ required: true, message: 'Inserisci il cognome' }]}
-              >
-                <Input />
-              </Form.Item>
-            </>
-          )}
-
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[{ type: 'email', message: 'Email non valida' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="telefono"
-            label="Telefono Fisso"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="cellulare"
-            label="Cellulare"
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="codice_fiscale"
-            label="Codice Fiscale"
-            tooltip="Opzionale ma consigliato"
-          >
-            <Input placeholder="Es. RSSMRA80A01H501U" />
-          </Form.Item>
-
-          <Form.Item
-            name="partita_iva"
-            label="Partita IVA"
-            tooltip="Obbligatoria per aziende"
-          >
-            <Input placeholder="11 cifre" maxLength={11} />
-          </Form.Item>
-
-          <Form.Item
-            name="indirizzo"
-            label="Indirizzo"
-          >
-            <Input />
-          </Form.Item>
-
-          <Space style={{ width: '100%' }} size="large">
-            <Form.Item
-              name="citta"
-              label="Città"
-              style={{ flex: 1 }}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              name="provincia"
-              label="Provincia"
-              style={{ width: 100 }}
-            >
-              <Input maxLength={2} />
-            </Form.Item>
-
-            <Form.Item
-              name="cap"
-              label="CAP"
-              style={{ width: 120 }}
-            >
-              <Input />
-            </Form.Item>
-          </Space>
-
-          <Form.Item
-            name="note"
-            label="Note"
-          >
-            <Input.TextArea rows={3} />
-          </Form.Item>
-        </Form>
-      </Modal>
+      />
     </div>
   )
 }

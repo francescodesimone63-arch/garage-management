@@ -91,3 +91,18 @@ class InterventionStatusType(Base):
     
     def __repr__(self):
         return f"<InterventionStatusType(id={self.id}, codice='{self.codice}', nome='{self.nome}')>"
+
+class InsuranceBranchType(Base):
+    """Insurance branch type - dynamic lookup table for claim branches"""
+    __tablename__ = "insurance_branch_types"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(100), unique=True, nullable=False, index=True)
+    codice = Column(String(30), unique=True, nullable=False, index=True)
+    descrizione = Column(Text)
+    attivo = Column(Boolean, default=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    
+    def __repr__(self):
+        return f"<InsuranceBranchType(id={self.id}, nome='{self.nome}')>"

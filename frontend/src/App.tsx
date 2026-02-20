@@ -4,6 +4,7 @@ import { message } from 'antd'
 import { AuthProvider } from './contexts/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import MainLayout from './layouts/MainLayout'
+import DebugDashboard from './components/DebugDashboard'
 import LoginPage from './pages/auth/LoginPage'
 import { OAuthCallback } from './pages/OAuthCallback'
 import DashboardPage from './pages/dashboard/DashboardPage'
@@ -63,6 +64,7 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <DebugDashboard />
     </AuthProvider>
   )
 }

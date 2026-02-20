@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.core.deps import get_db, get_current_user, get_current_active_superuser
 from app.models.user import User
-from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType
+from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType, InsuranceBranchType
 from app.schemas.system_tables import (
     DamageTypeCreate,
     DamageTypeUpdate,
@@ -21,6 +21,9 @@ from app.schemas.system_tables import (
     InterventionStatusTypeCreate,
     InterventionStatusTypeUpdate,
     InterventionStatusTypeResponse,
+    InsuranceBranchTypeCreate,
+    InsuranceBranchTypeUpdate,
+    InsuranceBranchTypeResponse,
 )
 
 router = APIRouter(tags=["system-tables"])
@@ -512,4 +515,120 @@ def delete_intervention_status_type(
         )
     
     db.delete(status_type)
+    db.commit()
+
+
+# ============================================================================
+# INSURANCE BRANCH TYPES ENDPOINTS
+# ============================================================================
+
+@router.get("/insurance-branch-types", response_model=List[InsuranceBranchTypeResponse])
+def get_insurance_branch_types(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Get all insurance branch types (accessibile a tutti gli utenti autenticati)"""
+    return db.query(InsuranceBranchType).all()
+
+
+@router.post("/insurance-branch-types", response_model=InsuranceBranchTypeResponse, status_code=status.HTTP_201_CREATED)
+def create_insurance_branch_type(
+    branch_type_in: InsuranceBranchTypeCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> Any:
+    """Create insurance branch type (admin only)"""
+    # Check if nome already exists
+    existing_nome = db.query(InsuranceBranchType).filter(
+        InsuranceBranchType.nome.ilike(branch_type_in.nome)
+    ).first()
+    if existing_nome:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Questo ramo di sinistro esiste già"
+        )
+    
+    # Check if codice already exists
+    existing_codice = db.query(InsuranceBranchType).filter(
+        InsuranceBranchType.codice.ilike(branch_type_in.codice)
+    ).first()
+    if existing_codice:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Questo codice è già in uso"
+        )
+    
+    branch_type = InsuranceBranchType(**branch_type_in.model_dump())
+    db.add(branch_type)
+    db.commit()
+    db.refresh(branch_type)
+    return branch_type
+
+
+@router.put("/insurance-branch-types/{branch_type_id}", response_model=InsuranceBranchTypeResponse)
+def update_insurance_branch_type(
+    branch_type_id: int,
+    branch_type_in: InsuranceBranchTypeUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> Any:
+    """Update insurance branch type (admin only)"""
+    branch_type = db.query(InsuranceBranchType).filter(InsuranceBranchType.id == branch_type_id).first()
+    
+    if not branch_type:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Ramo di sinistro non trovato"
+        )
+    
+    # Check nome uniqueness if changed
+    if branch_type_in.nome and branch_type_in.nome != branch_type.nome:
+        existing = db.query(InsuranceBranchType).filter(
+            InsuranceBranchType.nome.ilike(branch_type_in.nome),
+            InsuranceBranchType.id != branch_type_id
+        ).first()
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Questo nome è già in uso"
+            )
+    
+    # Check codice uniqueness if changed
+    if branch_type_in.codice and branch_type_in.codice != branch_type.codice:
+        existing = db.query(InsuranceBranchType).filter(
+            InsuranceBranchType.codice.ilike(branch_type_in.codice),
+            InsuranceBranchType.id != branch_type_id
+        ).first()
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Questo codice è già in uso"
+            )
+    
+    update_data = branch_type_in.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(branch_type, field, value)
+    
+    db.add(branch_type)
+    db.commit()
+    db.refresh(branch_type)
+    return branch_type
+
+
+@router.delete("/insurance-branch-types/{branch_type_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_insurance_branch_type(
+    branch_type_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_superuser),
+) -> None:
+    """Delete insurance branch type (admin only)"""
+    branch_type = db.query(InsuranceBranchType).filter(InsuranceBranchType.id == branch_type_id).first()
+    
+    if not branch_type:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Ramo di sinistro non trovato"
+        )
+    
+    db.delete(branch_type)
     db.commit()

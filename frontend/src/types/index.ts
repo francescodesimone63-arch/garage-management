@@ -149,7 +149,15 @@ export interface WorkOrder {
   data_completamento?: string
   priorita?: string
   valutazione_danno: string
-  note?: string
+  sinistro?: boolean
+  ramo_sinistro_id?: number
+  legale?: string
+  autorita?: string
+  numero_sinistro?: string
+  compagnia_sinistro?: string
+  compagnia_debitrice_sinistro?: string
+  scoperto?: number
+  perc_franchigia?: number
   creato_da?: number
   approvato_da?: number
   auto_cortesia_id?: number

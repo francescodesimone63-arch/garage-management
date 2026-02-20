@@ -14,6 +14,7 @@ load_dotenv()
 from app.core.config import Settings
 from app.core.database import engine, Base
 from app.api.v1.api import api_router
+from app.middleware.cors_preflight import CORSPreflightMiddleware
 
 # Create tables
 async def create_tables_async():
@@ -51,6 +52,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add CORS preflight middleware (must be added after CORSMiddleware to execute first)
+app.add_middleware(CORSPreflightMiddleware)
 
 # Include API routes
 app.include_router(api_router, prefix=settings.api_v1_str)

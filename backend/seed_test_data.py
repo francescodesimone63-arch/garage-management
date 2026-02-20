@@ -240,7 +240,6 @@ async def seed_database():
                     stato=statuses[i % len(statuses)],
                     priorita=Priority.MEDIA,
                     costo_stimato=150.00 + (i * 50),
-                    note=f"Ordine automatico di test #{i+1}",
                 )
                 work_orders.append(wo)
             

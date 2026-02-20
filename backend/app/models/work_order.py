@@ -16,7 +16,7 @@ Stati del workflow:
 - COMPLETATA: Lavori terminati
 - ANNULLATA: Scheda annullata
 """
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum, DECIMAL
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum, DECIMAL, Boolean
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import enum
@@ -79,7 +79,15 @@ class WorkOrder(Base):
     stato = Column(Enum(WorkOrderStatus), default=WorkOrderStatus.BOZZA, index=True)
     priorita = Column(Enum(Priority), default=Priority.MEDIA)
     valutazione_danno = Column(Text)
-    note = Column(Text)
+    sinistro = Column(Boolean, default=False, index=True)
+    ramo_sinistro_id = Column(Integer, ForeignKey("insurance_branch_types.id"), nullable=True)
+    legale = Column(Text, nullable=True)
+    autorita = Column(Text, nullable=True)
+    numero_sinistro = Column(String(50), nullable=True)
+    compagnia_sinistro = Column(String(200), nullable=True)
+    compagnia_debitrice_sinistro = Column(String(200), nullable=True)
+    scoperto = Column(DECIMAL(10, 2), nullable=True)
+    perc_franchigia = Column(DECIMAL(5, 2), nullable=True)
     creato_da = Column(Integer, ForeignKey("users.id"))
     approvato_da = Column(Integer, ForeignKey("users.id"))
     auto_cortesia_id = Column(Integer, ForeignKey("courtesy_cars.id"))
@@ -95,6 +103,7 @@ class WorkOrder(Base):
     creator = relationship("User", foreign_keys=[creato_da])
     approver = relationship("User", foreign_keys=[approvato_da])
     courtesy_car = relationship("CourtesyCar")
+    insurance_branch = relationship("InsuranceBranchType")
     interventions = relationship("Intervention", back_populates="work_order", cascade="all, delete-orphan")
     activities = relationship("WorkOrderActivity", back_populates="work_order", cascade="all, delete-orphan")
     parts = relationship("WorkOrderPart", back_populates="work_order", cascade="all, delete-orphan")
