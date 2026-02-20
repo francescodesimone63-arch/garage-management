@@ -1,0 +1,41 @@
+erDiagram
+    USERS ||--o{ ACTIVITY_LOGS : "crea"
+    USERS ||--o{ WORK_ORDERS : "assegna"
+    
+    CUSTOMERS ||--o{ VEHICLES : "possiede"
+    CUSTOMERS ||--o{ WORK_ORDERS : "richiede"
+    CUSTOMERS }o--|| CUSTOMER_TYPES : "ha tipo"
+    
+    VEHICLES ||--o{ WORK_ORDERS : "soggetto"
+    VEHICLES ||--o{ TIRES : "montate"
+    VEHICLES ||--o{ MAINTENANCE_SCHEDULES : "pianificata"
+    
+    WORK_ORDERS ||--o{ WORK_ORDER_ACTIVITIES : "contiene"
+    WORK_ORDERS ||--o{ WORK_ORDER_PARTS : "utilizza"
+    WORK_ORDERS ||--o{ WORK_ORDER_AUDITS : "cronologia"
+    WORK_ORDERS ||--o{ INTERVENTIONS : "include"
+    WORK_ORDERS ||--o{ DOCUMENTS : "documentazione"
+    WORK_ORDERS ||--o{ CALENDAR_EVENTS : "pianificata"
+    WORK_ORDERS }o--|| WORK_ORDER_STATUS_TYPES : "stato"
+    WORK_ORDERS }o--|| PRIORITY_TYPES : "priorita"
+    
+    INTERVENTIONS ||--o{ WORK_ORDER_ACTIVITIES : "attivita"
+    INTERVENTIONS }o--|| INTERVENTION_STATUS_TYPES : "stato"
+    
+    WORK_ORDER_PARTS }o--|| PARTS : "parte"
+    PARTS ||--o{ STOCK_MOVEMENTS : "movimenti"
+    
+    COURTESY_CARS ||--o{ CAR_ASSIGNMENTS : "assegnata"
+    CAR_ASSIGNMENTS }o--|| VEHICLES : "auto"
+    CAR_ASSIGNMENTS }o--|| CUSTOMERS : "cliente"
+    
+    MAINTENANCE_SCHEDULES }o--|| VEHICLES : "veicolo"
+    
+    DOCUMENTS }o--|| WORK_ORDERS : "associato"
+    
+    NOTIFICATIONS ||--o{ CALENDAR_EVENTS : "genera"
+    
+    USERS ||--o{ GOOGLE_OAUTH_TOKENS : "credenziali"
+    USERS ||--o{ GOOGLE_OAUTH_STATES : "sessioni"
+    
+    WORK_ORDERS }o--|| INSURANCE_BRANCH_TYPES : "ramo assicurativo"

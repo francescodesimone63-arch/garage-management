@@ -1,0 +1,2436 @@
+{
+  "tables": [
+    {
+      "name": "activity_logs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "azione",
+          "type": "VARCHAR(100)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "entita",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "entita_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ip_address",
+          "type": "VARCHAR(45)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "user_agent",
+          "type": "VARCHAR(500)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "dettagli",
+          "type": "JSON",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "timestamp",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "SET NULL"
+        }
+      ]
+    },
+    {
+      "name": "calendar_events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "google_event_id",
+          "type": "VARCHAR(255)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "titolo",
+          "type": "VARCHAR(200)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_inizio",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_fine",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "partecipanti",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "sincronizzato",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ultima_sincronizzazione",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "car_assignments",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "courtesy_car_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_inizio",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_fine_prevista",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_fine_effettiva",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_inizio",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_fine",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "VARCHAR",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "customer_id",
+          "references": {
+            "table": "customers",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "courtesy_car_id",
+          "references": {
+            "table": "courtesy_cars",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        }
+      ]
+    },
+    {
+      "name": "courtesy_cars",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "vehicle_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "contratto_tipo",
+          "type": "VARCHAR(9)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "fornitore_contratto",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_inizio_contratto",
+          "type": "DATE",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_scadenza_contratto",
+          "type": "DATE",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "canone_mensile",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_inclusi_anno",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(14)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "VARCHAR",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "contratto_firmato",
+          "type": "VARCHAR(500)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "vehicle_id",
+          "references": {
+            "table": "vehicles",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "customer_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "customers",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(20)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cognome",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ragione_sociale",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "codice_fiscale",
+          "type": "VARCHAR(16)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "partita_iva",
+          "type": "VARCHAR(11)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "telefono",
+          "type": "VARCHAR(20)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cellulare",
+          "type": "VARCHAR(20)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "indirizzo",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "citta",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cap",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "provincia",
+          "type": "VARCHAR(2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "preferenze_notifica",
+          "type": "JSON",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "damage_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(100)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "documents",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(10)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "numero",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_documento",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "importo_totale",
+          "type": "FLOAT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "file_path",
+          "type": "VARCHAR(500)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "file_name",
+          "type": "VARCHAR(255)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "file_size",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "mime_type",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "doc_metadata",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "created_by",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "SET NULL"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "SET NULL"
+        },
+        {
+          "column": "customer_id",
+          "references": {
+            "table": "customers",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "SET NULL"
+        }
+      ]
+    },
+    {
+      "name": "google_oauth_states",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "state",
+          "type": "VARCHAR(500)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "expires_at",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "return_url",
+          "type": "VARCHAR(1024)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "google_oauth_tokens",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "refresh_token",
+          "type": "TEXT",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "access_token",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "access_token_expiry",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "calendar_id",
+          "type": "VARCHAR(255)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "insurance_branch_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(100)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "codice",
+          "type": "VARCHAR(30)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "intervention_status_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "codice",
+          "type": "VARCHAR(30)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "richiede_nota",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ordine",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "interventions",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "progressivo",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione_intervento",
+          "type": "TEXT",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "durata_stimata",
+          "type": "DECIMAL(4, 2)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo_intervento",
+          "type": "VARCHAR(20)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "stato_intervento_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note_intervento",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note_sospensione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ore_effettive",
+          "type": "DECIMAL(5, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_inizio",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_fine",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "stato_intervento_id",
+          "references": {
+            "table": "intervention_status_types",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "maintenance_schedules",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "vehicle_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(13)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "km_scadenza",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_scadenza",
+          "type": "DATE",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_preavviso",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "giorni_preavviso",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ricorrente",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "intervallo_km",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "intervallo_giorni",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ultima_notifica",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "vehicle_id",
+          "references": {
+            "table": "vehicles",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(8)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "destinatario",
+          "type": "VARCHAR(200)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "oggetto",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "messaggio",
+          "type": "TEXT",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(7)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_invio",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "errore",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "riferimento_tipo",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "riferimento_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "parts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "codice",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(200)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "categoria",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "marca",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "modello",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "quantita",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "quantita_minima",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "prezzo_acquisto",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "prezzo_vendita",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "fornitore",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "posizione_magazzino",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(9)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "unita_misura",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "priority_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "stock_movements",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "part_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(9)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "quantita",
+          "type": "DECIMAL(10, 2)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "quantita_precedente",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "quantita_nuova",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_movimento",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "utente_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "utente_id",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "part_id",
+          "references": {
+            "table": "parts",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        }
+      ]
+    },
+    {
+      "name": "tires",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "vehicle_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo_stagione",
+          "type": "VARCHAR(9)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "marca",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "modello",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "misura",
+          "type": "VARCHAR(30)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_deposito",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_ultimo_cambio",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_prossimo_cambio",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "posizione_deposito",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "VARCHAR",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "posizione",
+          "type": "VARCHAR(19)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "condizione",
+          "type": "VARCHAR(8)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "profondita_battistrada",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_produzione",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_ultima_rotazione",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_ultima_rotazione",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "vehicle_id",
+          "references": {
+            "table": "vehicles",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "username",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(100)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "password_hash",
+          "type": "VARCHAR(255)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "ruolo",
+          "type": "VARCHAR(15)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cognome",
+          "type": "VARCHAR(100)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ultimo_accesso",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "vehicles",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "targa",
+          "type": "VARCHAR(10)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "telaio",
+          "type": "VARCHAR(17)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "marca",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "modello",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "colore",
+          "type": "VARCHAR(30)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cilindrata",
+          "type": "VARCHAR(20)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "kw",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "cv",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "porte",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "carburante",
+          "type": "VARCHAR(30)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "prima_immatricolazione",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "km_attuali",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(8)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "courtesy_car",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "disponibile",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "customer_id",
+          "references": {
+            "table": "customers",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "SET NULL"
+        }
+      ]
+    },
+    {
+      "name": "work_order_activities",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(11)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "assegnato_a",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(10)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ore_stimate",
+          "type": "DECIMAL(5, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ore_effettive",
+          "type": "DECIMAL(5, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "costo_manodopera",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "work_order_audits",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "from_state",
+          "type": "VARCHAR(14)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "to_state",
+          "type": "VARCHAR(14)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "transition_type",
+          "type": "VARCHAR(9)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "executed_by",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "user_role",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "reason",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "notes",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ip_address",
+          "type": "VARCHAR(45)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "user_agent",
+          "type": "VARCHAR(500)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "executed_by",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        }
+      ]
+    },
+    {
+      "name": "work_order_parts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "work_order_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "part_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "quantita_richiesta",
+          "type": "DECIMAL(10, 2)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "quantita_utilizzata",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(14)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_ordine",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_arrivo",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_utilizzo",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "fornitore_ordine",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "prezzo_acquisto",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "part_id",
+          "references": {
+            "table": "parts",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "work_order_id",
+          "references": {
+            "table": "work_orders",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE"
+        }
+      ]
+    },
+    {
+      "name": "work_order_status_types",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "nome",
+          "type": "VARCHAR(50)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "descrizione",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "attivo",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": []
+    },
+    {
+      "name": "work_orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "numero_scheda",
+          "type": "VARCHAR(20)",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "vehicle_id",
+          "type": "INTEGER",
+          "notNull": true,
+          "default": null
+        },
+        {
+          "name": "data_creazione",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "data_compilazione",
+          "type": "DATETIME",
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "data_appuntamento",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_fine_prevista",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "data_completamento",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR(14)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "priorita",
+          "type": "VARCHAR(7)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "valutazione_danno",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "sinistro",
+          "type": "BOOLEAN",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "ramo_sinistro_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "legale",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "autorita",
+          "type": "TEXT",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "numero_sinistro",
+          "type": "VARCHAR(50)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "compagnia_sinistro",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "compagnia_debitrice_sinistro",
+          "type": "VARCHAR(200)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "scoperto",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "perc_franchigia",
+          "type": "DECIMAL(5, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "creato_da",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "approvato_da",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "auto_cortesia_id",
+          "type": "INTEGER",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "costo_stimato",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "costo_finale",
+          "type": "DECIMAL(10, 2)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "google_event_id",
+          "type": "VARCHAR(255)",
+          "notNull": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "DATETIME",
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "primaryKeys": [
+        "id"
+      ],
+      "foreignKeys": [
+        {
+          "column": "auto_cortesia_id",
+          "references": {
+            "table": "courtesy_cars",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "approvato_da",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "creato_da",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "ramo_sinistro_id",
+          "references": {
+            "table": "insurance_branch_types",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "vehicle_id",
+          "references": {
+            "table": "vehicles",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        },
+        {
+          "column": "customer_id",
+          "references": {
+            "table": "customers",
+            "column": "id"
+          },
+          "onDelete": "NO ACTION",
+          "onUpdate": "NO ACTION"
+        }
+      ]
+    }
+  ]
+}

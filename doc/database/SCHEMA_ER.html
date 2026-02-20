@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema ER - Garage Management System</title>
+    <script async src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .diagram-container {
+            padding: 30px;
+            background: white;
+            overflow-x: auto;
+            min-height: 600px;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 30px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏎️ Schema ER - Garage Management System</h1>
+            <p>Entity-Relationship Diagram (garage.db)</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn-primary" onclick="downloadSVG()">💾 Scarica SVG</button>
+            <button class="btn-primary" onclick="downloadPNG()">🖼️ Screenshot PNG</button>
+            <button class="btn-secondary" onclick="printDiagram()">🖨️ Stampa</button>
+            <button class="btn-secondary" onclick="copyMarkdown()">📋 Copia Markdown</button>
+        </div>
+        
+        <div class="info-box">
+            <strong>ℹ️ Informazioni:</strong> Il diagramma mostra tutte le 26 tabelle del database e le loro relazioni. 
+            Le linee rappresentano foreign keys. Usa i pulsanti sopra per salvare il grafico in diversi formati.
+        </div>
+        
+        <div class="diagram-container">
+            <div class="mermaid">
+erDiagram
+    USERS ||--o{ ACTIVITY_LOGS : "crea"
+    USERS ||--o{ WORK_ORDERS : "assegna"
+    CUSTOMERS ||--o{ VEHICLES : "possiede"
+    CUSTOMERS ||--o{ WORK_ORDERS : "richiede"
+    CUSTOMERS }o--|| CUSTOMER_TYPES : "ha tipo"
+    VEHICLES ||--o{ WORK_ORDERS : "soggetto"
+    VEHICLES ||--o{ TIRES : "montate"
+    VEHICLES ||--o{ MAINTENANCE_SCHEDULES : "pianificata"
+    WORK_ORDERS ||--o{ WORK_ORDER_ACTIVITIES : "contiene"
+    WORK_ORDERS ||--o{ WORK_ORDER_PARTS : "utilizza"
+    WORK_ORDERS ||--o{ WORK_ORDER_AUDITS : "cronologia"
+    WORK_ORDERS ||--o{ INTERVENTIONS : "include"
+    WORK_ORDERS ||--o{ DOCUMENTS : "documentazione"
+    WORK_ORDERS ||--o{ CALENDAR_EVENTS : "pianificata"
+    WORK_ORDERS }o--|| WORK_ORDER_STATUS_TYPES : "stato"
+    WORK_ORDERS }o--|| PRIORITY_TYPES : "priorita"
+    INTERVENTIONS ||--o{ WORK_ORDER_ACTIVITIES : "attivita"
+    INTERVENTIONS }o--|| INTERVENTION_STATUS_TYPES : "stato"
+    WORK_ORDER_PARTS }o--|| PARTS : "parte"
+    PARTS ||--o{ STOCK_MOVEMENTS : "movimenti"
+    COURTESY_CARS ||--o{ CAR_ASSIGNMENTS : "assegnata"
+    CAR_ASSIGNMENTS }o--|| VEHICLES : "auto"
+    CAR_ASSIGNMENTS }o--|| CUSTOMERS : "cliente"
+    MAINTENANCE_SCHEDULES }o--|| VEHICLES : "veicolo"
+    DOCUMENTS }o--|| WORK_ORDERS : "associato"
+    NOTIFICATIONS ||--o{ CALENDAR_EVENTS : "genera"
+    USERS ||--o{ GOOGLE_OAUTH_TOKENS : "credenziali"
+    USERS ||--o{ GOOGLE_OAUTH_STATES : "sessioni"
+    WORK_ORDERS }o--|| INSURANCE_BRANCH_TYPES : "ramo assicurativo"
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📊 Schema generato il 20 febbraio 2026 | Garage Management System v1.0</p>
+        </div>
+    </div>
+    
+    <script>
+        // Inizializza Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        function downloadSVG() {
+            const svg = document.querySelector('.mermaid svg');
+            if (!svg) {
+                alert('⏳ Il diagramma si sta ancora caricando. Prova tra 2 secondi.');
+                return;
+            }
+            
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'schema-er-garage.svg';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+        
+        function downloadPNG() {
+            alert('💡 Metodi per salvare PNG:\n\n1. Mac: Cmd+Shift+4 → Trascina → Salva screenshot\n2. Oppure: Premi Cmd+P → "Salva come PDF" → Apri in Preview → Esporta PNG\n3. Browser: Click destro sul diagramma → "Salva immagine come..."');
+        }
+        
+        function printDiagram() {
+            window.print();
+        }
+        
+        function copyMarkdown() {
+            const markdown = `# Schema ER - Garage Management System\n\n\`\`\`mermaid\nerDiagram\n    USERS ||--o{ ACTIVITY_LOGS : "crea"\n    USERS ||--o{ WORK_ORDERS : "assegna"\n    CUSTOMERS ||--o{ VEHICLES : "possiede"\n    CUSTOMERS ||--o{ WORK_ORDERS : "richiede"\n    CUSTOMERS }o--|| CUSTOMER_TYPES : "ha tipo"\n    VEHICLES ||--o{ WORK_ORDERS : "soggetto"\n    VEHICLES ||--o{ TIRES : "montate"\n    VEHICLES ||--o{ MAINTENANCE_SCHEDULES : "pianificata"\n    WORK_ORDERS ||--o{ WORK_ORDER_ACTIVITIES : "contiene"\n    WORK_ORDERS ||--o{ WORK_ORDER_PARTS : "utilizza"\n    WORK_ORDERS ||--o{ WORK_ORDER_AUDITS : "cronologia"\n    WORK_ORDERS ||--o{ INTERVENTIONS : "include"\n    WORK_ORDERS ||--o{ DOCUMENTS : "documentazione"\n    WORK_ORDERS ||--o{ CALENDAR_EVENTS : "pianificata"\n    WORK_ORDERS }o--|| WORK_ORDER_STATUS_TYPES : "stato"\n    WORK_ORDERS }o--|| PRIORITY_TYPES : "priorita"\n    INTERVENTIONS ||--o{ WORK_ORDER_ACTIVITIES : "attivita"\n    INTERVENTIONS }o--|| INTERVENTION_STATUS_TYPES : "stato"\n    WORK_ORDER_PARTS }o--|| PARTS : "parte"\n    PARTS ||--o{ STOCK_MOVEMENTS : "movimenti"\n    COURTESY_CARS ||--o{ CAR_ASSIGNMENTS : "assegnata"\n    CAR_ASSIGNMENTS }o--|| VEHICLES : "auto"\n    CAR_ASSIGNMENTS }o--|| CUSTOMERS : "cliente"\n    MAINTENANCE_SCHEDULES }o--|| VEHICLES : "veicolo"\n    DOCUMENTS }o--|| WORK_ORDERS : "associato"\n    NOTIFICATIONS ||--o{ CALENDAR_EVENTS : "genera"\n    USERS ||--o{ GOOGLE_OAUTH_TOKENS : "credenziali"\n    USERS ||--o{ GOOGLE_OAUTH_STATES : "sessioni"\n    WORK_ORDERS }o--|| INSURANCE_BRANCH_TYPES : "ramo assicurativo"\n\`\`\`\n\nGenerato: 20 febbraio 2026 - Garage Management System`;
+            
+            navigator.clipboard.writeText(markdown).then(() => {
+                alert('✅ Markdown copiato negli appunti!');
+            }).catch(() => {
+                alert('❌ Errore nel copia. Prova manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>
