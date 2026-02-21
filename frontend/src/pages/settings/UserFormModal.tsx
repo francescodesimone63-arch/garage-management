@@ -1,5 +1,6 @@
-import { Modal, Form, Input, Select, message, Button } from 'antd'
+import { Modal, Form, Input, Select, message, Button, Row, Col } from 'antd'
 import { useEffect, useState } from 'react'
+import axiosInstance from '@/lib/axios'
 
 interface UserFormModalProps {
   open: boolean
@@ -9,18 +10,30 @@ interface UserFormModalProps {
   loading?: boolean
 }
 
-const roleOptions = [
-  { label: 'Amministratore', value: 'ADMIN' },
-  { label: 'GM - Direttore', value: 'GENERAL_MANAGER' },
-  { label: 'CMM - Meccanica', value: 'WORKSHOP' },
-  { label: 'CBM - Carrozzeria', value: 'BODYSHOP' }
-]
-
 export const UserFormModal = ({ open, editingUser, onOk, onCancel, loading }: UserFormModalProps) => {
   const [form] = Form.useForm()
   const [renderKey, setRenderKey] = useState(0)
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [roleOptions, setRoleOptions] = useState<any[]>([])
+  const [loadingRoles, setLoadingRoles] = useState(false)
+
+  // Carica i ruoli dal backend quando il componente monta
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        setLoadingRoles(true)
+        const response = await axiosInstance.get('/permissions/roles')
+        setRoleOptions(response.data.roles || [])
+      } catch (error) {
+        console.error('Errore caricamento ruoli:', error)
+        message.error('Impossibile caricare i ruoli')
+      } finally {
+        setLoadingRoles(false)
+      }
+    }
+    fetchRoles()
+  }, [])
 
   // When modal opens, increment renderKey to force complete Form re-render
   useEffect(() => {
@@ -140,9 +153,9 @@ export const UserFormModal = ({ open, editingUser, onOk, onCancel, loading }: Us
       onOk={handleSubmit}
       onCancel={onCancel}
       destroyOnHidden={true}
-      width={700}
+      width={600}
       style={{ maxHeight: '90vh' }}
-      styles={{ body: { maxHeight: '70vh', overflowY: 'auto' } }}
+      styles={{ body: { maxHeight: 'calc(90vh - 200px)', overflowY: 'auto', padding: '16px' } }}
       okText="Salva"
       cancelText="Annulla"
       confirmLoading={loading}
@@ -157,6 +170,8 @@ export const UserFormModal = ({ open, editingUser, onOk, onCancel, loading }: Us
           setPassword={setPassword}
           passwordConfirm={passwordConfirm}
           setPasswordConfirm={setPasswordConfirm}
+          roleOptions={roleOptions}
+          loadingRoles={loadingRoles}
         />
       )}
     </Modal>
@@ -170,7 +185,9 @@ const FormContent = ({
   password,
   setPassword,
   passwordConfirm,
-  setPasswordConfirm
+  setPasswordConfirm,
+  roleOptions,
+  loadingRoles
 }: any) => {
   const [showPwdFieldsLocal, setShowPwdFieldsLocal] = useState(false)
 
@@ -218,165 +235,188 @@ const FormContent = ({
     <Form
       form={form}
       layout="vertical"
-      style={{ marginTop: 20 }}
+      style={{ marginTop: 0 }}
     >
-      <Form.Item
-        name="email"
-        label="Email"
-        rules={[
-          { required: true, message: 'Email obbligatoria' },
-          { type: 'email', message: 'Email non valida' }
-        ]}
-      >
-        <Input type="email" placeholder="utente@garage.local" autoComplete="off" />
-      </Form.Item>
+      <Row gutter={12}>
+        <Col span={16}>
+          <Form.Item
+            name="email"
+            label="Email"
+            rules={[
+              { required: true, message: 'Email obbligatoria' },
+              { type: 'email', message: 'Email non valida' }
+            ]}
+            style={{ marginBottom: '12px' }}
+          >
+            <Input type="email" placeholder="utente@garage.local" autoComplete="off" size="small" />
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item
+            name="user_handle"
+            label="Username"
+            rules={[
+              { required: true, message: 'Username obbligatorio' },
+              { min: 3, message: 'Min 3 car' }
+            ]}
+            style={{ marginBottom: '12px' }}
+          >
+            <Input 
+              placeholder="username" 
+              autoComplete="off"
+              size="small"
+              spellCheck="false"
+              data-lpignore="true"
+              data-form-type="other"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        name="user_handle"
-        label="Username"
-        rules={[
-          { required: true, message: 'Username obbligatorio' },
-          { min: 3, message: 'Minimo 3 caratteri' }
-        ]}
-      >
-        <Input 
-          placeholder="username" 
-          autoComplete="off"
-          spellCheck="false"
-          data-lpignore="true"
-          data-form-type="other"
-        />
-      </Form.Item>
+      <Row gutter={12}>
+        <Col span={12}>
+          <Form.Item
+            name="nome"
+            label="Nome"
+            rules={[{ required: true, message: 'Nome obbligatorio' }]}
+            style={{ marginBottom: '12px' }}
+          >
+            <Input placeholder="Nome" size="small" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            name="cognome"
+            label="Cognome"
+            rules={[{ required: true, message: 'Cognome obbligatorio' }]}
+            style={{ marginBottom: '12px' }}
+          >
+            <Input placeholder="Cognome" size="small" />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        name="nome"
-        label="Nome"
-        rules={[{ required: true, message: 'Nome obbligatorio' }]}
-      >
-        <Input placeholder="Nome" />
-      </Form.Item>
-
-      <Form.Item
-        name="cognome"
-        label="Cognome"
-        rules={[{ required: true, message: 'Cognome obbligatorio' }]}
-      >
-        <Input placeholder="Cognome" />
-      </Form.Item>
-
-      <Form.Item
-        name="ruolo"
-        label="Ruolo"
-        rules={[{ required: true, message: 'Seleziona un ruolo' }]}
-      >
-        <Select
-          placeholder="Seleziona ruolo"
-          options={roleOptions}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="attivo"
-        label="Stato Utente"
-      >
-        <Select
-          placeholder="Seleziona stato"
-          options={[
-            { label: 'Attivo ✅', value: true },
-            { label: 'Inattivo ❌', value: false }
-          ]}
-        />
-      </Form.Item>
+      <Row gutter={12}>
+        <Col span={12}>
+          <Form.Item
+            name="ruolo"
+            label="Ruolo"
+            rules={[{ required: true, message: 'Seleziona un ruolo' }]}
+            style={{ marginBottom: '12px' }}
+          >
+            <Select
+              placeholder="Ruolo"
+              options={roleOptions}
+              size="small"
+            />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            name="attivo"
+            label="Stato"
+            style={{ marginBottom: '12px' }}
+          >
+            <Select
+              placeholder="Stato"
+              options={[
+                { label: '✅ Attivo', value: true },
+                { label: '❌ Inattivo', value: false }
+              ]}
+              size="small"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
 
       {/* PASSWORD SECTION - DIFFERENTE TRA CREATE E EDIT MODE */}
       {!editingUser || showPwdFieldsLocal ? (
         <>
-          {/* PASSWORD - HTML PURO, SENZA TYPE PASSWORD CHE ATTIVA AUTOCOMPLETE */}
-          <div style={{ marginBottom: '24px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>
-              Password {!editingUser && <span style={{ color: 'red' }}>*</span>}
-            </label>
-            <input
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="5-12 char: maiusc+minusc+numero (es: Abc12)"
-              autoComplete="off"
-              data-lpignore="true"
-              data-form-type="other"
-              style={{
-                width: '100%',
-                padding: '8px 12px',
-                border: '1px solid #d9d9d9',
-                borderRadius: '2px',
-                fontSize: '14px',
-                fontFamily: 'inherit',
-                WebkitTextSecurity: 'disc' // Maschera come • (Chrome, Safari)
-              } as any}
-            />
-            <div style={{ fontSize: '12px', color: '#999', marginTop: '4px' }}>
-              {editingUser && showPwdFieldsLocal ? 'Lascia vuoto per mantenere la password attuale' : 'Obbligatorio'}
-            </div>
-          </div>
-
-          {/* CONFERMA PASSWORD - STESSO APPROCCIO */}
-          <div style={{ marginBottom: '24px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>
-              Conferma Password
-            </label>
-            <input
-              type="text"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              placeholder="Ripeti password"
-              autoComplete="off"
-              data-lpignore="true"
-              data-form-type="other"
-              style={{
-                width: '100%',
-                padding: '8px 12px',
-                border: '1px solid #d9d9d9',
-                borderRadius: '2px',
-                fontSize: '14px',
-                fontFamily: 'inherit',
-                WebkitTextSecurity: 'disc' // Maschera come • (Chrome, Safari)
-              } as any}
-            />
-          </div>
+          <Row gutter={12}>
+            <Col span={12}>
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ display: 'block', marginBottom: '6px', fontWeight: 500, fontSize: '12px' }}>
+                  Password {!editingUser && <span style={{ color: 'red' }}>*</span>}
+                </label>
+                <input
+                  type="text"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Abc12 (5-12 car)"
+                  autoComplete="off"
+                  data-lpignore="true"
+                  data-form-type="other"
+                  style={{
+                    width: '100%',
+                    padding: '6px 10px',
+                    border: '1px solid #d9d9d9',
+                    borderRadius: '2px',
+                    fontSize: '13px',
+                    fontFamily: 'inherit',
+                    WebkitTextSecurity: 'disc'
+                  } as any}
+                />
+              </div>
+            </Col>
+            <Col span={12}>
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ display: 'block', marginBottom: '6px', fontWeight: 500, fontSize: '12px' }}>
+                  Conferma
+                </label>
+                <input
+                  type="text"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  placeholder="Ripeti"
+                  autoComplete="off"
+                  data-lpignore="true"
+                  data-form-type="other"
+                  style={{
+                    width: '100%',
+                    padding: '6px 10px',
+                    border: '1px solid #d9d9d9',
+                    borderRadius: '2px',
+                    fontSize: '13px',
+                    fontFamily: 'inherit',
+                    WebkitTextSecurity: 'disc'
+                  } as any}
+                />
+              </div>
+            </Col>
+          </Row>
 
           {editingUser && showPwdFieldsLocal && (
-            <div style={{ marginBottom: '24px' }}>
+            <div style={{ marginBottom: '12px' }}>
               <Button 
+                size="small"
                 onClick={() => {
                   setShowPwdFieldsLocal(false)
                   setPassword('')
                   setPasswordConfirm('')
                 }}
               >
-                ❌ Annulla cambio password
+                ❌ Annulla
               </Button>
             </div>
           )}
         </>
       ) : (
-        // EDIT MODE - Password non modificata
         <div style={{
-          padding: '12px',
+          padding: '10px 12px',
           backgroundColor: '#f0f2f5',
           borderRadius: '4px',
-          marginBottom: '24px'
+          marginBottom: '12px',
+          fontSize: '13px'
         }}>
-          <div style={{ fontSize: '14px', fontWeight: 500, marginBottom: '8px' }}>
-            🔐 Password attuale
-          </div>
-          <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
-            La password rimarrà invariata. Clicca il bottone qui sotto solo se vuoi cambiarla.
+          <div style={{ fontWeight: 500, marginBottom: '6px' }}>
+            🔐 Password protetta
           </div>
           <Button 
             type="primary"
+            size="small"
             onClick={() => setShowPwdFieldsLocal(true)}
           >
-            ✏️ Cambia password
+            ✏️ Modifica
           </Button>
         </div>
       )}

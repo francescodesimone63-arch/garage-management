@@ -1,0 +1,3885 @@
+2026-02-20 19:43:22 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/health",
+  "timestamp": "2026-02-20T19:43:22.034966",
+  "request_id": 1771613002.034923,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 19:43:22 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/health",
+  "status_code": 200,
+  "timestamp": "2026-02-20T19:43:22.038215",
+  "request_id": 1771613002.034923,
+  "duration_ms": "3.27",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:43:26 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/auth/login",
+  "timestamp": "2026-02-20T19:43:26.490470",
+  "request_id": 1771613006.489985,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:43:26 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on POST /auth/login | {
+  "status_code": 404,
+  "method": "POST",
+  "path": "/auth/login"
+}
+2026-02-20 19:43:26 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "POST",
+  "path": "/auth/login",
+  "status_code": 404,
+  "timestamp": "2026-02-20T19:43:26.491856",
+  "request_id": 1771613006.489985,
+  "duration_ms": "1.85",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:43:26 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/permissions/matrix",
+  "timestamp": "2026-02-20T19:43:26.608648",
+  "request_id": 1771613006.6086059,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 19:43:26 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /permissions/matrix | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/permissions/matrix"
+}
+2026-02-20 19:43:26 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/permissions/matrix",
+  "status_code": 404,
+  "timestamp": "2026-02-20T19:43:26.610613",
+  "request_id": 1771613006.6086059,
+  "duration_ms": "1.98",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:43:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/auth/login",
+  "timestamp": "2026-02-20T19:43:30.610057",
+  "request_id": 1771613010.6095722,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:43:30 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on POST /auth/login | {
+  "status_code": 404,
+  "method": "POST",
+  "path": "/auth/login"
+}
+2026-02-20 19:43:30 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "POST",
+  "path": "/auth/login",
+  "status_code": 404,
+  "timestamp": "2026-02-20T19:43:30.612076",
+  "request_id": 1771613010.6095722,
+  "duration_ms": "2.44",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:43:33 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/auth/login",
+  "timestamp": "2026-02-20T19:43:33.998407",
+  "request_id": 1771613013.997943,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:43:33 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on POST /auth/login | {
+  "status_code": 404,
+  "method": "POST",
+  "path": "/auth/login"
+}
+2026-02-20 19:43:33 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "POST",
+  "path": "/auth/login",
+  "status_code": 404,
+  "timestamp": "2026-02-20T19:43:33.999716",
+  "request_id": 1771613013.997943,
+  "duration_ms": "1.75",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:43:50 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T19:43:50.396605",
+  "request_id": 1771613030.396569,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 19:43:50 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/permissions/matrix | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix"
+}
+2026-02-20 19:43:50 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 401,
+  "timestamp": "2026-02-20T19:43:50.399733",
+  "request_id": 1771613030.396569,
+  "duration_ms": "3.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:44:04 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T19:44:04.966641",
+  "request_id": 1771613044.966599,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 19:44:04 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/permissions/matrix | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix"
+}
+2026-02-20 19:44:04 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 401,
+  "timestamp": "2026-02-20T19:44:04.972502",
+  "request_id": 1771613044.966599,
+  "duration_ms": "5.87",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:44:24 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T19:44:24.550045",
+  "request_id": 1771613064.549535,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:44:24 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T19:44:24.981521",
+  "request_id": 1771613064.549535,
+  "duration_ms": "431.96",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:45:08 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T19:45:08.018134",
+  "request_id": 1771613108.0175529,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:45:08 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T19:45:08.447034",
+  "request_id": 1771613108.0175529,
+  "duration_ms": "429.46",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 19:45:29 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T19:45:29.653975",
+  "request_id": 1771613129.653378,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 19:45:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T19:45:30.082804",
+  "request_id": 1771613129.653378,
+  "duration_ms": "429.40",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:21:40 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T20:21:40.826702",
+  "request_id": 1771615300.824624,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 20:21:41 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:21:41.102457",
+  "request_id": 1771615300.824624,
+  "duration_ms": "277.81",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:22:30.206658",
+  "request_id": 1771615350.206623,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:22:30.207694",
+  "request_id": 1771615350.207662,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.312203",
+  "request_id": 1771615350.206623,
+  "duration_ms": "105.55",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.312801",
+  "request_id": 1771615350.207662,
+  "duration_ms": "105.12",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:22:30.778107",
+  "request_id": 1771615350.778075,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "timestamp": "2026-02-20T20:22:30.780589",
+  "request_id": 1771615350.7805598,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "timestamp": "2026-02-20T20:22:30.782800",
+  "request_id": 1771615350.782763,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:22:30.784682",
+  "request_id": 1771615350.7846348,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/users | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/users"
+}
+2026-02-20 20:22:30 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/workshops | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/workshops"
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:30.790859",
+  "request_id": 1771615350.7805598,
+  "duration_ms": "10.27",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:30.792506",
+  "request_id": 1771615350.782763,
+  "duration_ms": "9.71",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "timestamp": "2026-02-20T20:22:30.806842",
+  "request_id": 1771615350.806805,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "timestamp": "2026-02-20T20:22:30.811691",
+  "request_id": 1771615350.81164,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/users | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/users"
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:30.818809",
+  "request_id": 1771615350.806805,
+  "duration_ms": "11.98",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/workshops | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/workshops"
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:30.821192",
+  "request_id": 1771615350.81164,
+  "duration_ms": "9.51",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.836121",
+  "request_id": 1771615350.7846348,
+  "duration_ms": "51.46",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:22:30.905428",
+  "request_id": 1771615350.905389,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.914997",
+  "request_id": 1771615350.778075,
+  "duration_ms": "136.88",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:22:30.921333",
+  "request_id": 1771615350.921301,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.926766",
+  "request_id": 1771615350.905389,
+  "duration_ms": "21.35",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:30 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:30.996690",
+  "request_id": 1771615350.921301,
+  "duration_ms": "75.37",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:22:37.912169",
+  "request_id": 1771615357.912141,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:22:37.912932",
+  "request_id": 1771615357.9129071,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:37 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:37.918149",
+  "request_id": 1771615357.912141,
+  "duration_ms": "5.99",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:37 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:37.919211",
+  "request_id": 1771615357.9129071,
+  "duration_ms": "6.28",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:22:38.109307",
+  "request_id": 1771615358.1091552,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "timestamp": "2026-02-20T20:22:38.111984",
+  "request_id": 1771615358.111936,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "timestamp": "2026-02-20T20:22:38.115334",
+  "request_id": 1771615358.115173,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:22:38.117097",
+  "request_id": 1771615358.1170619,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/users | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/users"
+}
+2026-02-20 20:22:38 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/workshops | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/workshops"
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:38.122210",
+  "request_id": 1771615358.111936,
+  "duration_ms": "10.24",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:38.123403",
+  "request_id": 1771615358.115173,
+  "duration_ms": "8.16",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "timestamp": "2026-02-20T20:22:38.133347",
+  "request_id": 1771615358.133313,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "timestamp": "2026-02-20T20:22:38.139047",
+  "request_id": 1771615358.13901,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/users | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/users"
+}
+2026-02-20 20:22:38 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/workshops | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/workshops"
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:38.145463",
+  "request_id": 1771615358.133313,
+  "duration_ms": "12.12",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/workshops",
+  "status_code": 404,
+  "timestamp": "2026-02-20T20:22:38.146732",
+  "request_id": 1771615358.13901,
+  "duration_ms": "7.69",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:38.162023",
+  "request_id": 1771615358.1170619,
+  "duration_ms": "44.82",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:22:38.247222",
+  "request_id": 1771615358.24719,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:38.256217",
+  "request_id": 1771615358.1091552,
+  "duration_ms": "147.04",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:22:38.263030",
+  "request_id": 1771615358.262996,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:38.267847",
+  "request_id": 1771615358.24719,
+  "duration_ms": "20.63",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:22:38 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:22:38.337049",
+  "request_id": 1771615358.262996,
+  "duration_ms": "74.03",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:23:25 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:23:25.060357",
+  "request_id": 1771615405.060328,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:23:25 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/users/ | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/users/"
+}
+2026-02-20 20:23:25 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 401,
+  "timestamp": "2026-02-20T20:23:25.062381",
+  "request_id": 1771615405.060328,
+  "duration_ms": "2.03",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:23:57 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:23:57.535745",
+  "request_id": 1771615437.5356648,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:23:57 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:23:57.543981",
+  "request_id": 1771615437.5356648,
+  "duration_ms": "8.29",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:23:59 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:23:59.817655",
+  "request_id": 1771615439.817624,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:23:59 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:23:59.822603",
+  "request_id": 1771615439.817624,
+  "duration_ms": "4.96",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:24:12 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/health",
+  "timestamp": "2026-02-20T20:24:12.636803",
+  "request_id": 1771615452.636767,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:24:12 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/health",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:24:12.638395",
+  "request_id": 1771615452.636767,
+  "duration_ms": "1.61",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:24:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T20:24:34.000624",
+  "request_id": 1771615473.999509,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 20:24:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:24:34.500596",
+  "request_id": 1771615473.999509,
+  "duration_ms": "501.06",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:24:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/health",
+  "timestamp": "2026-02-20T20:24:37.732082",
+  "request_id": 1771615477.732042,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:24:37 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/health",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:24:37.735138",
+  "request_id": 1771615477.732042,
+  "duration_ms": "3.07",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:24:42 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T20:24:42.589183",
+  "request_id": 1771615482.588655,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 20:24:42 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:24:42.867670",
+  "request_id": 1771615482.588655,
+  "duration_ms": "278.99",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:24:48 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-20T20:24:48.003758",
+  "request_id": 1771615488.002939,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-20 20:24:48 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:24:48.289497",
+  "request_id": 1771615488.002939,
+  "duration_ms": "286.53",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:47 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:26:47.686057",
+  "request_id": 1771615607.686025,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:47 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:47.690943",
+  "request_id": 1771615607.686025,
+  "duration_ms": "4.89",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:47 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:26:47.770841",
+  "request_id": 1771615607.770786,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:47 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:47.786841",
+  "request_id": 1771615607.770786,
+  "duration_ms": "16.02",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:48 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/dashboard/summary",
+  "timestamp": "2026-02-20T20:26:48.375930",
+  "request_id": 1771615608.375848,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:48 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/dashboard/summary",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:48.397979",
+  "request_id": 1771615608.375848,
+  "duration_ms": "22.11",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:26:52.952619",
+  "request_id": 1771615612.952548,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:26:52.956175",
+  "request_id": 1771615612.9561422,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.060171",
+  "request_id": 1771615612.9561422,
+  "duration_ms": "104.00",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.063855",
+  "request_id": 1771615612.952548,
+  "duration_ms": "111.27",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:26:53.069761",
+  "request_id": 1771615613.069684,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:26:53.075717",
+  "request_id": 1771615613.0756779,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.091098",
+  "request_id": 1771615613.069684,
+  "duration_ms": "21.36",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:26:53.129976",
+  "request_id": 1771615613.1299388,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.161381",
+  "request_id": 1771615613.0756779,
+  "duration_ms": "85.68",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.167156",
+  "request_id": 1771615613.1299388,
+  "duration_ms": "37.19",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:26:53.171845",
+  "request_id": 1771615613.171815,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:26:53 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:26:53.178214",
+  "request_id": 1771615613.171815,
+  "duration_ms": "6.37",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:32:36 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:32:36.771450",
+  "request_id": 1771615956.771421,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:32:36 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:32:36.777822",
+  "request_id": 1771615956.771421,
+  "duration_ms": "6.35",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:32:39 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:32:39.380024",
+  "request_id": 1771615959.379979,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:32:39 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:32:39.385186",
+  "request_id": 1771615959.379979,
+  "duration_ms": "5.18",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:37:38 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:37:38.550762",
+  "request_id": 1771616258.550731,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:37:38 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:37:38.556332",
+  "request_id": 1771616258.550731,
+  "duration_ms": "5.57",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:03 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:39:03.689298",
+  "request_id": 1771616343.689274,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:03 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:39:03.690079",
+  "request_id": 1771616343.6900558,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:03 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:03.694763",
+  "request_id": 1771616343.689274,
+  "duration_ms": "5.47",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:03 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:03.695352",
+  "request_id": 1771616343.6900558,
+  "duration_ms": "5.28",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:04 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:39:04.082718",
+  "request_id": 1771616344.082686,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:04 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:04.097638",
+  "request_id": 1771616344.082686,
+  "duration_ms": "14.58",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:04 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:39:04.106706",
+  "request_id": 1771616344.1066701,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:04 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:04.112670",
+  "request_id": 1771616344.1066701,
+  "duration_ms": "5.97",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:39:06.335013",
+  "request_id": 1771616346.334975,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:06.420872",
+  "request_id": 1771616346.334975,
+  "duration_ms": "85.87",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:39:06.424491",
+  "request_id": 1771616346.424444,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:06.531409",
+  "request_id": 1771616346.424444,
+  "duration_ms": "106.94",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:26 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:39:26.712275",
+  "request_id": 1771616366.712241,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:26 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:26.771849",
+  "request_id": 1771616366.712241,
+  "duration_ms": "59.58",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:27 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:39:27.737755",
+  "request_id": 1771616367.7377222,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:27 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:27.744538",
+  "request_id": 1771616367.7377222,
+  "duration_ms": "6.79",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:39:27 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:39:27.750475",
+  "request_id": 1771616367.7504,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:39:27 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:39:27.758217",
+  "request_id": 1771616367.7504,
+  "duration_ms": "7.78",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:42:42 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:42:42.845796",
+  "request_id": 1771616562.845772,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:42:42 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T20:42:42.847301",
+  "request_id": 1771616562.847279,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:42:42 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:42:42.852460",
+  "request_id": 1771616562.845772,
+  "duration_ms": "6.67",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:42:42 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:42:42.853807",
+  "request_id": 1771616562.847279,
+  "duration_ms": "6.51",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:42:43 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:42:43.183903",
+  "request_id": 1771616563.183869,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:42:43 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T20:42:43.185804",
+  "request_id": 1771616563.185724,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:42:43 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:42:43.200833",
+  "request_id": 1771616563.183869,
+  "duration_ms": "16.94",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:42:43 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:42:43.201885",
+  "request_id": 1771616563.185724,
+  "duration_ms": "16.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:43:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/system-tables/damage-types",
+  "timestamp": "2026-02-20T20:43:06.506636",
+  "request_id": 1771616586.506606,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:43:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/system-tables/damage-types",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:43:06.512848",
+  "request_id": 1771616586.506606,
+  "duration_ms": "6.22",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:43:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/system-tables/damage-types",
+  "timestamp": "2026-02-20T20:43:06.517517",
+  "request_id": 1771616586.517466,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:43:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/system-tables/damage-types",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:43:06.523147",
+  "request_id": 1771616586.517466,
+  "duration_ms": "5.65",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:43:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:43:15.821049",
+  "request_id": 1771616595.820972,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:43:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:43:15.894491",
+  "request_id": 1771616595.820972,
+  "duration_ms": "73.49",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 20:43:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "timestamp": "2026-02-20T20:43:15.899147",
+  "request_id": 1771616595.899114,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 20:43:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/matrix",
+  "status_code": 200,
+  "timestamp": "2026-02-20T20:43:15.967436",
+  "request_id": 1771616595.899114,
+  "duration_ms": "68.30",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:13:14 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:13:14.711907",
+  "request_id": 1771618394.7118778,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:13:14 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:13:14.715271",
+  "request_id": 1771618394.7118778,
+  "duration_ms": "3.37",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:13:14 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:13:14.720054",
+  "request_id": 1771618394.720026,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:13:14 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:13:14.723221",
+  "request_id": 1771618394.720026,
+  "duration_ms": "3.18",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:13:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:13:15.113963",
+  "request_id": 1771618395.113937,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:13:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:13:15.118425",
+  "request_id": 1771618395.113937,
+  "duration_ms": "4.47",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:13:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:13:15.126368",
+  "request_id": 1771618395.126294,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:13:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:13:15.134769",
+  "request_id": 1771618395.126294,
+  "duration_ms": "8.44",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:30:33 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:30:33.780185",
+  "request_id": 1771619433.7801569,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:30:33 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:30:33.783326",
+  "request_id": 1771619433.7801569,
+  "duration_ms": "3.15",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:30:33 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:30:33.788761",
+  "request_id": 1771619433.7887108,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:30:33 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:30:33.792464",
+  "request_id": 1771619433.7887108,
+  "duration_ms": "3.73",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:30:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:30:34.185957",
+  "request_id": 1771619434.185919,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:30:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:30:34.193976",
+  "request_id": 1771619434.185919,
+  "duration_ms": "7.99",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:30:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:30:34.200149",
+  "request_id": 1771619434.200075,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:30:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:30:34.207153",
+  "request_id": 1771619434.200075,
+  "duration_ms": "7.02",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:36:56.585981",
+  "request_id": 1771619816.585948,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:36:56.590124",
+  "request_id": 1771619816.585948,
+  "duration_ms": "4.15",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:36:56.595975",
+  "request_id": 1771619816.5959418,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:36:56.600258",
+  "request_id": 1771619816.5959418,
+  "duration_ms": "4.29",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:36:56.963805",
+  "request_id": 1771619816.963774,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:36:56.971471",
+  "request_id": 1771619816.963774,
+  "duration_ms": "7.66",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:36:56.979618",
+  "request_id": 1771619816.9795682,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:36:56 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:36:56.987916",
+  "request_id": 1771619816.9795682,
+  "duration_ms": "8.32",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:38:34.229203",
+  "request_id": 1771619914.229179,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:38:34.232508",
+  "request_id": 1771619914.229179,
+  "duration_ms": "3.31",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:38:34.238171",
+  "request_id": 1771619914.238036,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:38:34.245220",
+  "request_id": 1771619914.238036,
+  "duration_ms": "7.10",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:38:34.385508",
+  "request_id": 1771619914.3854809,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:38:34.395125",
+  "request_id": 1771619914.3854809,
+  "duration_ms": "9.59",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:38:34.402070",
+  "request_id": 1771619914.402026,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:38:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:38:34.408116",
+  "request_id": 1771619914.402026,
+  "duration_ms": "6.06",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:52:09.398723",
+  "request_id": 1771620729.3986812,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:52:09.412006",
+  "request_id": 1771620729.3986812,
+  "duration_ms": "13.30",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:52:09.418077",
+  "request_id": 1771620729.418022,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:52:09.425928",
+  "request_id": 1771620729.418022,
+  "duration_ms": "7.86",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:52:09.908809",
+  "request_id": 1771620729.908781,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:52:09.916189",
+  "request_id": 1771620729.908781,
+  "duration_ms": "7.39",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:52:09.921585",
+  "request_id": 1771620729.921549,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:52:09 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:52:09.931064",
+  "request_id": 1771620729.921549,
+  "duration_ms": "9.49",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:53:10.566683",
+  "request_id": 1771620790.566638,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:53:10.571633",
+  "request_id": 1771620790.566638,
+  "duration_ms": "4.96",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:53:10.583766",
+  "request_id": 1771620790.583699,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:53:10.592103",
+  "request_id": 1771620790.583699,
+  "duration_ms": "8.36",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:53:10.964137",
+  "request_id": 1771620790.9640992,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:53:10.974271",
+  "request_id": 1771620790.9640992,
+  "duration_ms": "10.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:53:10.978828",
+  "request_id": 1771620790.978785,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:53:10 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:53:10.988277",
+  "request_id": 1771620790.978785,
+  "duration_ms": "9.46",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:59:52.389909",
+  "request_id": 1771621192.389882,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:59:52.393076",
+  "request_id": 1771621192.389882,
+  "duration_ms": "3.17",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T21:59:52.397569",
+  "request_id": 1771621192.3975391,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:59:52.403095",
+  "request_id": 1771621192.3975391,
+  "duration_ms": "5.53",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:59:52.560993",
+  "request_id": 1771621192.560961,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:59:52.580102",
+  "request_id": 1771621192.560961,
+  "duration_ms": "19.11",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T21:59:52.584899",
+  "request_id": 1771621192.584857,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 21:59:52 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T21:59:52.591483",
+  "request_id": 1771621192.584857,
+  "duration_ms": "6.59",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:02:34.694353",
+  "request_id": 1771621354.6942751,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:02:34.701595",
+  "request_id": 1771621354.6942751,
+  "duration_ms": "7.26",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:02:34.724895",
+  "request_id": 1771621354.7248619,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:02:34.729424",
+  "request_id": 1771621354.7248619,
+  "duration_ms": "4.53",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:02:34.843110",
+  "request_id": 1771621354.843081,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:02:34.849522",
+  "request_id": 1771621354.843081,
+  "duration_ms": "6.42",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:02:34.854613",
+  "request_id": 1771621354.8545542,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:02:34 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:02:34.861158",
+  "request_id": 1771621354.8545542,
+  "duration_ms": "6.57",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:03:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:03:15.986649",
+  "request_id": 1771621395.986619,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:03:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:03:15.989881",
+  "request_id": 1771621395.986619,
+  "duration_ms": "3.24",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:03:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:03:15.993951",
+  "request_id": 1771621395.993921,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:03:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:03:15.999720",
+  "request_id": 1771621395.993921,
+  "duration_ms": "5.77",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:03:16 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:03:16.302577",
+  "request_id": 1771621396.3025432,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:03:16 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:03:16.308550",
+  "request_id": 1771621396.3025432,
+  "duration_ms": "5.98",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:03:16 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:03:16.315560",
+  "request_id": 1771621396.315501,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:03:16 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:03:16.324350",
+  "request_id": 1771621396.315501,
+  "duration_ms": "8.82",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:05:11.107727",
+  "request_id": 1771621511.107698,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:05:11.110859",
+  "request_id": 1771621511.107698,
+  "duration_ms": "3.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:05:11.114751",
+  "request_id": 1771621511.114721,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:05:11.119964",
+  "request_id": 1771621511.114721,
+  "duration_ms": "5.19",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:05:11.382158",
+  "request_id": 1771621511.382127,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:05:11.390659",
+  "request_id": 1771621511.382127,
+  "duration_ms": "8.50",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:05:11.396967",
+  "request_id": 1771621511.3968902,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:05:11 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:05:11.403660",
+  "request_id": 1771621511.3968902,
+  "duration_ms": "6.71",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:08:05.540190",
+  "request_id": 1771621685.540163,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:08:05.544291",
+  "request_id": 1771621685.540163,
+  "duration_ms": "4.10",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-20T22:08:05.549352",
+  "request_id": 1771621685.549284,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:08:05.553494",
+  "request_id": 1771621685.549284,
+  "duration_ms": "4.18",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:08:05.922298",
+  "request_id": 1771621685.9222589,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:08:05.928610",
+  "request_id": 1771621685.9222589,
+  "duration_ms": "6.32",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-20T22:08:05.941021",
+  "request_id": 1771621685.940908,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-20 22:08:05 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-20T22:08:05.949731",
+  "request_id": 1771621685.940908,
+  "duration_ms": "8.74",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-21T00:43:36.166419",
+  "request_id": 1771631016.1663811,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-21T00:43:36.171078",
+  "request_id": 1771631016.1663811,
+  "duration_ms": "4.67",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-21T00:43:36.180103",
+  "request_id": 1771631016.180047,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-21T00:43:36.188268",
+  "request_id": 1771631016.180047,
+  "duration_ms": "8.19",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-21T00:43:36.288825",
+  "request_id": 1771631016.288796,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T00:43:36.294744",
+  "request_id": 1771631016.288796,
+  "duration_ms": "5.93",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-21T00:43:36.301613",
+  "request_id": 1771631016.30157,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 00:43:36 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T00:43:36.308338",
+  "request_id": 1771631016.30157,
+  "duration_ms": "6.73",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-21T01:05:06.080027",
+  "request_id": 1771632306.079981,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-21T01:05:06.085379",
+  "request_id": 1771632306.079981,
+  "duration_ms": "5.36",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "timestamp": "2026-02-21T01:05:06.093479",
+  "request_id": 1771632306.0934489,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/auth/me",
+  "status_code": 200,
+  "timestamp": "2026-02-21T01:05:06.097242",
+  "request_id": 1771632306.0934489,
+  "duration_ms": "3.76",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-21T01:05:06.268761",
+  "request_id": 1771632306.268733,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T01:05:06.275328",
+  "request_id": 1771632306.268733,
+  "duration_ms": "6.56",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "timestamp": "2026-02-21T01:05:06.282529",
+  "request_id": 1771632306.2824252,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 01:05:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/users/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T01:05:06.290751",
+  "request_id": 1771632306.2824252,
+  "duration_ms": "8.26",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:18:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "timestamp": "2026-02-21T10:18:37.287050",
+  "request_id": 1771665517.287008,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:18:37 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/permissions/roles | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/permissions/roles"
+}
+2026-02-21 10:18:37 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "status_code": 401,
+  "timestamp": "2026-02-21T10:18:37.300183",
+  "request_id": 1771665517.287008,
+  "duration_ms": "13.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:18:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "timestamp": "2026-02-21T10:18:37.305714",
+  "request_id": 1771665517.3056698,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "***"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:18:37 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/permissions/roles | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/permissions/roles"
+}
+2026-02-21 10:18:37 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "status_code": 401,
+  "timestamp": "2026-02-21T10:18:37.419361",
+  "request_id": 1771665517.3056698,
+  "duration_ms": "113.65",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:19:09 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/health",
+  "timestamp": "2026-02-21T10:19:09.280828",
+  "request_id": 1771665549.280789,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:19:09 - garage_main - WARNING - [logger.py:66] - HTTP Error 404 on GET /api/v1/health | {
+  "status_code": 404,
+  "method": "GET",
+  "path": "/api/v1/health"
+}
+2026-02-21 10:19:09 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/health",
+  "status_code": 404,
+  "timestamp": "2026-02-21T10:19:09.284097",
+  "request_id": 1771665549.280789,
+  "duration_ms": "3.28",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:19:13 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:19:13.288812",
+  "request_id": 1771665553.288331,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:19:13 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:19:13.727651",
+  "request_id": 1771665553.288331,
+  "duration_ms": "439.29",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:19:16 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:19:16.828519",
+  "request_id": 1771665556.827549,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:19:17 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:19:17.069745",
+  "request_id": 1771665556.827549,
+  "duration_ms": "242.18",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:19:24 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "timestamp": "2026-02-21T10:19:24.511481",
+  "request_id": 1771665564.511442,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:19:24 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on GET /api/v1/permissions/roles | {
+  "status_code": 401,
+  "method": "GET",
+  "path": "/api/v1/permissions/roles"
+}
+2026-02-21 10:19:24 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "GET",
+  "path": "/api/v1/permissions/roles",
+  "status_code": 401,
+  "timestamp": "2026-02-21T10:19:24.513691",
+  "request_id": 1771665564.511442,
+  "duration_ms": "2.23",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:20:54 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:20:54.035857",
+  "request_id": 1771665654.0351539,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin@garage.local",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:20:54 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:20:54.377395",
+  "request_id": 1771665654.0351539,
+  "duration_ms": "342.22",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:21:28 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:21:28.179438",
+  "request_id": 1771665688.178967,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin@garage.local",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:21:28 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:21:28.461629",
+  "request_id": 1771665688.178967,
+  "duration_ms": "282.64",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:22:11 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:22:11.306720",
+  "request_id": 1771665731.3061278,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:22:11 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:22:11.744559",
+  "request_id": 1771665731.3061278,
+  "duration_ms": "438.41",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:22:20 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:22:20.985601",
+  "request_id": 1771665740.985106,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:22:21 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:22:21.269052",
+  "request_id": 1771665740.985106,
+  "duration_ms": "283.92",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:22:43 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:22:43.265971",
+  "request_id": 1771665763.2654872,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin@garage.local",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:22:43 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:22:43.548556",
+  "request_id": 1771665763.2654872,
+  "duration_ms": "283.05",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:25:23 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:25:23.759432",
+  "request_id": 1771665923.7588422,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin@garage.local",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:25:24 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:25:24.021427",
+  "request_id": 1771665923.7588422,
+  "duration_ms": "262.56",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:25:48 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:25:48.399149",
+  "request_id": 1771665948.398355,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:25:48 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:25:48.799377",
+  "request_id": 1771665948.398355,
+  "duration_ms": "401.00",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:26:46 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:26:46.036812",
+  "request_id": 1771666006.0362859,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:26:46 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:26:46.294493",
+  "request_id": 1771666006.0362859,
+  "duration_ms": "258.19",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:27:15 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:27:15.562946",
+  "request_id": 1771666035.5625138,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:27:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:27:15.842031",
+  "request_id": 1771666035.5625138,
+  "duration_ms": "279.50",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:27:27 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:27:27.584124",
+  "request_id": 1771666047.58371,
+  "headers": {
+    "user-agent": "python-requests/2.32.5",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:27:27 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:27:27.862937",
+  "request_id": 1771666047.58371,
+  "duration_ms": "279.20",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:27:57 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/",
+  "timestamp": "2026-02-21T10:27:57.668278",
+  "request_id": 1771666077.668245,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:27:57 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:27:57.670043",
+  "request_id": 1771666077.668245,
+  "duration_ms": "1.78",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:47:14 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:47:14.889824",
+  "request_id": 1771667234.889236,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:47:15 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:47:15.293682",
+  "request_id": 1771667234.889236,
+  "duration_ms": "404.42",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:47:37 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/",
+  "timestamp": "2026-02-21T10:47:37.133453",
+  "request_id": 1771667257.13341,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:47:37 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:47:37.135140",
+  "request_id": 1771667257.13341,
+  "duration_ms": "1.70",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:48:05 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:48:05.274583",
+  "request_id": 1771667285.274237,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:48:05 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:48:05.501630",
+  "request_id": 1771667285.274237,
+  "duration_ms": "227.37",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:50:26 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/",
+  "timestamp": "2026-02-21T10:50:26.840688",
+  "request_id": 1771667426.840651,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:50:26 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:50:26.843499",
+  "request_id": 1771667426.840651,
+  "duration_ms": "2.82",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:51:17 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:51:17.294453",
+  "request_id": 1771667477.293897,
+  "headers": {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "query_params": {}
+}
+2026-02-21 10:51:17 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:51:17.743197",
+  "request_id": 1771667477.293897,
+  "duration_ms": "449.28",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:53:14 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:53:14.284365",
+  "request_id": 1771667594.283045,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin"
+  },
+  "query_params": {}
+}
+2026-02-21 10:53:14 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on POST /api/v1/auth/login | {
+  "status_code": 401,
+  "method": "POST",
+  "path": "/api/v1/auth/login"
+}
+2026-02-21 10:53:14 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 401,
+  "timestamp": "2026-02-21T10:53:14.506824",
+  "request_id": 1771667594.283045,
+  "duration_ms": "223.76",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:54:03 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/health",
+  "timestamp": "2026-02-21T10:54:03.136447",
+  "request_id": 1771667643.136374,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "N/A",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:54:03 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/health",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:54:03.139224",
+  "request_id": 1771667643.136374,
+  "duration_ms": "2.79",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "N/A"
+  }
+}
+2026-02-21 10:54:06 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "GET",
+  "path": "/health",
+  "timestamp": "2026-02-21T10:54:06.491511",
+  "request_id": 1771667646.491466,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": null,
+  "query_params": {}
+}
+2026-02-21 10:54:06 - garage_main - INFO - [logger.py:128] - ✅ API RESPONSE | {
+  "method": "GET",
+  "path": "/health",
+  "status_code": 200,
+  "timestamp": "2026-02-21T10:54:06.494627",
+  "request_id": 1771667646.491466,
+  "duration_ms": "3.14",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "http://localhost:3000"
+  }
+}
+2026-02-21 10:54:10 - garage_main - INFO - [logger.py:116] - 📨 API REQUEST | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "timestamp": "2026-02-21T10:54:10.111665",
+  "request_id": 1771667650.11131,
+  "headers": {
+    "user-agent": "curl/8.7.1",
+    "origin": "http://localhost:3000",
+    "authorization": "None"
+  },
+  "body": {
+    "username": "admin",
+    "password": "admin"
+  },
+  "query_params": {}
+}
+2026-02-21 10:54:10 - garage_main - INFO - [logger.py:128] - ⚠️ API RESPONSE | {
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "status_code": 401,
+  "timestamp": "2026-02-21T10:54:10.590356",
+  "request_id": 1771667650.11131,
+  "duration_ms": "479.00",
+  "headers": {
+    "content-type": "application/json",
+    "access-control-allow-origin": "http://localhost:3000"
+  }
+}
+2026-02-21 10:54:10 - garage_main - ERROR - [logger.py:82] - Eccezione non gestita in POST /api/v1/auth/login
+{
+  "timestamp": "2026-02-21T10:54:10.591401",
+  "message": "Eccezione non gestita in POST /api/v1/auth/login",
+  "method": "POST",
+  "path": "/api/v1/auth/login",
+  "exception": "Unexpected message received: http.request",
+  "exception_type": "RuntimeError",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py\", line 159, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py\", line 132, in receive\n    raise EndOfStream from None\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/debug_middleware.py\", line 102, in dispatch\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py\", line 165, in call_next\n    raise app_exc\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py\", line 151, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py\", line 189, in __call__\n    with collapse_excgroups():\n  File \"/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py\", line 158, in __exit__\n    self.gen.throw(typ, value, traceback)\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py\", line 91, in collapse_excgroups\n    raise exc\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py\", line 261, in __call__\n    await wrap(partial(self.listen_for_disconnect, receive))\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py\", line 257, in wrap\n    await func()\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py\", line 234, in listen_for_disconnect\n    message = await receive()\n              ^^^^^^^^^^^^^^^\n  File \"/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py\", line 56, in wrapped_receive\n    raise RuntimeError(f\"Unexpected message received: {msg['type']}\")\nRuntimeError: Unexpected message received: http.request\n"
+}
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/debug_middleware.py", line 102, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:54:54 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on POST /api/v1/auth/login | {
+  "status_code": 401,
+  "method": "POST",
+  "path": "/api/v1/auth/login"
+}
+2026-02-21 10:55:07 - garage_main - WARNING - [logger.py:66] - HTTP Error 401 on POST /api/v1/auth/login | {
+  "status_code": 401,
+  "method": "POST",
+  "path": "/api/v1/auth/login"
+}

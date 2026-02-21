@@ -22,7 +22,7 @@ def login(
     db: Session = Depends(get_db),
 ) -> Any:
     """
-    OAuth2 compatible token login - ottieni access token
+    OAuth2 compatible token login - ottieni access token + permessi
     """
     # Cerca utente per email O username
     from sqlalchemy import or_
@@ -66,11 +66,32 @@ def login(
     user.ultimo_accesso = dt.utcnow()
     db.commit()
     
+    # Ottieni i permessi dell'utente
+    from app.models import Permission, RolePermission
+    from app.models.user import UserRole
+    
+    permissions = []
+    if user.ruolo == UserRole.ADMIN:
+        # Admin ha tutti i permessi
+        perms = db.query(Permission).filter(Permission.attivo == True).all()
+        permissions = [p.codice for p in perms]
+    else:
+        # Prendi i permessi concessi
+        perms = db.query(Permission).join(
+            RolePermission,
+            Permission.id == RolePermission.permission_id
+        ).filter(
+            RolePermission.ruolo == user.ruolo.value,
+            RolePermission.granted == True
+        ).all()
+        permissions = [p.codice for p in perms]
+    
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "expires_in": settings.jwt_access_token_expire_minutes * 60,
-        "user": UserResponse.from_orm(user)
+        "user": UserResponse.from_orm(user),
+        "permissions": permissions
     }
 
 
@@ -123,18 +144,39 @@ def refresh_token(
     current_user: User = Depends(get_current_user)
 ) -> Any:
     """
-    Rinnova access token
+    Rinnova access token con permessi aggiornati
     """
     access_token_expires = timedelta(minutes=settings.jwt_access_token_expire_minutes)
     access_token = security.create_access_token(
         data={"sub": str(current_user.id)}, expires_delta=access_token_expires
     )
     
+    # Ottieni i permessi dell'utente (aggiornati)
+    from app.models import Permission, RolePermission
+    from app.models.user import UserRole
+    
+    permissions = []
+    if current_user.ruolo == UserRole.ADMIN:
+        # Admin ha tutti i permessi
+        perms = db.query(Permission).filter(Permission.attivo == True).all()
+        permissions = [p.codice for p in perms]
+    else:
+        # Prendi i permessi concessi
+        perms = db.query(Permission).join(
+            RolePermission,
+            Permission.id == RolePermission.permission_id
+        ).filter(
+            RolePermission.ruolo == current_user.ruolo.value,
+            RolePermission.granted == True
+        ).all()
+        permissions = [p.codice for p in perms]
+    
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "expires_in": settings.jwt_access_token_expire_minutes * 60,
-        "user": UserResponse.from_orm(current_user)
+        "user": UserResponse.from_orm(current_user),
+        "permissions": permissions
     }
 
 

@@ -2,6 +2,7 @@
 Database models for the Garage Management System
 """
 from app.models.user import User, UserRole
+from app.models.rbac import Workshop, Permission, RolePermission
 from app.models.customer import Customer
 from app.models.vehicle import Vehicle
 from app.models.work_order import WorkOrder, WorkOrderStatus
@@ -15,12 +16,15 @@ from app.models.notification import Notification, NotificationType
 from app.models.calendar_event import CalendarEvent
 from app.models.document import Document, DocumentType
 from app.models.activity_log import ActivityLog
-from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType
+from app.models.system_tables import DamageType, CustomerType, WorkOrderStatusType, PriorityType, InterventionStatusType, InsuranceBranchType
 from app.models.google_oauth import GoogleOAuthToken
 
 __all__ = [
     "User",
     "UserRole",
+    "Workshop",
+    "Permission",
+    "RolePermission",
     "Customer",
     "Vehicle",
     "WorkOrder",
@@ -41,5 +45,10 @@ __all__ = [
     "DocumentType",
     "ActivityLog",
     "GoogleOAuthToken",
+    "DamageType",
+    "CustomerType",
+    "WorkOrderStatusType",
+    "PriorityType",
     "InterventionStatusType",
+    "InsuranceBranchType",
 ]

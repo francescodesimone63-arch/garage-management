@@ -14,9 +14,6 @@ from app.core.config import settings
 from app.core.database import sync_engine, Base
 from app.api.v1.api import api_router
 from app.core.logging_config import setup_logging, get_logger
-from app.middleware.logging_middleware import LoggingMiddleware
-from app.middleware.debug_middleware import DebugMiddleware, ErrorHandlerMiddleware
-from app.middleware.cors_preflight import CORSPreflightMiddleware
 
 # Load environment variables from .env file
 env_path = Path(__file__).parent / ".env"
@@ -45,41 +42,41 @@ app = FastAPI(
     redirect_slashes=False  # Disabilita redirect automatici da /vehicles a /vehicles/
 )
 
-# IMPORTANTE: L'ordine è INVERSO! Gli ultimi middleware aggiunti vengono eseguiti PRIMA (outermost)
-# Quindi CORS deve essere aggiunto PER ULTIMO per essere eseguito per primo
+# ============================================================================
+# MIDDLEWARE STACK
+# ============================================================================
+# Ordine: i middleware aggiunti per ULTIMO sono i più ESTERNI e eseguiti per PRIMI
+# Quindi l'ordine di aggiunta è inverso all'ordine di esecuzione
+#
+# Stack finale (da outer a inner):
+#   1. CORS → gestisce preflight OPTIONS e aggiunge header CORS
+#   2. GZip → comprime risposte
+#   3. Session → gestisce sessioni per Google OAuth
+# ============================================================================
 
-# Add error handler middleware
-app.add_middleware(ErrorHandlerMiddleware)
-logger.info("✅ Error handler middleware attivato")
-
-# Add debug middleware to track all requests
-app.add_middleware(DebugMiddleware)
-logger.info("✅ Debug middleware attivato")
-
-# Add logging middleware to track all requests
-app.add_middleware(LoggingMiddleware)
-logger.info("✅ Logging middleware attivato")
-
-# Add session middleware (for Google OAuth)
-app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
-
-# Add GZip middleware
-app.add_middleware(GZipMiddleware, minimum_size=1000)
-
-# Set up CORS - DEVE ESSERE AGGIUNTO PER ULTIMO (verrà eseguito PRIMO)
+# 1. CORS middleware - DEVE ESSERE AGGIUNTO PER ULTIMO (eseguito PRIMO)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",  # Frontend porta standard
+        "http://localhost:3001",  # Frontend porta alternativa (Vite)
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 logger.info("✅ CORS middleware attivato")
 
-# Add CORS Preflight middleware AFTER CORS (executes BEFORE CORSMiddleware)
-# Handles OPTIONS requests before CORSMiddleware can reject them with 405
-app.add_middleware(CORSPreflightMiddleware)
-logger.info("✅ CORS Preflight middleware attivato")
+# 2. GZip compression
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+logger.info("✅ GZip middleware attivato")
+
+# 3. Session middleware (per Google OAuth)
+app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
+logger.info("✅ Session middleware attivato")
 
 # Include API router
 app.include_router(api_router, prefix=settings.api_v1_str)

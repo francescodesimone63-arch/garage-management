@@ -106,8 +106,77 @@ Ora: ~16:00 (ULTIMA MODIFICA)
 ✅ Debug: Sistema operativo
 ✅ Insurance branches: Seed completato (7 rami caricati)
 
+---
+
+🔐 RBAC SYSTEM - FASE 1 COMPLETATO (20 febbraio 2026)
+=====================================================
+
+**Database Models Created:**
+
+1. **Workshop** (`/backend/app/models/rbac.py`)
+   - Tabella: `workshops` (8 colonne)
+   - Supporta multi-officina (meccanica/carrozzeria)
+   - FK: `responsabile_id` → users.id
+   - Relazione: users (back_populates)
+
+2. **Permission** (`/backend/app/models/rbac.py`)
+   - Tabella: `permissions` (8 colonne)
+   - 44 permessi seed caricati
+   - Categorie: sistema, clienti, veicoli, schede lavoro, interventi, magazzino, ecc.
+   - Schema: codice (unique), nome, categoria, descrizione, attivo
+
+3. **RolePermission** (`/backend/app/models/rbac.py`) 
+   - Tabella: `role_permissions` (6 colonne)
+   - 352 mappamenti ruolo-permesso creati
+   - Constraint: UNIQUE(ruolo, permission_id)
+   - Campo: `granted` (boolean) - determina se permesso concesso
+
+**User Model Updated:**
+- Aggiunto: `workshop_id` (Integer FK → workshops.id)
+- Aggiunto: `workshop` relationship con foreign_keys=[workshop_id]
+- Ruoli espansi: GMA, FEM aggiunti a UserRole enum
+- Total ruoli: 8 (ADMIN, GENERAL_MANAGER, GM_ASSISTANT, FRONTEND_MANAGER, CMM, CBM, WORKSHOP, BODYSHOP)
+
+**Database Schema:**
+- Tabelle totali: 29 (prima 26 + 3 nuove RBAC)
+- Nuove tabelle: workshops, permissions, role_permissions
+- Modifiche: users.workshop_id aggiunto
+
+**Seed Script: /backend/seed_rbac.py (280+ righe)**
+- 44 permessi creati (divisi in 12 categorie)
+- 8 ruoli mappati con permessi intelligenti
+- Modello whitelist/blacklist:
+  - ADMIN: tutti i permessi
+  - GENERAL_MANAGER: tutti tranne system.manage_*
+  - GMA, FEM, CMM, CBM: whitelist specifici
+  - WORKSHOP, BODYSHOP: operatori minimal (6 permessi each)
+- Esecuzione: ~2 secondi, 352 mappamenti creati
+
+**Risoluzione Problemi:**
+- Alembic migration conflicts: Risolto con merge commit
+- AsyncEngine create_all issue: Risolto con sync engine per init
+- SQLAlchemy ambiguous FK: Risolto aggiungendo foreign_keys=[workshop_id]
+
+**Stato Finale:**
+✅ Database creato da modelli SQLAlchemy sincronicamente
+✅ Permessi seed completato (44 permessi)
+✅ Ruoli mappati a permessi (352 mappamenti)
+✅ Admin user creato (admin@garage.local / admin123)
+✅ Backend online (http://localhost:8000)
+✅ Frontend online (http://localhost:3000)
+
+---
+
 🎯 PROSSIMI PASSI
 -----------------
+
+### FASE 2 (IN ATTESA)
+- Creare endpoint `GET /api/v1/permissions` (lista permessi)
+- Creare endpoint `GET /api/v1/permissions/matrix` (matrice ruoli-permessi)
+- Aggiornare `GET /api/v1/auth/me` con `permissions[]` array
+- Creare dependency `require_permission(codice)` per proteggere endpoint
+
+### FASE 3+ (FUTURE)
 - Implementare funzioni aggiuntive
 - Estendere API endpoints
-- Aggiungere features UI
+- Aggiungere features UI per admin permessi

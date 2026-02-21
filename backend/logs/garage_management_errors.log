@@ -5945,3 +5945,1008 @@ sqlalchemy.orm.exc.FlushError: Instance <Vehicle at 0x10acbd3d0> has a NULL iden
 2026-02-19 10:24:21 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/calendar/book                              | Status:502 | 20.85ms
 2026-02-19 10:27:51 | ERROR    | garage_management.api | log_response:106 | ← GET    /docs                                              | Status:404 | 1.52ms
 2026-02-19 10:28:18 | ERROR    | garage_management.api | log_response:106 | ← HEAD   /docs                                              | Status:404 | 1.26ms
+2026-02-20 19:43:26 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 3.31ms
+2026-02-20 19:43:26 | ERROR    | garage_management.api | log_response:106 | ← GET    /permissions/matrix                                | Status:404 | 3.04ms
+2026-02-20 19:43:30 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 5.11ms
+2026-02-20 19:43:34 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 3.18ms
+2026-02-20 19:43:50 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:401 | 4.18ms
+2026-02-20 19:44:04 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:401 | 7.08ms
+2026-02-20 19:44:24 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 433.25ms
+2026-02-20 19:45:08 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 430.84ms
+2026-02-20 19:45:30 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 430.68ms
+2026-02-20 20:21:41 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 279.20ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 14.61ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 14.17ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 15.03ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 15.12ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 13.77ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 12.58ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 15.19ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 13.87ms
+2026-02-20 20:23:25 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:401 | 3.32ms
+2026-02-20 20:24:34 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 502.62ms
+2026-02-20 20:24:42 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.31ms
+2026-02-20 20:24:48 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 287.75ms
+2026-02-21 10:18:37 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 14.70ms
+2026-02-21 10:18:37 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 116.27ms
+2026-02-21 10:19:09 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/health                                     | Status:404 | 4.67ms
+2026-02-21 10:19:13 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 440.58ms
+2026-02-21 10:19:17 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 243.44ms
+2026-02-21 10:19:24 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 3.25ms
+2026-02-21 10:20:54 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 343.72ms
+2026-02-21 10:21:28 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 283.90ms
+2026-02-21 10:22:11 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 439.73ms
+2026-02-21 10:22:21 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 286.84ms
+2026-02-21 10:22:43 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 284.21ms
+2026-02-21 10:25:24 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 263.75ms
+2026-02-21 10:25:48 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 402.21ms
+2026-02-21 10:26:46 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 259.40ms
+2026-02-21 10:27:15 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.70ms
+2026-02-21 10:27:27 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.45ms
+2026-02-21 10:47:15 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 405.79ms
+2026-02-21 10:48:05 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 228.40ms
+2026-02-21 10:51:17 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 450.52ms
+2026-02-21 10:53:14 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 225.01ms
+2026-02-21 10:54:10 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/auth/login                                 | Status:401 | 477.62ms

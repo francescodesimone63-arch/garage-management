@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_db, get_current_user
+from app.core.permissions import require_permission
 from app.models.user import User
 from app.models.vehicle import Vehicle, VehicleType
 from app.models.customer import Customer
@@ -15,7 +16,7 @@ from app.schemas.vehicle import VehicleCreate, VehicleUpdate, VehicleResponse, V
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(require_permission("vehicles.view"))])
 def read_vehicles(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -56,7 +57,7 @@ def read_vehicles(
     }
 
 
-@router.post("/", response_model=VehicleResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=VehicleResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_permission("vehicles.create"))])
 def create_vehicle(
     *,
     db: Session = Depends(get_db),
@@ -107,7 +108,7 @@ def create_vehicle(
     return VehicleResponse.model_validate(vehicle)
 
 
-@router.get("/{vehicle_id}", response_model=VehicleResponse)
+@router.get("/{vehicle_id}", response_model=VehicleResponse, dependencies=[Depends(require_permission("vehicles.view"))])
 def read_vehicle(
     vehicle_id: int,
     db: Session = Depends(get_db),
@@ -127,7 +128,7 @@ def read_vehicle(
     return VehicleResponse.model_validate(vehicle)
 
 
-@router.get("/{vehicle_id}/history", response_model=VehicleWithHistory)
+@router.get("/{vehicle_id}/history", response_model=VehicleWithHistory, dependencies=[Depends(require_permission("vehicles.view"))])
 def read_vehicle_history(
     vehicle_id: int,
     db: Session = Depends(get_db),
@@ -191,7 +192,7 @@ def read_vehicle_maintenance_status(
     }
 
 
-@router.put("/{vehicle_id}", response_model=VehicleResponse)
+@router.put("/{vehicle_id}", response_model=VehicleResponse, dependencies=[Depends(require_permission("vehicles.edit"))])
 def update_vehicle(
     *,
     db: Session = Depends(get_db),
@@ -271,7 +272,7 @@ def update_vehicle(
     return VehicleResponse.model_validate(vehicle)
 
 
-@router.delete("/{vehicle_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{vehicle_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(require_permission("vehicles.delete"))])
 def delete_vehicle(
     *,
     db: Session = Depends(get_db),

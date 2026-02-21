@@ -6,6 +6,7 @@ from fastapi import APIRouter
 from app.api.v1.endpoints import (
     auth,
     users,
+    permissions,
     customers,
     vehicles,
     work_orders,
@@ -41,6 +42,13 @@ api_router.include_router(
     users.router,
     prefix="/users",
     tags=["users"]
+)
+
+# Permissions and roles endpoints
+api_router.include_router(
+    permissions.router,
+    prefix="/permissions",
+    tags=["permissions"]
 )
 
 # Customer management endpoints
@@ -171,6 +179,13 @@ api_router.include_router(
     auto.router,
     prefix="/auto",
     tags=["auto"]
+)
+
+# RBAC Permissions management endpoints
+api_router.include_router(
+    permissions.router,
+    prefix="/permissions",
+    tags=["permissions"]
 )
 
 # TODO: Future endpoints

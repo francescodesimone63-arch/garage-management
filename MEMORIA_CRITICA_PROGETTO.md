@@ -195,24 +195,73 @@ Frasi tipo:
 ===========================
 
 ### Priority 1 ⭐⭐⭐
+
+#### FASE 1 — RBAC Database (✅ COMPLETATO)
+- [x] Aggiungere ruoli `GMA` e `FEM` all'enum `UserRole`
+- [x] Creare modello `Permission` (permessi catalogo)
+- [x] Creare modello `RolePermission` (matrice dinamica ruoli-permessi)
+- [x] Creare modello `Workshop` (officine multi-garage)
+- [x] Aggiungere `workshop_id` (FK) al modello `User`
+- [x] Database inizializzato con schema completo (29 tabelle)
+- [x] Seed permessi iniziali (44 permessi raggruppati per categoria)
+- [x] Ruolo-permessi mappati (352 mappamenti creati)
+
+#### FASE 2 — API Permessi
+- [ ] Endpoint `GET /api/v1/permissions` (lista permessi)
+- [ ] Endpoint `GET /api/v1/permissions/matrix` (matrice ruoli-permessi)
+- [ ] Endpoint `PUT /api/v1/permissions/matrix` (aggiorna matrice)
+- [ ] Aggiornare `GET /api/v1/auth/me` con `permissions[]`
+- [ ] Creare dependency `require_permission(codice)`
+- [ ] Applicare protezioni a tutti gli endpoint
+
+#### FASE 4 — Frontend Protezione
+- [ ] Aggiornare tipo `User` con `permissions[]` e `workshop_id`
+- [ ] Creare hook `usePermission()`
+- [ ] Creare componente `<Can permission="">`
+- [ ] Creare `RoleBasedRoute`
+- [ ] Applicare protezioni a App.tsx routes
+
+#### FASE 5 — Admin Gestione Permessi (UI)
+- [ ] Pagina con griglia interattiva ruoli × permessi
+- [ ] Checkbox per ogni permesso-ruolo
+- [ ] Salvataggio matrici
+
+### Priority 2 ⭐⭐
+- [ ] FASE 3 — Workshop multi-officina CRUD
+- [ ] FASE 6 — Admin gestione officine (UI)
+- [ ] FASE 7 — Sicurezza predisposta (refresh token, token blacklist, rate limiting)
+
+### PRIMA: Priority UI ⭐⭐⭐
 - [ ] UI CRUD Customers
 - [ ] UI CRUD Vehicles
 - [ ] UI CRUD Work Orders
-- [ ] Work Order Status Flow (BOZZA → APPROVATA → IN_LAVORAZIONE → COMPLETATA)
-- [ ] Interventions & Activities management
 
-### Priority 2 ⭐⭐
-- [ ] Parts Management (magazzino)
-- [ ] Work Order Audits (cronologia transizioni)
-- [ ] Documents (Preventivi, Fatture, Report)
-- [ ] Courtesy Cars Assignment
-- [ ] Notifications System
+---
 
-### Priority 3 ⭐
-- [ ] Google Calendar Integration
-- [ ] Maintenance Schedules
-- [ ] Stock Movements & Reports
-- [ ] Analytics & Reports
+🔐 SISTEMA RBAC DINAMICO
+========================
+
+**Architettura**: Role-Based Access Control con permessi configurabili da ADMIN
+
+**Ruoli (8 totali)**:
+- `ADMIN` - Gestione sistema
+- `GM` - General Manager  
+- `GMA` - GM Assistant
+- `FEM` - Front End Manager
+- `CMM` - Capo Meccanica
+- `CBM` - Capo Carrozzeria
+- `WORKSHOP` - Operatore Meccanica
+- `BODYSHOP` - Operatore Carrozzeria
+
+**Tabelle Database**:
+- `permissions` - Catalogo azioni/funzionalità (54+ permessi)
+- `role_permissions` - Matrice dinamica ruolo-permesso (configurabile)
+- `workshops` - Officine del garage (multi-officina)
+- `users.workshop_id` - FK verso workshop
+
+**Categorie Permessi**: Sistema, Clienti, Veicoli, Schede Lavoro, Interventi, Magazzino, Pneumatici, Auto Cortesia, Calendario, Manutenzioni, Dashboard, Documenti/Report
+
+**Flusso Login**: Response include `permissions[]` array con permessi concessi
 
 ---
 

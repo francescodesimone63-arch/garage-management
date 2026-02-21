@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session, selectinload, noload
 from sqlalchemy import func, extract, or_
 
 from app.core.deps import get_db, get_current_user
+from app.core.permissions import require_permission
 from app.models.user import User
 from app.models.work_order import WorkOrder, WorkOrderStatus
 from app.models.vehicle import Vehicle
@@ -26,7 +27,7 @@ from app.services.work_order_state_manager import WorkOrderStateManager
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(require_permission("work_orders.view"))])
 def read_work_orders(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -135,7 +136,7 @@ def get_next_numero_scheda(
     return {"numero_scheda": numero_scheda}
 
 
-@router.post("/", response_model=WorkOrderResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=WorkOrderResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_permission("work_orders.create"))])
 def create_work_order(
     *,
     db: Session = Depends(get_db),
@@ -243,7 +244,7 @@ def read_work_orders_stats(
     }
 
 
-@router.get("/{work_order_id}", response_model=WorkOrderResponse)
+@router.get("/{work_order_id}", response_model=WorkOrderResponse, dependencies=[Depends(require_permission("work_orders.view"))])
 def read_work_order(
     work_order_id: int,
     db: Session = Depends(get_db),
@@ -266,7 +267,7 @@ def read_work_order(
     return work_order
 
 
-@router.put("/{work_order_id}", response_model=WorkOrderResponse)
+@router.put("/{work_order_id}", response_model=WorkOrderResponse, dependencies=[Depends(require_permission("work_orders.edit"))])
 def update_work_order(
     *,
     db: Session = Depends(get_db),
@@ -353,7 +354,7 @@ async def update_work_order_status(
         )
 
 
-@router.delete("/{work_order_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{work_order_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(require_permission("work_orders.delete"))])
 def delete_work_order(
     *,
     db: Session = Depends(get_db),

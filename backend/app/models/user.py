@@ -1,7 +1,7 @@
 """
 User model for authentication and authorization
 """
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Enum
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Enum, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import enum
@@ -13,6 +13,8 @@ class UserRole(str, enum.Enum):
     """User roles enumeration"""
     ADMIN = "ADMIN"                    # Administrator
     GENERAL_MANAGER = "GENERAL_MANAGER"  # General Manager (GM)
+    GM_ASSISTANT = "GM_ASSISTANT"      # GM Assistant (GMA)
+    FRONTEND_MANAGER = "FRONTEND_MANAGER"  # Front End Manager (FEM)
     WORKSHOP = "WORKSHOP"                # Legacy - Meccanica
     BODYSHOP = "BODYSHOP"                # Legacy - Carrozzeria
     CMM = "CMM"                          # Capo Meccanica
@@ -33,12 +35,14 @@ class User(Base):
     ruolo = Column(Enum(UserRole), nullable=False, index=True)
     nome = Column(String(100))
     cognome = Column(String(100))
+    workshop_id = Column(Integer, ForeignKey("workshops.id"), nullable=True, index=True)
     attivo = Column(Boolean, default=True)
     ultimo_accesso = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     # Relationships
+    workshop = relationship("Workshop", back_populates="users", foreign_keys=[workshop_id])
     created_documents = relationship("Document", back_populates="creator")
     activity_logs = relationship("ActivityLog", back_populates="user")
     

@@ -94,10 +94,12 @@ class UserInDB(UserInDBBase):
 
 
 class Token(BaseModel):
-    """Token response schema"""
+    """Token response schema with permissions"""
     access_token: str
     token_type: str = "bearer"
     expires_in: int
+    user: Optional[UserResponse] = None
+    permissions: Optional[list[str]] = None  # List of permission codes
     user: "UserResponse"
 
 

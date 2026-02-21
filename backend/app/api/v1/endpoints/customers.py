@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_db, get_current_user
+from app.core.permissions import require_permission
 from app.models.user import User
 from app.models.customer import Customer
 from app.models.vehicle import Vehicle
@@ -16,7 +17,7 @@ from app.schemas.customer import CustomerCreate, CustomerUpdate, CustomerRespons
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(require_permission("customers.view"))])
 def read_customers(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -54,7 +55,7 @@ def read_customers(
     }
 
 
-@router.post("/", response_model=CustomerResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=CustomerResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_permission("customers.create"))])
 def create_customer(
     *,
     db: Session = Depends(get_db),
@@ -83,7 +84,7 @@ def create_customer(
     return CustomerResponse.model_validate(customer)
 
 
-@router.get("/{customer_id}", response_model=CustomerResponse)
+@router.get("/{customer_id}", response_model=CustomerResponse, dependencies=[Depends(require_permission("customers.view"))])
 def read_customer(
     customer_id: int,
     db: Session = Depends(get_db),
@@ -103,7 +104,7 @@ def read_customer(
     return CustomerResponse.model_validate(customer)
 
 
-@router.get("/{customer_id}/details", response_model=CustomerWithVehicles)
+@router.get("/{customer_id}/details", response_model=CustomerWithVehicles, dependencies=[Depends(require_permission("customers.view"))])
 def read_customer_with_vehicles(
     customer_id: int,
     db: Session = Depends(get_db),
@@ -123,7 +124,7 @@ def read_customer_with_vehicles(
     return customer
 
 
-@router.get("/{customer_id}/stats", response_model=CustomerStats)
+@router.get("/{customer_id}/stats", response_model=CustomerStats, dependencies=[Depends(require_permission("customers.view"))])
 def read_customer_stats(
     customer_id: int,
     db: Session = Depends(get_db),
@@ -164,7 +165,7 @@ def read_customer_stats(
     }
 
 
-@router.put("/{customer_id}", response_model=CustomerResponse)
+@router.put("/{customer_id}", response_model=CustomerResponse, dependencies=[Depends(require_permission("customers.edit"))])
 def update_customer(
     *,
     db: Session = Depends(get_db),
@@ -207,7 +208,7 @@ def update_customer(
     return CustomerResponse.model_validate(customer)
 
 
-@router.delete("/{customer_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{customer_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(require_permission("customers.delete"))])
 def delete_customer(
     *,
     db: Session = Depends(get_db),

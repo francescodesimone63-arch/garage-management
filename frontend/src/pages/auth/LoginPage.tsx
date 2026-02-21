@@ -77,20 +77,20 @@ const LoginPage = () => {
             layout="vertical"
             size="large"
             initialValues={{
-              username: 'admin@garage.local',
+              username: 'admin',
               password: 'admin123',
             }}
           >
             <Form.Item
               name="username"
               rules={[
-                { required: true, message: 'Inserisci la tua email' },
+                { required: true, message: 'Inserisci il tuo username' },
               ]}
             >
               <Input
                 prefix={<UserOutlined />}
-                placeholder="Email"
-                autoComplete="email"
+                placeholder="Username"
+                autoComplete="username"
               />
             </Form.Item>
 

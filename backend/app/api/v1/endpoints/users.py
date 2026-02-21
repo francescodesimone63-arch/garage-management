@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_db, get_current_user, get_current_active_superuser
+from app.core.permissions import require_permission
 from app.models.user import User
 from app.schemas.user import UserCreate, UserUpdate, UserResponse
 from app.core import security
@@ -14,7 +15,7 @@ from app.core import security
 router = APIRouter()
 
 
-@router.get("/", response_model=List[UserResponse])
+@router.get("/", response_model=List[UserResponse], dependencies=[Depends(require_permission("system.manage_users"))])
 def read_users(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -28,7 +29,7 @@ def read_users(
     return users
 
 
-@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_permission("system.manage_users"))])
 def create_user(
     *,
     db: Session = Depends(get_db),
@@ -159,7 +160,7 @@ def read_user_by_id(
     return user
 
 
-@router.put("/{user_id}", response_model=UserResponse)
+@router.put("/{user_id}", response_model=UserResponse, dependencies=[Depends(require_permission("system.manage_users"))])
 def update_user(
     *,
     db: Session = Depends(get_db),
@@ -228,7 +229,7 @@ def update_user(
     return user
 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(require_permission("system.manage_users"))])
 def delete_user(
     *,
     db: Session = Depends(get_db),

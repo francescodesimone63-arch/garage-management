@@ -13494,3 +13494,1721 @@ sqlalchemy.orm.exc.FlushError: Instance <Vehicle at 0x10acbd3d0> has a NULL iden
 2026-02-19 11:03:55 | INFO     | garage_management.api | log_request:101 | → GET    /                                                  | Anonymous
 2026-02-19 11:03:55 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
 2026-02-19 11:03:55 | INFO     | garage_management.api | log_response:106 | ← GET    /                                                  | Status:200 | 1.68ms
+2026-02-20 19:42:55 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-20 19:42:55 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-20 19:42:55.480782
+2026-02-20 19:42:55 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-20 19:42:55 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-20 19:42:55 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-20 19:42:55 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-20 19:43:22 | INFO     | garage_management.api | log_request:101 | → GET    /health                                            | Anonymous
+2026-02-20 19:43:22 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:43:22 | INFO     | garage_management.api | log_response:106 | ← GET    /health                                            | Status:200 | 5.42ms
+2026-02-20 19:43:26 | INFO     | garage_management.api | log_request:101 | → POST   /auth/login                                        | Anonymous
+2026-02-20 19:43:26 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:43:26 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:26 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 3.31ms
+2026-02-20 19:43:26 | INFO     | garage_management.api | log_request:101 | → GET    /permissions/matrix                                | Anonymous
+2026-02-20 19:43:26 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer ...
+2026-02-20 19:43:26 | ERROR    | garage_management.api | log_response:106 | ← GET    /permissions/matrix                                | Status:404 | 3.04ms
+2026-02-20 19:43:30 | INFO     | garage_management.api | log_request:101 | → POST   /auth/login                                        | Anonymous
+2026-02-20 19:43:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:43:30 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:30 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 5.11ms
+2026-02-20 19:43:33 | INFO     | garage_management.api | log_request:101 | → POST   /auth/login                                        | Anonymous
+2026-02-20 19:43:33 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:43:34 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /auth/login                                        | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /auth/login
+2026-02-20 19:43:34 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 3.18ms
+2026-02-20 19:43:50 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 19:43:50 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:43:50 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:401 | 4.18ms
+2026-02-20 19:44:01 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-20 19:44:01 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-20 19:44:01.628529
+2026-02-20 19:44:01 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-20 19:44:01 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-20 19:44:01 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-20 19:44:01 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-20 19:44:04 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 19:44:04 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:44:04 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:401 | 7.08ms
+2026-02-20 19:44:24 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 19:44:24 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:44:24 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:44:24 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 433.25ms
+2026-02-20 19:45:04 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-20 19:45:04 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-20 19:45:04.460714
+2026-02-20 19:45:04 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-20 19:45:04 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-20 19:45:04 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-20 19:45:04 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-20 19:45:08 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 19:45:08 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:45:08 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:45:08 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 430.84ms
+2026-02-20 19:45:21 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-20 19:45:21 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-20 19:45:21.768937
+2026-02-20 19:45:21 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-20 19:45:21 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-20 19:45:21 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-20 19:45:21 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-20 19:45:22 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-20 19:45:29 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 19:45:29 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 19:45:30 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 19:45:30 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 430.68ms
+2026-02-20 20:21:40 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 20:21:40 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:21:41 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:21:41 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 279.20ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 107.09ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 107.96ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users                                      | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/workshops                                  | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 14.61ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 14.17ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users                                      | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/workshops                                  | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 15.03ms
+2026-02-20 20:22:30 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 15.12ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 53.23ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 138.31ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:22:30 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 60.47ms
+2026-02-20 20:22:30 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 76.94ms
+2026-02-20 20:22:37 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:22:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:37 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:22:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:37 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 7.06ms
+2026-02-20 20:22:37 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 7.55ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users                                      | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/workshops                                  | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 13.77ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 12.58ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users                                      | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/workshops                                  | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users                                      | Status:404 | 15.19ms
+2026-02-20 20:22:38 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/workshops                                  | Status:404 | 13.87ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 69.67ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 148.83ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:22:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 22.18ms
+2026-02-20 20:22:38 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 76.39ms
+2026-02-20 20:23:25 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:23:25 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer dummy...
+2026-02-20 20:23:25 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:401 | 3.32ms
+2026-02-20 20:23:57 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:23:57 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:23:57 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.12ms
+2026-02-20 20:23:59 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:23:59 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:23:59 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 5.94ms
+2026-02-20 20:24:12 | INFO     | garage_management.api | log_request:101 | → GET    /health                                            | Anonymous
+2026-02-20 20:24:12 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:24:12 | INFO     | garage_management.api | log_response:106 | ← GET    /health                                            | Status:200 | 2.68ms
+2026-02-20 20:24:28 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-20 20:24:28 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-20 20:24:28.624710
+2026-02-20 20:24:28 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-20 20:24:28 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-20 20:24:28 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-20 20:24:28 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-20 20:24:33 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 20:24:33 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:24:34 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:34 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 502.62ms
+2026-02-20 20:24:37 | INFO     | garage_management.api | log_request:101 | → GET    /health                                            | Anonymous
+2026-02-20 20:24:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:24:37 | INFO     | garage_management.api | log_response:106 | ← GET    /health                                            | Status:200 | 4.15ms
+2026-02-20 20:24:42 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 20:24:42 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:24:42 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:42 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.31ms
+2026-02-20 20:24:48 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-20 20:24:48 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-20 20:24:48 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-20 20:24:48 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 287.75ms
+2026-02-20 20:26:47 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:26:47 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:47 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.92ms
+2026-02-20 20:26:47 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:26:47 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:47 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 20.12ms
+2026-02-20 20:26:48 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/dashboard/summary                          | Anonymous
+2026-02-20 20:26:48 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:48 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/dashboard/summary                          | Status:200 | 23.54ms
+2026-02-20 20:26:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:26:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:26:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 107.20ms
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 114.03ms
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:26:53 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:26:53 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 23.02ms
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:26:53 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 87.21ms
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 71.78ms
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:26:53 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:26:53 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.46ms
+2026-02-20 20:32:36 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:32:36 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:32:36 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.44ms
+2026-02-20 20:32:39 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:32:39 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:32:39 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 6.35ms
+2026-02-20 20:37:38 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:37:38 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:37:38 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.11ms
+2026-02-20 20:39:03 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:39:03 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:03 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:39:03 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:03 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.72ms
+2026-02-20 20:39:03 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.51ms
+2026-02-20 20:39:04 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:39:04 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:04 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 19.58ms
+2026-02-20 20:39:04 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:39:04 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:04 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.38ms
+2026-02-20 20:39:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:39:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 87.86ms
+2026-02-20 20:39:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:39:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 108.06ms
+2026-02-20 20:39:26 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:39:26 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:26 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 60.76ms
+2026-02-20 20:39:27 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:39:27 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:27 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.19ms
+2026-02-20 20:39:27 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:39:27 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:39:27 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 9.55ms
+2026-02-20 20:42:42 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:42:42 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:42:42 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 20:42:42 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:42:42 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 7.77ms
+2026-02-20 20:42:42 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 7.84ms
+2026-02-20 20:42:43 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:42:43 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:42:43 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 20:42:43 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:42:43 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 18.37ms
+2026-02-20 20:42:43 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 18.11ms
+2026-02-20 20:43:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/system-tables/damage-types                 | Anonymous
+2026-02-20 20:43:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:43:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/system-tables/damage-types                 | Status:200 | 7.30ms
+2026-02-20 20:43:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/system-tables/damage-types                 | Anonymous
+2026-02-20 20:43:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:43:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/system-tables/damage-types                 | Status:200 | 7.01ms
+2026-02-20 20:43:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:43:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:43:15 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 75.31ms
+2026-02-20 20:43:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/matrix                         | Anonymous
+2026-02-20 20:43:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 20:43:15 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/matrix                         | Status:200 | 69.65ms
+2026-02-20 21:13:14 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:13:14 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:13:14 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.36ms
+2026-02-20 21:13:14 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:13:14 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:13:14 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.12ms
+2026-02-20 21:13:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:13:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:13:15 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 6.10ms
+2026-02-20 21:13:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:13:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:13:15 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 11.36ms
+2026-02-20 21:30:33 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:30:33 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:30:33 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.47ms
+2026-02-20 21:30:33 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:30:33 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:30:33 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.73ms
+2026-02-20 21:30:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:30:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:30:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.05ms
+2026-02-20 21:30:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:30:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:30:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.94ms
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:36:56 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.55ms
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:36:56 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.49ms
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:36:56 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 9.70ms
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:36:56 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:36:56 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.09ms
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:38:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.48ms
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:38:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 9.02ms
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:38:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 12.98ms
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:38:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:38:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.29ms
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:52:09 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 14.70ms
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:52:09 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 9.99ms
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:52:09 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 9.00ms
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:52:09 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:52:09 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 11.16ms
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:53:10 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 10.45ms
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:53:10 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 10.81ms
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:53:10 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 11.46ms
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:53:10 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:53:10 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 11.42ms
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:59:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.11ms
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 21:59:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.72ms
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:59:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 20.89ms
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 21:59:52 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 21:59:52 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.93ms
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:02:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 10.68ms
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:02:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.87ms
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:02:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 7.34ms
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:02:34 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:02:34 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.35ms
+2026-02-20 22:03:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:03:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:03:15 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.19ms
+2026-02-20 22:03:15 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:03:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:03:16 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 7.29ms
+2026-02-20 22:03:16 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:03:16 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:03:16 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.54ms
+2026-02-20 22:03:16 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:03:16 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:03:16 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.64ms
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:05:11 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 4.37ms
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:05:11 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.50ms
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:05:11 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.38ms
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:05:11 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:05:11 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.34ms
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:08:05 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.27ms
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-20 22:08:05 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.45ms
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:08:05 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.72ms
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-20 22:08:05 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-20 22:08:05 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 11.30ms
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-21 00:43:36 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.63ms
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-21 00:43:36 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 11.04ms
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-21 00:43:36 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 6.84ms
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-21 00:43:36 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 00:43:36 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 9.50ms
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-21 01:05:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 6.90ms
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/auth/me                                    | Anonymous
+2026-02-21 01:05:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/auth/me                                    | Status:200 | 5.03ms
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-21 01:05:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 8.23ms
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/users/                                     | Anonymous
+2026-02-21 01:05:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 01:05:06 | INFO     | garage_management.api | log_response:106 | ← GET    /api/v1/users/                                     | Status:200 | 10.01ms
+2026-02-21 10:18:26 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:18:26 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:18:26.813581
+2026-02-21 10:18:26 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:18:26 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:18:26 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:18:26 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:18:27 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:18:37 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/roles                          | Anonymous
+2026-02-21 10:18:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 10:18:37 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 14.70ms
+2026-02-21 10:18:37 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/roles                          | Anonymous
+2026-02-21 10:18:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=Bearer eyJhbGciOiJIU...
+2026-02-21 10:18:37 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 116.27ms
+2026-02-21 10:18:47 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:18:47 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:18:47.734397
+2026-02-21 10:18:47 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:18:47 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:18:47 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:18:47 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:18:48 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:19:09 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/health                                     | Anonymous
+2026-02-21 10:19:09 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:19:09 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/health                                     | Status:404 | 4.67ms
+2026-02-21 10:19:13 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:19:13 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:19:13 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:19:13 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 440.58ms
+2026-02-21 10:19:16 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:19:16 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:19:17 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:19:17 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 243.44ms
+2026-02-21 10:19:24 | INFO     | garage_management.api | log_request:101 | → GET    /api/v1/permissions/roles                          | Anonymous
+2026-02-21 10:19:24 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:19:24 | ERROR    | garage_management.api | log_response:106 | ← GET    /api/v1/permissions/roles                          | Status:401 | 3.25ms
+2026-02-21 10:20:54 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:20:54 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:20:54 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:20:54 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 343.72ms
+2026-02-21 10:21:28 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:21:28 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:21:28 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:21:28 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 283.90ms
+2026-02-21 10:22:07 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:22:07 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:22:07.110758
+2026-02-21 10:22:07 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:22:07 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:22:07 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:22:07 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:22:11 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:22:11 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:22:11 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:11 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 439.73ms
+2026-02-21 10:22:20 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:22:20 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:22:21 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:21 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 286.84ms
+2026-02-21 10:22:43 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:22:43 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:22:43 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:22:43 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 284.21ms
+2026-02-21 10:25:23 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:25:23 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:25:24 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:25:24 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 263.75ms
+2026-02-21 10:25:48 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:25:48 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:25:48 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:25:48 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 402.21ms
+2026-02-21 10:26:46 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:26:46 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:26:46 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:26:46 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 259.40ms
+2026-02-21 10:27:15 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:27:15 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:27:15 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:27:15 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.70ms
+2026-02-21 10:27:27 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:27:27 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:27:27 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:27:27 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 280.45ms
+2026-02-21 10:27:53 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:27:53 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:27:53.101809
+2026-02-21 10:27:53 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:27:53 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:27:53 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:27:53 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:27:57 | INFO     | garage_management.api | log_request:101 | → GET    /                                                  | Anonymous
+2026-02-21 10:27:57 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:27:57 | INFO     | garage_management.api | log_response:106 | ← GET    /                                                  | Status:200 | 2.82ms
+2026-02-21 10:45:56 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:45:56 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:45:56.998219
+2026-02-21 10:45:56 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:45:56 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:45:56 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:45:56 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:45:56 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:45:56 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:45:57 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:47:08 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:47:08 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:47:08.902301
+2026-02-21 10:47:08 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:47:08 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:47:08 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:47:08 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:47:09 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:47:14 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:47:14 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:47:15 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:47:15 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 405.79ms
+2026-02-21 10:47:37 | INFO     | garage_management.api | log_request:101 | → GET    /                                                  | Anonymous
+2026-02-21 10:47:37 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:47:37 | INFO     | garage_management.api | log_response:106 | ← GET    /                                                  | Status:200 | 4.33ms
+2026-02-21 10:48:05 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:48:05 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:48:05 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:48:05 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 228.40ms
+2026-02-21 10:50:18 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:50:18 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:50:18.588666
+2026-02-21 10:50:18 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:50:18 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:50:18 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:31 | ================================================================================
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:32 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:33 | ================================================================================
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:53 | ✅ Error handler middleware attivato
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:57 | ✅ Debug middleware attivato
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:61 | ✅ Logging middleware attivato
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:77 | ✅ CORS middleware attivato
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:82 | ✅ CORS Preflight middleware attivato
+2026-02-21 10:50:18 | INFO     | garage_management | <module>:86 | ✅ API router registrato: /api/v1
+2026-02-21 10:50:26 | INFO     | garage_management.api | log_request:101 | → GET    /                                                  | Anonymous
+2026-02-21 10:50:26 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:50:26 | INFO     | garage_management.api | log_response:106 | ← GET    /                                                  | Status:200 | 4.02ms
+2026-02-21 10:51:17 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:51:17 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:51:17 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:51:17 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 450.52ms
+2026-02-21 10:53:14 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:53:14 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:53:14 | ERROR    | garage_management.api | log_error:110 | ✗ POST   /api/v1/auth/login                                 | ERROR: RuntimeError: Unexpected message received: http.request
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/anyio/streams/memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/app/middleware/logging_middleware.py", line 41, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+    raise app_exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+    with collapse_excgroups():
+  File "/usr/local/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+    raise exc
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 261, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 257, in wrap
+    await func()
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/responses.py", line 234, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "/Users/francescodesimone/Sviluppo Python/garage-management/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 56, in wrapped_receive
+    raise RuntimeError(f"Unexpected message received: {msg['type']}")
+RuntimeError: Unexpected message received: http.request
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:61 | Error details: RuntimeError: Unexpected message received: http.request
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:62 | Request: POST /api/v1/auth/login
+2026-02-21 10:53:14 | ERROR    | garage_management.middleware | dispatch:63 | Duration: 225.01ms
+2026-02-21 10:53:38 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:53:38 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:53:38.060929
+2026-02-21 10:53:38 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:53:38 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:53:38 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:31 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:32 | ================================================================================
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:52 | ✅ Error handler middleware attivato
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:56 | ✅ Debug middleware attivato
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:60 | ✅ Logging middleware attivato
+2026-02-21 10:53:38 | INFO     | garage_management | <module>:76 | ✅ CORS middleware attivato
+2026-02-21 10:53:51 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:53:51 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:53:51.302228
+2026-02-21 10:53:51 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:53:51 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:53:51 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:31 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:32 | ================================================================================
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:59 | ✅ CORS middleware attivato
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:69 | ✅ Logging middleware attivato
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:73 | ✅ Debug middleware attivato
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:77 | ✅ Error handler middleware attivato
+2026-02-21 10:53:51 | INFO     | garage_management | <module>:81 | ✅ API router registrato: /api/v1
+2026-02-21 10:54:03 | INFO     | garage_management.api | log_request:101 | → GET    /health                                            | Anonymous
+2026-02-21 10:54:03 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:54:03 | INFO     | garage_management.api | log_response:106 | ← GET    /health                                            | Status:200 | 1.56ms
+2026-02-21 10:54:06 | INFO     | garage_management.api | log_request:101 | → GET    /health                                            | Anonymous
+2026-02-21 10:54:06 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:54:06 | INFO     | garage_management.api | log_response:106 | ← GET    /health                                            | Status:200 | 2.24ms
+2026-02-21 10:54:10 | INFO     | garage_management.api | log_request:101 | → POST   /api/v1/auth/login                                 | Anonymous
+2026-02-21 10:54:10 | DEBUG    | garage_management.middleware | dispatch:37 | Headers: Authorization=None...
+2026-02-21 10:54:10 | ERROR    | garage_management.api | log_response:106 | ← POST   /api/v1/auth/login                                 | Status:401 | 477.62ms
+2026-02-21 10:54:42 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:54:42 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:54:42.268125
+2026-02-21 10:54:42 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:54:42 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:54:42 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:31 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:32 | ================================================================================
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:59 | ✅ CORS middleware attivato
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:69 | ✅ Error handler middleware attivato
+2026-02-21 10:54:42 | INFO     | garage_management | <module>:76 | ✅ API router registrato: /api/v1
+2026-02-21 10:57:00 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:57:00 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:57:00.336514
+2026-02-21 10:57:00 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:57:00 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:57:00 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:57:00 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:57:00 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:57:00 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:57:00 | INFO     | garage_management | <module>:57 | ✅ CORS middleware attivato
+2026-02-21 10:57:03 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:57:03 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:57:03.885017
+2026-02-21 10:57:03 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:57:03 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:57:03 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:57:03 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:57:03 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:57:03 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:57:03 | INFO     | garage_management | <module>:57 | ✅ CORS middleware attivato
+2026-02-21 10:57:17 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:57:17 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:57:17.352560
+2026-02-21 10:57:17 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:57:17 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:57:17 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:66 | ✅ CORS middleware attivato
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:70 | ✅ GZip middleware attivato
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:74 | ✅ Session middleware attivato
+2026-02-21 10:57:17 | INFO     | garage_management | <module>:78 | ✅ API router registrato: /api/v1
+2026-02-21 10:59:34 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:59:34 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:59:34.949940
+2026-02-21 10:59:34 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:59:34 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:59:34 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:66 | ✅ CORS middleware attivato
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:70 | ✅ GZip middleware attivato
+2026-02-21 10:59:34 | INFO     | garage_management | <module>:74 | ✅ Session middleware attivato
+2026-02-21 10:59:35 | INFO     | garage_management | <module>:78 | ✅ API router registrato: /api/v1
+2026-02-21 10:59:40 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:59:40 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:59:40.504187
+2026-02-21 10:59:40 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:59:40 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:59:40 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:66 | ✅ CORS middleware attivato
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:70 | ✅ GZip middleware attivato
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:74 | ✅ Session middleware attivato
+2026-02-21 10:59:40 | INFO     | garage_management | <module>:78 | ✅ API router registrato: /api/v1
+2026-02-21 10:59:53 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 10:59:53 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 10:59:53.022351
+2026-02-21 10:59:53 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 10:59:53 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 10:59:53 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:66 | ✅ CORS middleware attivato
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:70 | ✅ GZip middleware attivato
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:74 | ✅ Session middleware attivato
+2026-02-21 10:59:53 | INFO     | garage_management | <module>:78 | ✅ API router registrato: /api/v1
+2026-02-21 11:00:06 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 11:00:06 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 11:00:06.369871
+2026-02-21 11:00:06 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 11:00:06 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 11:00:06 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:66 | ✅ CORS middleware attivato
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:70 | ✅ GZip middleware attivato
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:74 | ✅ Session middleware attivato
+2026-02-21 11:00:06 | INFO     | garage_management | <module>:78 | ✅ API router registrato: /api/v1
+2026-02-21 11:07:00 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 11:07:00 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 11:07:00.786716
+2026-02-21 11:07:00 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 11:07:00 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 11:07:00 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:71 | ✅ CORS middleware attivato
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:75 | ✅ GZip middleware attivato
+2026-02-21 11:07:00 | INFO     | garage_management | <module>:79 | ✅ Session middleware attivato
+2026-02-21 11:07:01 | INFO     | garage_management | <module>:83 | ✅ API router registrato: /api/v1
+2026-02-21 11:07:09 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 11:07:09 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 11:07:09.877737
+2026-02-21 11:07:09 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 11:07:09 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 11:07:09 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:71 | ✅ CORS middleware attivato
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:75 | ✅ GZip middleware attivato
+2026-02-21 11:07:09 | INFO     | garage_management | <module>:79 | ✅ Session middleware attivato
+2026-02-21 11:07:10 | INFO     | garage_management | <module>:83 | ✅ API router registrato: /api/v1
+2026-02-21 11:08:39 | INFO     | garage_management | setup_logging:77 | ================================================================================
+2026-02-21 11:08:39 | INFO     | garage_management | setup_logging:78 | Sistema di logging inizializzato - 2026-02-21 11:08:39.082448
+2026-02-21 11:08:39 | INFO     | garage_management | setup_logging:79 | Livello: DEBUG
+2026-02-21 11:08:39 | INFO     | garage_management | setup_logging:80 | Directory log: /Users/francescodesimone/Sviluppo Python/garage-management/backend/logs
+2026-02-21 11:08:39 | INFO     | garage_management | setup_logging:81 | ================================================================================
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:28 | ================================================================================
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:29 | 🚀 GARAGE MANAGEMENT SYSTEM - AVVIO
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:30 | ================================================================================
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:71 | ✅ CORS middleware attivato
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:75 | ✅ GZip middleware attivato
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:79 | ✅ Session middleware attivato
+2026-02-21 11:08:39 | INFO     | garage_management | <module>:83 | ✅ API router registrato: /api/v1

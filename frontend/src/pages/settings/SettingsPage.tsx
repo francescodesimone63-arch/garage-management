@@ -9,6 +9,8 @@ import { UserFormModal } from './UserFormModal'
 import { SystemTableManager } from '@/components/SystemTableManager'
 import { InterventionStatusTypeManager } from '@/components/InterventionStatusTypeManager'
 import { InsuranceBranchTypeManager } from '@/components/InsuranceBranchTypeManager'
+import { RolePermissionsMatrix } from '@/components/RolePermissionsMatrix'
+import UsersManager from '@/components/UsersManager'
 
 interface User {
   id: number
@@ -103,6 +105,12 @@ const SettingsPage = () => {
       width: 200,
     },
     {
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
+      width: 140,
+    },
+    {
       title: 'Nome Completo',
       dataIndex: 'nome',
       key: 'nome',
@@ -170,25 +178,56 @@ const SettingsPage = () => {
             label: '👥 Gestione Utenze',
             children: (
               <Card style={{ marginTop: 20 }}>
-                <Block title="Gestione Utenti Applicazione">
-                  <div style={{ marginBottom: 20 }}>
-                    <Button
-                      type="primary"
-                      icon={<PlusOutlined />}
-                      onClick={handleCreate}
-                    >
-                      Aggiungi Utente
-                    </Button>
-                  </div>
-
-                  <Table
-                    columns={columns}
-                    dataSource={users}
-                    loading={loading}
-                    rowKey="id"
-                    pagination={{ pageSize: 10 }}
-                  />
-                </Block>
+                <Tabs
+                  defaultActiveKey="users-list"
+                  items={[
+                    {
+                      key: 'users-list',
+                      label: '👥 Utenti',
+                      children: (
+                        <div style={{ paddingTop: 16 }}>
+                          <div style={{ marginBottom: 16 }}>
+                            <Button
+                              type="primary"
+                              icon={<PlusOutlined />}
+                              onClick={handleCreate}
+                              size="small"
+                            >
+                              Aggiungi Utente
+                            </Button>
+                          </div>
+                          <Table
+                            columns={columns}
+                            dataSource={users}
+                            loading={loading}
+                            rowKey="id"
+                            pagination={{ pageSize: 10 }}
+                            size="small"
+                            bordered
+                          />
+                        </div>
+                      )
+                    },
+                    {
+                      key: 'rbac-matrix',
+                      label: '🔐 Ruoli & Permessi',
+                      children: (
+                        <div style={{ paddingTop: 16 }}>
+                          <RolePermissionsMatrix />
+                        </div>
+                      )
+                    },
+                    {
+                      key: 'role-assignment',
+                      label: '👤 Assegna Ruoli',
+                      children: (
+                        <div style={{ paddingTop: 16 }}>
+                          <UsersManager />
+                        </div>
+                      )
+                    }
+                  ]}
+                />
               </Card>
             )
           },
